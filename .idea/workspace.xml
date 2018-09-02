@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="756797dd-5895-4996-9cc3-d09ac57be919" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SimuladorSO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SO.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pruebas.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimuladorSO.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimuladorSO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.py" beforeDir="false" afterPath="$PROJECT_DIR$/VentanaPrincipal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.ui" beforeDir="false" afterPath="$PROJECT_DIR$/VentanaPrincipal.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,35 +17,36 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.27" value="1" />
-          <entry key="project.open.time.3" value="7" />
+          <entry key="project.open.time.3" value="8" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="5" />
+          <entry key="Python" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="307" />
+          <entry key="py" value="812" />
           <entry key="txt" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="23" />
-          <entry key="Python" value="307" />
+          <entry key="Python" value="812" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -61,22 +61,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7905">
-              <caret line="465" column="8" selection-start-line="465" selection-start-column="8" selection-end-line="465" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="252">
+              <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <marker date="1535869209079" expanded="true" signature="90:99" ph="..." />
+                <marker date="1535869209079" expanded="true" signature="121:127" ph="..." />
+                <marker date="1535869209079" expanded="true" signature="221:226" ph="..." />
+                <marker date="1535869209079" expanded="true" signature="221:867" ph="..." />
               </folding>
             </state>
           </provider>
@@ -94,8 +89,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>row</find>
-      <find>p1</find>
       <find>p20</find>
+      <find>procesos</find>
+      <find>lineedit</find>
+      <find>lineedit_npr</find>
+      <find>connec</find>
+      <find>lineed</find>
+      <find>p1</find>
+      <find>align</find>
+      <find>verticalheader</find>
+      <find>horizont</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -112,6 +115,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Pruebas.py" />
+        <option value="$PROJECT_DIR$/VentanaPrincipal.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
       </list>
     </option>
@@ -129,27 +133,10 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Qt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/VentanaPrincipal.py" />
     <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -314,7 +301,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.5010846" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4963119" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4963119" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -378,17 +365,21 @@
     <entry file="file://$PROJECT_DIR$/Qt/VentanaPrincipal.py" />
     <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7905">
-          <caret line="465" column="8" selection-start-line="465" selection-start-column="8" selection-end-line="465" selection-end-column="8" />
+        <state relative-caret-position="43">
+          <caret line="437" column="8" selection-start-line="437" selection-start-column="8" selection-end-line="437" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="252">
+          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <marker date="1535869209079" expanded="true" signature="90:99" ph="..." />
+            <marker date="1535869209079" expanded="true" signature="121:127" ph="..." />
+            <marker date="1535869209079" expanded="true" signature="221:226" ph="..." />
+            <marker date="1535869209079" expanded="true" signature="221:867" ph="..." />
           </folding>
         </state>
       </provider>
