@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="756797dd-5895-4996-9cc3-d09ac57be919" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Instalación.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Instalación.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Convertir UI a PY.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Convertir UI a PY.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimuladorSO.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimuladorSO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Tablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.ui" beforeDir="false" afterPath="$PROJECT_DIR$/VentanaPrincipal.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +57,35 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1244282120">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.17" value="2" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="329" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="329" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="SO" />
@@ -65,23 +95,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="49" column="92" lean-forward="true" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
+            <state relative-caret-position="272">
+              <caret line="16" column="70" lean-forward="true" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1535941681371" expanded="true" signature="233:550" ph="..." />
-                <marker date="1535941681371" expanded="true" signature="385:550" ph="..." />
-                <marker date="1535941681371" expanded="true" signature="1251:1776" ph="..." />
+                <marker date="1535985692871" expanded="true" signature="205:322" ph="..." />
+                <marker date="1535985692871" expanded="true" signature="2793:2889" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
+        <entry file="file://$PROJECT_DIR$/Dialog_Importar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="434" column="8" lean-forward="true" selection-start-line="434" selection-start-column="8" selection-end-line="434" selection-end-column="23" />
+            <state relative-caret-position="281">
+              <caret line="184" column="4" selection-start-line="184" selection-start-column="4" selection-end-line="185" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="495" lean-forward="true" selection-start-line="495" selection-end-line="495" />
             </state>
           </provider>
         </entry>
@@ -148,8 +186,8 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/VentanaPrincipal.py" />
-    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -312,7 +350,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989154" weight="0.20126449" />
@@ -320,7 +358,7 @@
       <window_info id="Favorites" order="2" sideWeight="0.5010846" side_tool="true" weight="0.24973656" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4963119" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4963119" weight="0.32839838" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -328,7 +366,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49841937" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5036881" side_tool="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49947312" weight="0.329718" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49947312" weight="0.32839838" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -383,22 +421,29 @@
     <entry file="file://$PROJECT_DIR$/Qt Designer/VentanaPrincipal.py" />
     <entry file="file://$PROJECT_DIR$/Pruebas.py" />
     <entry file="file://$PROJECT_DIR$/Qt/VentanaPrincipal.py" />
-    <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
+    <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py" />
+    <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="434" column="8" lean-forward="true" selection-start-line="434" selection-start-column="8" selection-end-line="434" selection-end-column="23" />
+        <state relative-caret-position="406">
+          <caret line="495" lean-forward="true" selection-start-line="495" selection-end-line="495" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dialog_Importar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="184" column="4" selection-start-line="184" selection-start-column="4" selection-end-line="185" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="49" column="92" lean-forward="true" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
+        <state relative-caret-position="272">
+          <caret line="16" column="70" lean-forward="true" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <marker date="1535941681371" expanded="true" signature="233:550" ph="..." />
-            <marker date="1535941681371" expanded="true" signature="385:550" ph="..." />
-            <marker date="1535941681371" expanded="true" signature="1251:1776" ph="..." />
+            <marker date="1535985692871" expanded="true" signature="205:322" ph="..." />
+            <marker date="1535985692871" expanded="true" signature="2793:2889" ph="..." />
           </folding>
         </state>
       </provider>
