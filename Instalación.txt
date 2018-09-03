@@ -23,8 +23,10 @@ En el instalador de Python:
 Cuando instalen Pycharm (instalen primero python), marquen ".py".
 Para instalar Github, nada distinto, todo siguiente nomás.
 
-Abran "Ejecutar"->cmd->pip3 install --user PyQt5
+Abran "Ejecutar"->cmd
+pip3 install --user PyQt5
 pip3 install --user PyQt5-tools
+pip install --user mysql-connector-python
 
 Abran github, pongan "Clone a respository" y les debería aparecer uno que dice SO, si quieren cambien la carpeta y clonen.
 Cuando hagan cambios en los archivos de esa carpeta, en github les van a aparecer los cambios; abajo a la izquierda ponen un título y si tienen ganas una descripción de lo que hicieron y hacen el commit.

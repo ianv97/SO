@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="756797dd-5895-4996-9cc3-d09ac57be919" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Instalación.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Instalación.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimuladorSO.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimuladorSO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.py" beforeDir="false" afterPath="$PROJECT_DIR$/VentanaPrincipal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VentanaPrincipal.ui" beforeDir="false" afterPath="$PROJECT_DIR$/VentanaPrincipal.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Tablas.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,36 +17,37 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="8" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="9" />
+          <entry key="py" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="9" />
+          <entry key="Python" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="812" />
-          <entry key="txt" value="23" />
+          <entry key="py" value="2150" />
+          <entry key="txt" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="23" />
-          <entry key="Python" value="812" />
+          <entry key="PLAIN_TEXT" value="76" />
+          <entry key="Python" value="2150" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -64,15 +65,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+            <state relative-caret-position="380">
+              <caret line="49" column="92" lean-forward="true" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1535869209079" expanded="true" signature="90:99" ph="..." />
-                <marker date="1535869209079" expanded="true" signature="121:127" ph="..." />
-                <marker date="1535869209079" expanded="true" signature="221:226" ph="..." />
-                <marker date="1535869209079" expanded="true" signature="221:867" ph="..." />
+                <marker date="1535941681371" expanded="true" signature="233:550" ph="..." />
+                <marker date="1535941681371" expanded="true" signature="385:550" ph="..." />
+                <marker date="1535941681371" expanded="true" signature="1251:1776" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="434" column="8" lean-forward="true" selection-start-line="434" selection-start-column="8" selection-end-line="434" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -99,6 +108,9 @@
       <find>align</find>
       <find>verticalheader</find>
       <find>horizont</find>
+      <find>guardar</find>
+      <find>click</find>
+      <find>import</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -280,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535737553367</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Ventana principal&#10;Creación de tablas sql">
+      <created>1535869292388</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1535869292388</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -357,7 +376,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ian" />
     <MESSAGE value="Ventana de prueba" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ventana de prueba" />
+    <MESSAGE value="Ventana principal&#10;Creación de tablas sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ventana principal&#10;Creación de tablas sql" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Qt Designer/VentanaPrincipal.py" />
@@ -365,21 +385,20 @@
     <entry file="file://$PROJECT_DIR$/Qt/VentanaPrincipal.py" />
     <entry file="file://$PROJECT_DIR$/VentanaPrincipal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="437" column="8" selection-start-line="437" selection-start-column="8" selection-end-line="437" selection-end-column="54" />
+        <state relative-caret-position="179">
+          <caret line="434" column="8" lean-forward="true" selection-start-line="434" selection-start-column="8" selection-end-line="434" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+        <state relative-caret-position="380">
+          <caret line="49" column="92" lean-forward="true" selection-start-line="49" selection-start-column="92" selection-end-line="49" selection-end-column="92" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <marker date="1535869209079" expanded="true" signature="90:99" ph="..." />
-            <marker date="1535869209079" expanded="true" signature="121:127" ph="..." />
-            <marker date="1535869209079" expanded="true" signature="221:226" ph="..." />
-            <marker date="1535869209079" expanded="true" signature="221:867" ph="..." />
+            <marker date="1535941681371" expanded="true" signature="233:550" ph="..." />
+            <marker date="1535941681371" expanded="true" signature="385:550" ph="..." />
+            <marker date="1535941681371" expanded="true" signature="1251:1776" ph="..." />
           </folding>
         </state>
       </provider>

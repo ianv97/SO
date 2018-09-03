@@ -1,11 +1,13 @@
 CREATE DATABASE SO;
+CREATE USER 'so'@'localhost' IDENTIFIED BY 'adminso';
+GRANT ALL PRIVILEGES ON so . * TO 'so'@'localhost';
 USE SO;
 
 CREATE TABLE Algoritmo(
 Id_algoritmo int PRIMARY KEY,
 Nombre varchar(15));
 
-algoritmoCREATE TABLE Carga_de_trabajo(
+CREATE TABLE Carga_de_trabajo(
 Id_carga int PRIMARY KEY AUTO_INCREMENT,
 Nombre varchar(60),
 N_procesos int,
