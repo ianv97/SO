@@ -1,16 +1,24 @@
 import sys
-from VentanaPrincipal import *
 import mysql.connector
 from mysql.connector import Error
+from Form_CargaDeTrabajo import *
+from Dialog_Importar import *
 
-class Ventana(Ui_Form):
+
+class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
+    def __init__(self):
+        self.setupUi(Form_CargaDeTrabajo)
+        self.eventos_de_usuario()
+        Form_CargaDeTrabajo.show()
+
     def eventos_de_usuario(self):
-        self.lineEdit_nprocesos.editingFinished.connect(self.mostrar_filas)
-        self.pushButton_3.clicked.connect(self.guardar_carga)
-        self.pushButton.clicked.connect(self.importar_carga)
+        self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
+        self.pushButton_Guardar.clicked.connect(self.guardar_carga)
+        self.pushButton_Importar.clicked.connect(self.importar_carga(Dialog_Importar))
+
     def obtener_filas(self):
-        if len(self.lineEdit_nprocesos.text())>0:
-            filas=int(self.lineEdit_nprocesos.text())
+        if len(self.lineEdit_NProcesos.text())>0:
+            filas=int(self.lineEdit_NProcesos.text())
         else:
             filas=0
         return filas
@@ -18,17 +26,17 @@ class Ventana(Ui_Form):
     def mostrar_filas(self):
         #CREAR FILAS
             filas=self.obtener_filas()
-            self.tableWidget.setRowCount(filas)
+            self.tableWidget_Procesos.setRowCount(filas)
         #ALINEAR CELDAS Y PONER TITULO A LAS FILAS
             _translate = QtCore.QCoreApplication.translate
             for i in range(filas):
                 item = QtWidgets.QTableWidgetItem()
-                self.tableWidget.setVerticalHeaderItem(i, item)
+                self.tableWidget_Procesos.setVerticalHeaderItem(i, item)
                 item.setText(_translate("Form", "P" + str(i + 1)))
                 for j in range(6):
                     item = QtWidgets.QTableWidgetItem()
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
-                    self.tableWidget.setItem(i, j, item)
+                    self.tableWidget_Procesos.setItem(i, j, item)
 
     def conectar_bd(self):
         try:
@@ -52,7 +60,8 @@ class Ventana(Ui_Form):
         cursor.execute(qry, valores)
         db.commit()
 
-    def importar_carga(self):
+    def importar_carga(self,Dialog_Importar):
+        Dialog_Importar.show()
         db, cursor = self.conectar_bd()
         filas = self.obtener_filas()
         qry = "SELECT carga_de_trabajo.Nombre, N_procesos, algoritmo.Nombre as Algoritmo FROM carga_de_trabajo INNER JOIN algoritmo ON carga_de_trabajo.Algoritmo=algoritmo.Id_algoritmo"
@@ -60,11 +69,20 @@ class Ventana(Ui_Form):
         resultado = cursor.fetchall()
         print(resultado)
 
+class VentanaModal(Ui_Dialog_Importar):
+    def __init__(self):
+        self.setupUi(Dialog_Importar)
+        Dialog_Importar.show()
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ventana()
-    ui.setupUi(Form)
-    ui.eventos_de_usuario()
-    Form.show()
+
+    Form_CargaDeTrabajo = QtWidgets.QWidget()
+    ui = VentanaPrincipal()
+
+    Dialog_Importar = QtWidgets.QDialog()
+    uiModal = Ui_Dialog_Importar()
+    # uiModal.setupUi(Dialog_Importar)
+
     sys.exit(app.exec_())
