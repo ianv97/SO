@@ -6,10 +6,6 @@ from Dialog_Importar import *
 
 
 class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
-    def __init__(self):
-        self.setupUi(Form_CargaDeTrabajo)
-        self.eventos_de_usuario()
-        Form_CargaDeTrabajo.show()
 
     def eventos_de_usuario(self):
         self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
@@ -69,29 +65,33 @@ class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
         resultado = cursor.fetchall()
         print(resultado)
 
-class VentanaModal(Ui_Dialog_Importar):
-    def __init__(self):
-        self.setupUi(Dialog_Importar)
-        Dialog_Importar.show()
+#class VentanaModal(Ui_Dialog_Importar):
 
 
 class Control:
     def __init__(self):
-        pass
+        self.Ventana()
 
-    def Ventana():
+    def Ventana(self):
         Form_CargaDeTrabajo = QtWidgets.QWidget()
         ui = VentanaPrincipal()
+        ui.setupUi(Form_CargaDeTrabajo)
+        ui.eventos_de_usuario()
+        Form_CargaDeTrabajo.show()
+
 
     def VentanaModal(self):
         Dialog_Importar = QtWidgets.QDialog()
         uiModal = Ui_Dialog_Importar()
+        uiModal.setupUi(Dialog_Importar)
+        Dialog_Importar.show()
+
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
-    control=Control
-    control.Ventana()
+    ctrl=Control
+    ctrl.Ventana()
 
     sys.exit(app.exec_())
