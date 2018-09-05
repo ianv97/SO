@@ -75,14 +75,23 @@ class VentanaModal(Ui_Dialog_Importar):
         Dialog_Importar.show()
 
 
+class Control:
+    def __init__(self):
+        pass
+
+    def Ventana():
+        Form_CargaDeTrabajo = QtWidgets.QWidget()
+        ui = VentanaPrincipal()
+
+    def VentanaModal(self):
+        Dialog_Importar = QtWidgets.QDialog()
+        uiModal = Ui_Dialog_Importar()
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
-    Form_CargaDeTrabajo = QtWidgets.QWidget()
-    ui = VentanaPrincipal()
-
-    Dialog_Importar = QtWidgets.QDialog()
-    uiModal = Ui_Dialog_Importar()
-    # uiModal.setupUi(Dialog_Importar)
+    control=Control
+    control.Ventana()
 
     sys.exit(app.exec_())
