@@ -6,11 +6,18 @@ from Dialog_Importar import *
 
 
 class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
+    def __init__(self):
+        Ui_Form_CargaDeTrabajo.__init__(self)
+        self.Form_CargaDeTrabajo = QtWidgets.QWidget()
+        self.setupUi(self.Form_CargaDeTrabajo)
+        self.eventos_de_usuario()
+        self.Form_CargaDeTrabajo.show()
 
     def eventos_de_usuario(self):
         self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
         self.pushButton_Guardar.clicked.connect(self.guardar_carga)
-        self.pushButton_Importar.clicked.connect(self.importar_carga(Dialog_Importar))
+        self.pushButton_Importar.clicked.connect(self.importar_carga)
+        self.pushButton_Importar.clicked.connect(uiModal.Dialog_Importar.show)
 
     def obtener_filas(self):
         if len(self.lineEdit_NProcesos.text())>0:
@@ -34,64 +41,52 @@ class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
                     self.tableWidget_Procesos.setItem(i, j, item)
 
-    def conectar_bd(self):
-        try:
-            db = mysql.connector.connect(host='localhost', database='so', user='so', password='adminso')
-            if db.is_connected():
-                cursor = db.cursor()
-                # cursor.execute("SELECT * FROM algoritmo")
-                # resultado = cursor.fetchall()
-                # cursor.close()
-                # db.commit()
-                # db.close()
-                return db,cursor
-        except Error as err:
-            print("Error en la conexión a la base de datos: ", err)
 
     def guardar_carga(self):
-        db, cursor = self.conectar_bd()
         filas = self.obtener_filas()
         qry = "INSERT INTO carga_de_trabajo (Nombre,N_procesos,Algoritmo) VALUES (%s,%s,%s)"
         valores = ("Prueba", filas, 1)
-        cursor.execute(qry, valores)
-        db.commit()
+        bd.insertar(qry, valores)
 
-    def importar_carga(self,Dialog_Importar):
-        Dialog_Importar.show()
-        db, cursor = self.conectar_bd()
+
+    def importar_carga(self):
         filas = self.obtener_filas()
         qry = "SELECT carga_de_trabajo.Nombre, N_procesos, algoritmo.Nombre as Algoritmo FROM carga_de_trabajo INNER JOIN algoritmo ON carga_de_trabajo.Algoritmo=algoritmo.Id_algoritmo"
-        cursor.execute(qry)
-        resultado = cursor.fetchall()
+        resultado = bd.consultar(qry)
         print(resultado)
 
-#class VentanaModal(Ui_Dialog_Importar):
-
-
-class Control:
+class db:
     def __init__(self):
-        self.Ventana()
+        try:
+            self.conector = mysql.connector.connect(host='localhost', database='so', user='so', password='adminso')
+        except Error as err:
+            print("Error en la conexión a la base de datos: ", err)
 
-    def Ventana(self):
-        Form_CargaDeTrabajo = QtWidgets.QWidget()
-        ui = VentanaPrincipal()
-        ui.setupUi(Form_CargaDeTrabajo)
-        ui.eventos_de_usuario()
-        Form_CargaDeTrabajo.show()
+    def consultar(self,qry):
+        cursor = self.conector.cursor()
+        cursor.execute(qry)
+        resultado = cursor.fetchall()
+        cursor.close()
+        return resultado
 
+    def insertar(self,qry,valores):
+        cursor = self.conector.cursor()
+        resultado = cursor.execute(qry,valores)
+        cursor.close()
+        self.conector.commit()
+        return resultado
 
-    def VentanaModal(self):
-        Dialog_Importar = QtWidgets.QDialog()
-        uiModal = Ui_Dialog_Importar()
-        uiModal.setupUi(Dialog_Importar)
-        Dialog_Importar.show()
-
+class VentanaModal(Ui_Dialog_Importar):
+    def __init__(self):
+        Ui_Dialog_Importar.__init__(self)
+        self.Dialog_Importar = QtWidgets.QDialog()
+        self.setupUi(self.Dialog_Importar)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-
-    ctrl=Control
-    ctrl.Ventana()
+    bd=db()
+    uiModal = VentanaModal()
+    ui = VentanaPrincipal()
 
     sys.exit(app.exec_())
