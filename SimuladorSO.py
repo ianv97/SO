@@ -10,14 +10,12 @@ class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
         Ui_Form_CargaDeTrabajo.__init__(self)
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
-        self.eventos_de_usuario()
-        self.Form_CargaDeTrabajo.show()
+        self.eventos()
 
-    def eventos_de_usuario(self):
+    def eventos(self):
         self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
         self.pushButton_Guardar.clicked.connect(self.guardar_carga)
         self.pushButton_Importar.clicked.connect(self.importar_carga)
-        self.pushButton_Importar.clicked.connect(uiModal.Dialog_Importar.show)
 
     def obtener_filas(self):
         if len(self.lineEdit_NProcesos.text())>0:
@@ -46,13 +44,13 @@ class VentanaPrincipal(Ui_Form_CargaDeTrabajo):
         filas = self.obtener_filas()
         qry = "INSERT INTO carga_de_trabajo (Nombre,N_procesos,Algoritmo) VALUES (%s,%s,%s)"
         valores = ("Prueba", filas, 1)
-        bd.insertar(qry, valores)
+        ctrl.bd.insertar(qry, valores)
 
 
     def importar_carga(self):
         filas = self.obtener_filas()
         qry = "SELECT carga_de_trabajo.Nombre, N_procesos, algoritmo.Nombre as Algoritmo FROM carga_de_trabajo INNER JOIN algoritmo ON carga_de_trabajo.Algoritmo=algoritmo.Id_algoritmo"
-        resultado = bd.consultar(qry)
+        resultado = ctrl.bd.consultar(qry)
         print(resultado)
 
 class db:
@@ -81,12 +79,38 @@ class VentanaModal(Ui_Dialog_Importar):
         Ui_Dialog_Importar.__init__(self)
         self.Dialog_Importar = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Importar)
+        self.eventos()
 
+    def eventos(self):
+        self.pushButton_Cancelar.clicked.connect(self.Dialog_Importar.close)
+
+    def cargar_CDT(self):
+        qry="SELECT nombre FROM carga_de_trabajo"
+        cargas=ctrl.bd.consultar(qry)
+        for i in cargas:
+            aux=str(i)
+            elemento=''.join(j for j in aux if j.isalnum())
+            self.listWidget_CargasDeTrabajo.addItem(elemento)
+
+class Control:
+    def __init__(self):
+        self.bd=db()
+        self.ui=VentanaPrincipal()
+        self.uiModal = VentanaModal()
+        self.eventos()
+
+    def ventana_importar(self):
+        self.uiModal.Dialog_Importar.show()
+
+    def ventana_carga_de_trabajo(self):
+        self.ui.Form_CargaDeTrabajo.show()
+
+    def eventos(self):
+        self.ui.pushButton_Importar.clicked.connect(self.ventana_importar)
+        self.ui.pushButton_Importar.clicked.connect(self.uiModal.cargar_CDT)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    bd=db()
-    uiModal = VentanaModal()
-    ui = VentanaPrincipal()
-
+    ctrl=Control()
+    ctrl.ventana_carga_de_trabajo()
     sys.exit(app.exec_())
