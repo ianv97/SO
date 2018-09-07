@@ -15,7 +15,7 @@ n_procesos int);
 
 CREATE TABLE IF NOT EXISTS Proceso(
 id_cdt smallint,
-id int AUTO_INCREMENT,
+id int,
 tiempo_arribo int,
 cpu1 int,
 entrada int,

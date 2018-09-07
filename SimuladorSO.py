@@ -14,8 +14,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.eventos()
 
     def eventos(self):
-        self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
-        # self.lineEdit_NProcesos.textChanged()
+        self.lineEdit_NProcesos.textChanged.connect(self.mostrar_filas)
 
     def obtener_nprocesos(self):
         if len(self.lineEdit_NProcesos.text()) > 0:
@@ -54,22 +53,22 @@ class VentanaImportar(Ui_Dialog_Importar):
     def cargar_cdt(self):
         self.listWidget_CargasDeTrabajo.clear()
         qry = "SELECT nombre FROM CDT"
-        cargas = ctrl.consultar(qry)
-        for i in cargas:
-            self.listWidget_CargasDeTrabajo.addItem(i)
+        cdt = ctrl.consultar(qry)
+        for item in cdt:
+            self.listWidget_CargasDeTrabajo.addItem(item[0])
 
     def importar_cdt(self):
         qry = "SELECT id, n_procesos FROM CDT WHERE nombre = '" + self.listWidget_CargasDeTrabajo.currentItem().text() + "'"
-        resultado = ctrl.consultar(qry)
+        resultado = ctrl.consultar(qry)[0]
         id = resultado[0]
         nprocesos = resultado[1]
         ctrl.uiCDT.lineEdit_NProcesos.setText(str(nprocesos))
         qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(id)
         procesos = ctrl.consultar(qry)
-        print(procesos)
-        for i in range(nprocesos):
+        for i in range(len(procesos)):
             for j in range(6):
-                ctrl.uiCDT.tableWidget_Procesos.Item(i, j).SetText(str(procesos[i*6+j]))
+                ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(procesos[i][j]))
+        self.Dialog_Importar.close()
 
 
 class VentanaGuardar(Ui_Dialog_Guardar):
@@ -89,7 +88,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
         qry = "INSERT INTO CDT (nombre, n_procesos) VALUES (%s, %s)"
         valores = (nombre, nprocesos)
         ctrl.insertar(qry, valores)
-        id = ctrl.consultar("SELECT LAST_INSERT_ID()")
+        id = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
         qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         for i in range(nprocesos):
             ta = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 0).text())
@@ -132,12 +131,7 @@ class Control:
     def consultar(self, qry):
         cursor = self.bd.cursor()
         cursor.execute(qry)
-        resultado = []
-        for item in cursor.fetchall():
-            if len(item) == 1:
-                resultado.append(item[0])
-        if len(resultado) == 1:
-            resultado = resultado[0]
+        resultado = cursor.fetchall()
         cursor.close()
         return resultado
 
