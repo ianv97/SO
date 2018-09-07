@@ -15,22 +15,22 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
 
     def eventos(self):
         self.lineEdit_NProcesos.editingFinished.connect(self.mostrar_filas)
-        self.pushButton_Importar.clicked.connect(self.importar_carga)
+        # self.lineEdit_NProcesos.textChanged()
 
-    def obtener_filas(self):
+    def obtener_nprocesos(self):
         if len(self.lineEdit_NProcesos.text()) > 0:
-            filas = int(self.lineEdit_NProcesos.text())
+            nprocesos = int(self.lineEdit_NProcesos.text())
         else:
-            filas = 0
-        return filas
+            nprocesos = 0
+        return nprocesos
 
     def mostrar_filas(self):
         #CREAR FILAS
-            filas = self.obtener_filas()
-            self.tableWidget_Procesos.setRowCount(filas)
+            nprocesos = self.obtener_nprocesos()
+            self.tableWidget_Procesos.setRowCount(nprocesos)
         #ALINEAR CELDAS Y PONER TITULO A LAS FILAS
             _translate = QtCore.QCoreApplication.translate
-            for i in range(filas):
+            for i in range(nprocesos):
                 item = QtWidgets.QTableWidgetItem()
                 self.tableWidget_Procesos.setVerticalHeaderItem(i, item)
                 item.setText(_translate("Form", "P" + str(i + 1)))
@@ -38,12 +38,6 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     item = QtWidgets.QTableWidgetItem()
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
                     self.tableWidget_Procesos.setItem(i, j, item)
-
-    def importar_carga(self):
-        filas = self.obtener_filas()
-        qry = "SELECT * FROM CDT"
-        resultado = ctrl.consultar(qry)
-        print(resultado)
 
 
 class VentanaImportar(Ui_Dialog_Importar):
@@ -55,25 +49,27 @@ class VentanaImportar(Ui_Dialog_Importar):
 
     def eventos(self):
         self.pushButton_Cancelar.clicked.connect(self.Dialog_Importar.close)
+        self.pushButton_Importar.clicked.connect(self.importar_cdt)
 
     def cargar_cdt(self):
         self.listWidget_CargasDeTrabajo.clear()
-        qry = "SELECT nombre_cdt FROM CDT"
+        qry = "SELECT nombre FROM CDT"
         cargas = ctrl.consultar(qry)
         for i in cargas:
-            aux = str(i)
-            elemento = ''.join(j for j in aux if j.isalnum())
-            self.listWidget_CargasDeTrabajo.addItem(elemento)
+            self.listWidget_CargasDeTrabajo.addItem(i)
 
-    # def importar_cdt(self):
-        # if ctrl.uiCDT.radioButton_FCFS.isChecked():
-        #     algoritmo = "FCFS"
-        # elif ctrl.uiCDT.radioButton_SJF.isChecked():
-        #     algoritmo = "SJF"
-        # elif ctrl.uiCDT.radioButton_SRTF.isChecked():
-        #     algoritmo = "SRTF"
-        # elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
-        #     algoritmo = "ROUND ROBIN"
+    def importar_cdt(self):
+        qry = "SELECT id, n_procesos FROM CDT WHERE nombre = '" + self.listWidget_CargasDeTrabajo.currentItem().text() + "'"
+        resultado = ctrl.consultar(qry)
+        id = resultado[0]
+        nprocesos = resultado[1]
+        ctrl.uiCDT.lineEdit_NProcesos.setText(str(nprocesos))
+        qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(id)
+        procesos = ctrl.consultar(qry)
+        print(procesos)
+        for i in range(nprocesos):
+            for j in range(6):
+                ctrl.uiCDT.tableWidget_Procesos.Item(i, j).SetText(str(procesos[i*6+j]))
 
 
 class VentanaGuardar(Ui_Dialog_Guardar):
@@ -89,10 +85,21 @@ class VentanaGuardar(Ui_Dialog_Guardar):
 
     def guardar_cdt(self):
         nombre = self.lineEdit_NombreCDT.text()
-        nprocesos = ctrl.uiCDT.obtener_filas()
-        qry = "INSERT INTO CDT (nombre_cdt, n_procesos) VALUES (%s,%s)"
+        nprocesos = ctrl.uiCDT.obtener_nprocesos()
+        qry = "INSERT INTO CDT (nombre, n_procesos) VALUES (%s, %s)"
         valores = (nombre, nprocesos)
         ctrl.insertar(qry, valores)
+        id = ctrl.consultar("SELECT LAST_INSERT_ID()")
+        qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        for i in range(nprocesos):
+            ta = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 0).text())
+            cpu1 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 1).text())
+            e = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 2).text())
+            cpu2 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 3).text())
+            s = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 4).text())
+            cpu3 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 5).text())
+            valores = (id, i+1, ta, cpu1, e, cpu2, s, cpu3)
+            ctrl.insertar(qry, valores)
         self.Dialog_Guardar.close()
 
 class Control:
@@ -125,7 +132,12 @@ class Control:
     def consultar(self, qry):
         cursor = self.bd.cursor()
         cursor.execute(qry)
-        resultado = cursor.fetchall()
+        resultado = []
+        for item in cursor.fetchall():
+            if len(item) == 1:
+                resultado.append(item[0])
+        if len(resultado) == 1:
+            resultado = resultado[0]
         cursor.close()
         return resultado
 
@@ -141,3 +153,13 @@ if __name__ == "__main__":
     ctrl = Control()
     ctrl.ventana_cdt()
     sys.exit(app.exec_())
+
+    # def importar_cdt(self):
+    # if ctrl.uiCDT.radioButton_FCFS.isChecked():
+    #     algoritmo = "FCFS"
+    # elif ctrl.uiCDT.radioButton_SJF.isChecked():
+    #     algoritmo = "SJF"
+    # elif ctrl.uiCDT.radioButton_SRTF.isChecked():
+    #     algoritmo = "SRTF"
+    # elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
+    #     algoritmo = "ROUND ROBIN"

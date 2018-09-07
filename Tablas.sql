@@ -1,25 +1,28 @@
 CREATE DATABASE IF NOT EXISTS SO;
 CREATE USER IF NOT EXISTS 'so'@'localhost' IDENTIFIED BY 'adminso';
 GRANT ALL PRIVILEGES ON so . * TO 'so'@'localhost';
+drop database SO;
+CREATE DATABASE SO;
 USE SO;
 
 CREATE TABLE IF NOT EXISTS Algoritmo(
-nombre_algoritmo varchar(15) PRIMARY KEY);
+nombre varchar(15) PRIMARY KEY);
 
 CREATE TABLE IF NOT EXISTS CDT(
-nombre_cdt varchar(60) PRIMARY KEY,
+id smallint PRIMARY KEY AUTO_INCREMENT,
+nombre varchar(60),
 n_procesos int);
 
 CREATE TABLE IF NOT EXISTS Proceso(
-nombre_cdt varchar(60),
-id_proceso int,
+id_cdt smallint,
+id int AUTO_INCREMENT,
 tiempo_arribo int,
 cpu1 int,
 entrada int,
 cpu2 int,
 salida int,
 cpu3 int,
-PRIMARY KEY (nombre_cdt, id_proceso),
-FOREIGN KEY (nombre_cdt) REFERENCES CDT(nombre_cdt));
+PRIMARY KEY (id_cdt, id),
+FOREIGN KEY (id_cdt) REFERENCES CDT(id));
 
 INSERT INTO Algoritmo VALUES ("FCFS"),("SJF"),("SRTF"),("ROUND ROBIN");
