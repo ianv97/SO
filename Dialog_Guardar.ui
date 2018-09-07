@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog_Importar</class>
- <widget class="QDialog" name="Dialog_Importar">
+ <class>Dialog_Guardar</class>
+ <widget class="QDialog" name="Dialog_Guardar">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>195</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,11 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(57, 57, 57);</string>
   </property>
-  <widget class="QPushButton" name="pushButton_Importar">
+  <widget class="QPushButton" name="pushButton_Guardar">
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>260</y>
+     <y>150</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -217,7 +217,7 @@
 color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
-    <string>Importar</string>
+    <string>Guardar</string>
    </property>
    <property name="autoDefault">
     <bool>false</bool>
@@ -227,7 +227,7 @@ color: rgb(0, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>260</y>
+     <y>150</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -430,26 +430,12 @@ color: rgb(0, 0, 0);</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget_CargasDeTrabajo">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>301</width>
-     <height>192</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(0, 0, 0);</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>10</y>
-     <width>301</width>
+     <x>20</x>
+     <y>30</y>
+     <width>371</width>
      <height>21</height>
     </rect>
    </property>
@@ -462,10 +448,28 @@ background-color: rgb(0, 0, 0);</string>
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Seleccione la Carga de trabajo a importar</string>
+    <string>Ingrese el nombre de la carga de trabajo a guardar</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_NombreCDT">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>361</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_NombreCDT</tabstop>
+  <tabstop>pushButton_Guardar</tabstop>
+  <tabstop>pushButton_Cancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

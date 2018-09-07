@@ -1,29 +1,25 @@
-CREATE DATABASE SO;
-CREATE USER 'so'@'localhost' IDENTIFIED BY 'adminso';
+CREATE DATABASE IF NOT EXISTS SO;
+CREATE USER IF NOT EXISTS 'so'@'localhost' IDENTIFIED BY 'adminso';
 GRANT ALL PRIVILEGES ON so . * TO 'so'@'localhost';
 USE SO;
 
-CREATE TABLE Algoritmo(
-Id_algoritmo int PRIMARY KEY,
-Nombre varchar(15));
+CREATE TABLE IF NOT EXISTS Algoritmo(
+nombre_algoritmo varchar(15) PRIMARY KEY);
 
-CREATE TABLE Carga_de_trabajo(
-Id_carga int PRIMARY KEY AUTO_INCREMENT,
-Nombre varchar(60),
-N_procesos int,
-Algoritmo int,
-FOREIGN KEY (Algoritmo) REFERENCES Algoritmo(Id_Algoritmo));
+CREATE TABLE IF NOT EXISTS CDT(
+nombre_cdt varchar(60) PRIMARY KEY,
+n_procesos int);
 
-CREATE TABLE Proceso(
-Id_carga int,
-Id_proceso int,
-Tiempo_arribo int,
-Cpu1 int,
-Entrada int,
-Cpu2 int,
-Salida int,
-Cpu3 int,
-PRIMARY KEY (Id_carga, Id_proceso),
-FOREIGN KEY (Id_carga) REFERENCES Carga_de_trabajo(Id_carga));
+CREATE TABLE IF NOT EXISTS Proceso(
+nombre_cdt varchar(60),
+id_proceso int,
+tiempo_arribo int,
+cpu1 int,
+entrada int,
+cpu2 int,
+salida int,
+cpu3 int,
+PRIMARY KEY (nombre_cdt, id_proceso),
+FOREIGN KEY (nombre_cdt) REFERENCES CDT(nombre_cdt));
 
-INSERT INTO Algoritmo VALUES (1,"FCFS"),(2,"SJF"),(3,"SRTF"),(4,"ROUND ROBIN");
+INSERT INTO Algoritmo VALUES ("FCFS"),("SJF"),("SRTF"),("ROUND ROBIN");

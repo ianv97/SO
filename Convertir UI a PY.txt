@@ -1,7 +1,7 @@
-python -m PyQt5.uic.pyuic youruifile.ui -o yourpyfile.py -x
-
-
 python -m PyQt5.uic.pyuic Form_CargaDeTrabajo.ui -o Form_CargaDeTrabajo.py -x
 
 
 python -m PyQt5.uic.pyuic Dialog_Importar.ui -o Dialog_Importar.py -x
+
+
+python -m PyQt5.uic.pyuic Dialog_Guardar.ui -o Dialog_Guardar.py -x

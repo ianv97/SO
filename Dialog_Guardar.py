@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Dialog_Importar.ui'
+# Form implementation generated from reading ui file 'Dialog_Guardar.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.2
 #
@@ -8,13 +8,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog_Importar(object):
-    def setupUi(self, Dialog_Importar):
-        Dialog_Importar.setObjectName("Dialog_Importar")
-        Dialog_Importar.resize(400, 300)
-        Dialog_Importar.setStyleSheet("background-color: rgb(57, 57, 57);")
-        self.pushButton_Importar = QtWidgets.QPushButton(Dialog_Importar)
-        self.pushButton_Importar.setGeometry(QtCore.QRect(190, 260, 81, 31))
+class Ui_Dialog_Guardar(object):
+    def setupUi(self, Dialog_Guardar):
+        Dialog_Guardar.setObjectName("Dialog_Guardar")
+        Dialog_Guardar.resize(400, 195)
+        Dialog_Guardar.setStyleSheet("background-color: rgb(57, 57, 57);")
+        self.pushButton_Guardar = QtWidgets.QPushButton(Dialog_Guardar)
+        self.pushButton_Guardar.setGeometry(QtCore.QRect(190, 150, 81, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -70,21 +70,21 @@ class Ui_Dialog_Importar(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 123, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.pushButton_Importar.setPalette(palette)
+        self.pushButton_Guardar.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("12 MS Shell Dlg 2")
         font.setPointSize(8)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
-        self.pushButton_Importar.setFont(font)
-        self.pushButton_Importar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_Importar.setStyleSheet("background-color: rgb(0, 123, 255);\n"
+        self.pushButton_Guardar.setFont(font)
+        self.pushButton_Guardar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_Guardar.setStyleSheet("background-color: rgb(0, 123, 255);\n"
 "color: rgb(0, 0, 0);")
-        self.pushButton_Importar.setAutoDefault(False)
-        self.pushButton_Importar.setObjectName("pushButton_Importar")
-        self.pushButton_Cancelar = QtWidgets.QPushButton(Dialog_Importar)
-        self.pushButton_Cancelar.setGeometry(QtCore.QRect(300, 260, 81, 31))
+        self.pushButton_Guardar.setAutoDefault(False)
+        self.pushButton_Guardar.setObjectName("pushButton_Guardar")
+        self.pushButton_Cancelar = QtWidgets.QPushButton(Dialog_Guardar)
+        self.pushButton_Cancelar.setGeometry(QtCore.QRect(300, 150, 81, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -153,38 +153,39 @@ class Ui_Dialog_Importar(object):
 "color: rgb(0, 0, 0);")
         self.pushButton_Cancelar.setAutoDefault(False)
         self.pushButton_Cancelar.setObjectName("pushButton_Cancelar")
-        self.listWidget_CargasDeTrabajo = QtWidgets.QListWidget(Dialog_Importar)
-        self.listWidget_CargasDeTrabajo.setGeometry(QtCore.QRect(30, 40, 301, 192))
-        self.listWidget_CargasDeTrabajo.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(0, 0, 0);")
-        self.listWidget_CargasDeTrabajo.setObjectName("listWidget_CargasDeTrabajo")
-        self.label = QtWidgets.QLabel(Dialog_Importar)
-        self.label.setGeometry(QtCore.QRect(30, 10, 301, 21))
+        self.label = QtWidgets.QLabel(Dialog_Guardar)
+        self.label.setGeometry(QtCore.QRect(20, 30, 371, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label.setFont(font)
         self.label.setStyleSheet("color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
+        self.lineEdit_NombreCDT = QtWidgets.QLineEdit(Dialog_Guardar)
+        self.lineEdit_NombreCDT.setGeometry(QtCore.QRect(20, 80, 361, 20))
+        self.lineEdit_NombreCDT.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit_NombreCDT.setObjectName("lineEdit_NombreCDT")
 
-        self.retranslateUi(Dialog_Importar)
-        QtCore.QMetaObject.connectSlotsByName(Dialog_Importar)
+        self.retranslateUi(Dialog_Guardar)
+        QtCore.QMetaObject.connectSlotsByName(Dialog_Guardar)
+        Dialog_Guardar.setTabOrder(self.lineEdit_NombreCDT, self.pushButton_Guardar)
+        Dialog_Guardar.setTabOrder(self.pushButton_Guardar, self.pushButton_Cancelar)
 
-    def retranslateUi(self, Dialog_Importar):
+    def retranslateUi(self, Dialog_Guardar):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Importar.setWindowTitle(_translate("Dialog_Importar", "Importar carga de trabajo"))
-        self.pushButton_Importar.setToolTip(_translate("Dialog_Importar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
-        self.pushButton_Importar.setText(_translate("Dialog_Importar", "Importar"))
-        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Importar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
-        self.pushButton_Cancelar.setText(_translate("Dialog_Importar", "Cancelar"))
-        self.label.setText(_translate("Dialog_Importar", "Seleccione la Carga de trabajo a importar"))
+        Dialog_Guardar.setWindowTitle(_translate("Dialog_Guardar", "Importar carga de trabajo"))
+        self.pushButton_Guardar.setToolTip(_translate("Dialog_Guardar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        self.pushButton_Guardar.setText(_translate("Dialog_Guardar", "Guardar"))
+        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Guardar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        self.pushButton_Cancelar.setText(_translate("Dialog_Guardar", "Cancelar"))
+        self.label.setText(_translate("Dialog_Guardar", "Ingrese el nombre de la carga de trabajo a guardar"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog_Importar = QtWidgets.QDialog()
-    ui = Ui_Dialog_Importar()
-    ui.setupUi(Dialog_Importar)
-    Dialog_Importar.show()
+    Dialog_Guardar = QtWidgets.QDialog()
+    ui = Ui_Dialog_Guardar()
+    ui.setupUi(Dialog_Guardar)
+    Dialog_Guardar.show()
     sys.exit(app.exec_())
 
