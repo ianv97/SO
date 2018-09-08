@@ -4,6 +4,8 @@ from mysql.connector import Error
 from Form_CargaDeTrabajo import *
 from Dialog_Importar import *
 from Dialog_Guardar import *
+from Dialog_Generar import *
+from random import randint
 
 
 class VentanaCDT(Ui_Form_CargaDeTrabajo):
@@ -101,6 +103,27 @@ class VentanaGuardar(Ui_Dialog_Guardar):
             ctrl.insertar(qry, valores)
         self.Dialog_Guardar.close()
 
+
+class VentanaGenerar(Ui_Dialog_Generar):
+    def __init__(self):
+        Ui_Dialog_Generar.__init__(self)
+        self.Dialog_Generar = QtWidgets.QDialog()
+        self.setupUi(self.Dialog_Generar)
+        self.eventos()
+
+    def eventos(self):
+        self.pushButton_Cancelar.clicked.connect(self.Dialog_Generar.close)
+        self.pushButton_Generar.clicked.connect(self.generar)
+
+    def generar(self):
+        liminf = int(self.lineEdit_LimInf.text())
+        limsup = int(self.lineEdit_LimSup.text())
+        for i in range(ctrl.uiCDT.obtener_nprocesos()):
+            for j in range(6):
+                aleatorio = randint(liminf, limsup)
+                ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
+        self.Dialog_Generar.close()
+
 class Control:
     def __init__(self):
         try:
@@ -110,6 +133,7 @@ class Control:
         self.uiCDT = VentanaCDT()
         self.uiImportar = VentanaImportar()
         self.uiGuardar = VentanaGuardar()
+        self.uiGenerar = VentanaGenerar()
         self.eventos()
 
     def ventana_cdt(self):
@@ -122,11 +146,14 @@ class Control:
         self.uiGuardar.lineEdit_NombreCDT.clear()
         self.uiGuardar.Dialog_Guardar.show()
 
+    def ventana_generar(self):
+        self.uiGenerar.Dialog_Generar.show()
+
     def eventos(self):
         self.uiCDT.pushButton_Importar.clicked.connect(self.ventana_importar)
         self.uiCDT.pushButton_Importar.clicked.connect(self.uiImportar.cargar_cdt)
         self.uiCDT.pushButton_Guardar.clicked.connect(self.ventana_guardar)
-
+        self.uiCDT.pushButton_Generar.clicked.connect(self.ventana_generar)
 
     def consultar(self, qry):
         cursor = self.bd.cursor()
