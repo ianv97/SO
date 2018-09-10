@@ -5,6 +5,7 @@ from Form_CargaDeTrabajo import *
 from Dialog_Importar import *
 from Dialog_Guardar import *
 from Dialog_Generar import *
+from Dialog_Error import *
 from random import randint
 
 
@@ -14,9 +15,15 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
         self.eventos()
+        self.ocultar_quantum()
 
     def eventos(self):
         self.lineEdit_NProcesos.textChanged.connect(self.mostrar_filas)
+        self.radioButton_FCFS.clicked.connect(self.ocultar_quantum)
+        self.radioButton_SJF.clicked.connect(self.ocultar_quantum)
+        self.radioButton_SRTF.clicked.connect(self.ocultar_quantum)
+        self.radioButton_ROUNDROBIN.clicked.connect(self.mostrar_quantum)
+        self.pushButton_Siguiente.clicked.connect(self.verificar_procesos)
 
     def obtener_nprocesos(self):
         if len(self.lineEdit_NProcesos.text()) > 0:
@@ -26,10 +33,10 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         return nprocesos
 
     def mostrar_filas(self):
-        #CREAR FILAS
+        # CREAR FILAS
             nprocesos = self.obtener_nprocesos()
             self.tableWidget_Procesos.setRowCount(nprocesos)
-        #ALINEAR CELDAS Y PONER TITULO A LAS FILAS
+        # ALINEAR CELDAS Y PONER TÍTULO A LAS FILAS
             _translate = QtCore.QCoreApplication.translate
             for i in range(nprocesos):
                 item = QtWidgets.QTableWidgetItem()
@@ -39,6 +46,46 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     item = QtWidgets.QTableWidgetItem()
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
                     self.tableWidget_Procesos.setItem(i, j, item)
+
+    def mostrar_quantum(self):
+        self.label_Quantum.setVisible(True)
+        self.lineEdit_Quantum.setVisible(True)
+
+    def ocultar_quantum(self):
+        self.label_Quantum.setVisible(False)
+        self.lineEdit_Quantum.setVisible(False)
+
+    def verificar_procesos(self):
+        error_cpu = -1
+        error_ta_vacio = -1
+        error_ta_menor = -1
+        ta_anterior = 0
+        nprocesos = self.obtener_nprocesos()
+        if nprocesos > 0:
+            for i in range(nprocesos):
+                if (self.tableWidget_Procesos.item(i, 0).text() == ""):
+                    error_ta_vacio = i+1
+                    break
+                elif (self.tableWidget_Procesos.item(i, 1).text() == "0") or \
+                        (self.tableWidget_Procesos.item(i, 1).text() == "") or \
+                        (self.tableWidget_Procesos.item(i, 5).text() == "0") or \
+                        (self.tableWidget_Procesos.item(i, 5).text() == ""):
+                    error_cpu = i+1
+                    break
+                elif int(self.tableWidget_Procesos.item(i, 0).text()) < ta_anterior:
+                    error_ta_menor = i+1
+                    break
+                ta_anterior = int(self.tableWidget_Procesos.item(i, 0).text())
+            if error_cpu != -1:
+                ctrl.uiError.error("Proceso P"+str(error_cpu)+": Todos los procesos deben iniciar y terminar con un ciclo de CPU.")
+            elif error_ta_vacio != -1:
+                ctrl.uiError.error("Proceso P"+str(error_ta_vacio)+": Se debe especificar el tiempo de arribo.")
+            elif error_ta_menor != -1:
+                ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
+            else:
+                self.Form_CargaDeTrabajo.close()
+        else:
+            ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
 
 class VentanaImportar(Ui_Dialog_Importar):
@@ -62,10 +109,10 @@ class VentanaImportar(Ui_Dialog_Importar):
     def importar_cdt(self):
         qry = "SELECT id, n_procesos FROM CDT WHERE nombre = '" + self.listWidget_CargasDeTrabajo.currentItem().text() + "'"
         resultado = ctrl.consultar(qry)[0]
-        id = resultado[0]
+        idcdt = resultado[0]
         nprocesos = resultado[1]
         ctrl.uiCDT.lineEdit_NProcesos.setText(str(nprocesos))
-        qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(id)
+        qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(idcdt)
         procesos = ctrl.consultar(qry)
         for i in range(len(procesos)):
             for j in range(6):
@@ -91,7 +138,8 @@ class VentanaGuardar(Ui_Dialog_Guardar):
         valores = (nombre, nprocesos)
         ctrl.insertar(qry, valores)
         id = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
-        qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3)" \
+              "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         for i in range(nprocesos):
             ta = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 0).text())
             cpu1 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 1).text())
@@ -116,25 +164,76 @@ class VentanaGenerar(Ui_Dialog_Generar):
         self.pushButton_Generar.clicked.connect(self.generar)
 
     def generar(self):
-        liminf = int(self.lineEdit_LimInf.text())
-        limsup = int(self.lineEdit_LimSup.text())
-        for i in range(ctrl.uiCDT.obtener_nprocesos()):
-            for j in range(6):
-                aleatorio = randint(liminf, limsup)
-                ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
+        nprocesos = ctrl.uiCDT.obtener_nprocesos()
+        lim_inf = int(self.lineEdit_LimInf.text())
+        lim_sup = int(self.lineEdit_LimSup.text())
+        ta_lim_inf = 0
+        ta_lim_sup = round(((lim_sup - lim_inf) / nprocesos) * lim_sup)
+        print(str(ta_lim_sup))
+        if lim_sup <= lim_inf:
+            ctrl.uiError.error("El límite superior debe ser mayor al límite inferior.")
+        else:
+            if lim_inf != 0:
+                for i in range(nprocesos):
+                    aleatorio = randint(ta_lim_inf, ta_lim_sup)
+                    ta_lim_sup += aleatorio-ta_lim_inf
+                    ta_lim_inf = aleatorio
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(aleatorio))
+                    for j in range(1, 6):
+                        aleatorio = randint(lim_inf, lim_sup)
+                        ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
+            else:
+                for i in range(nprocesos):
+                    # Tiempo de Arribo
+                    aleatorio = randint(ta_lim_inf, ta_lim_sup)
+                    ta_lim_sup += aleatorio-ta_lim_inf
+                    ta_lim_inf = aleatorio
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(aleatorio))
+                    # CPU 1 debe ser mayor a 0
+                    aleatorio = randint(1, lim_sup)
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 1).setText(str(aleatorio))
+                    # Entrada, CPU2 y Salida
+                    for j in range(2, 5):
+                        aleatorio = randint(lim_inf, lim_sup)
+                        ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
+                    # CPU 3 debe ser mayor a 0
+                    aleatorio = randint(1, lim_sup)
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 5).setText(str(aleatorio))
         self.Dialog_Generar.close()
+
+
+class VentanaError(Ui_Dialog_Error):
+    def __init__(self):
+        Ui_Dialog_Error.__init__(self)
+        self.Dialog_Error = QtWidgets.QDialog()
+        self.setupUi(self.Dialog_Error)
+        self.eventos()
+
+    def eventos(self):
+        self.pushButton_Aceptar.clicked.connect(self.Dialog_Error.close)
+
+    def error(self, descripcion):
+        self.textBrowser_Error.setText("               ¡Error!\n" + descripcion)
+        ctrl.ventana_error()
+
 
 class Control:
     def __init__(self):
-        try:
-            self.bd = mysql.connector.connect(host='localhost', database='so', user='so', password='adminso')
-        except Error as err:
-            print("Error en la conexión a la base de datos: ", err)
         self.uiCDT = VentanaCDT()
         self.uiImportar = VentanaImportar()
         self.uiGuardar = VentanaGuardar()
         self.uiGenerar = VentanaGenerar()
+        self.uiError = VentanaError()
         self.eventos()
+
+    def conectar_bd(self):
+        try:
+            self.bd = mysql.connector.connect(host='localhost', database='so', user='so', password='adminso')
+        except Error as err:
+            self.uiError.error("No se pudo conectar con la base de datos.\n"
+                               "Las funciones Importar y Guardar estarán deshabilitadas.\n" + str(err))
+            self.uiCDT.pushButton_Importar.setDisabled(True)
+            self.uiCDT.pushButton_Guardar.setDisabled(True)
 
     def ventana_cdt(self):
         self.uiCDT.Form_CargaDeTrabajo.show()
@@ -148,6 +247,9 @@ class Control:
 
     def ventana_generar(self):
         self.uiGenerar.Dialog_Generar.show()
+
+    def ventana_error(self):
+        self.uiError.Dialog_Error.show()
 
     def eventos(self):
         self.uiCDT.pushButton_Importar.clicked.connect(self.ventana_importar)
@@ -169,10 +271,12 @@ class Control:
         self.bd.commit()
         return resultado
 
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
     ctrl.ventana_cdt()
+    ctrl.conectar_bd()
     sys.exit(app.exec_())
 
     # def importar_cdt(self):

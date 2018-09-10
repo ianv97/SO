@@ -22,9 +22,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>123</green>
-        <blue>255</blue>
+        <red>57</red>
+        <green>57</green>
+        <blue>57</blue>
        </color>
       </brush>
      </colorrole>
@@ -51,9 +51,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>14</red>
-        <green>255</green>
-        <blue>235</blue>
+        <red>57</red>
+        <green>57</green>
+        <blue>57</blue>
        </color>
       </brush>
      </colorrole>
@@ -1222,22 +1222,5 @@ color: rgb(0, 0, 0);</string>
   <tabstop>pushButton_Atras</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton_Siguiente</sender>
-   <signal>clicked()</signal>
-   <receiver>Form_CargaDeTrabajo</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>980</x>
-     <y>30</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>287</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
