@@ -6,7 +6,9 @@ from Dialog_Importar import *
 from Dialog_Guardar import *
 from Dialog_Generar import *
 from Dialog_Error import *
+from Form_Memoria import *
 from random import randint
+from PyQt5.QtGui import QPainter, QColor, QFont
 
 
 class VentanaCDT(Ui_Form_CargaDeTrabajo):
@@ -23,6 +25,9 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.radioButton_SJF.clicked.connect(self.ocultar_quantum)
         self.radioButton_SRTF.clicked.connect(self.ocultar_quantum)
         self.radioButton_ROUNDROBIN.clicked.connect(self.mostrar_quantum)
+        self.pushButton_Importar.clicked.connect(self.ventana_importar)
+        self.pushButton_Guardar.clicked.connect(self.ventana_guardar)
+        self.pushButton_Generar.clicked.connect(self.ventana_generar)
         self.pushButton_Siguiente.clicked.connect(self.verificar_procesos)
 
     def obtener_nprocesos(self):
@@ -37,11 +42,10 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
             nprocesos = self.obtener_nprocesos()
             self.tableWidget_Procesos.setRowCount(nprocesos)
         # ALINEAR CELDAS Y PONER TÍTULO A LAS FILAS
-            _translate = QtCore.QCoreApplication.translate
             for i in range(nprocesos):
                 item = QtWidgets.QTableWidgetItem()
                 self.tableWidget_Procesos.setVerticalHeaderItem(i, item)
-                item.setText(_translate("Form", "P" + str(i + 1)))
+                item.setText("P" + str(i + 1))
                 for j in range(6):
                     item = QtWidgets.QTableWidgetItem()
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -54,6 +58,18 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
     def ocultar_quantum(self):
         self.label_Quantum.setVisible(False)
         self.lineEdit_Quantum.setVisible(False)
+
+    @staticmethod
+    def ventana_importar():
+        ctrl.ventana_importar()
+
+    @staticmethod
+    def ventana_guardar():
+        ctrl.ventana_guardar()
+
+    @staticmethod
+    def ventana_generar():
+        ctrl.ventana_generar()
 
     def verificar_procesos(self):
         error_cpu = -1
@@ -84,6 +100,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                 ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
             else:
                 self.Form_CargaDeTrabajo.close()
+                ctrl.ventana_memoria(self.tableWidget_Procesos, nprocesos)
         else:
             ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
@@ -167,28 +184,27 @@ class VentanaGenerar(Ui_Dialog_Generar):
         nprocesos = ctrl.uiCDT.obtener_nprocesos()
         lim_inf = int(self.lineEdit_LimInf.text())
         lim_sup = int(self.lineEdit_LimSup.text())
-        ta_lim_inf = 0
-        ta_lim_sup = round(((lim_sup - lim_inf) / nprocesos) * lim_sup)
-        print(str(ta_lim_sup))
+        ta = 0
+        ta_prom = round((lim_inf + lim_sup) * 2.5)
         if lim_sup <= lim_inf:
             ctrl.uiError.error("El límite superior debe ser mayor al límite inferior.")
         else:
             if lim_inf != 0:
                 for i in range(nprocesos):
-                    aleatorio = randint(ta_lim_inf, ta_lim_sup)
-                    ta_lim_sup += aleatorio-ta_lim_inf
-                    ta_lim_inf = aleatorio
-                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(aleatorio))
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
+                    ta_lim_inf = ta
+                    ta_lim_sup += ta + ta_prom
+                    ta = randint(ta_lim_inf, ta_lim_sup)
                     for j in range(1, 6):
                         aleatorio = randint(lim_inf, lim_sup)
                         ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
             else:
                 for i in range(nprocesos):
                     # Tiempo de Arribo
-                    aleatorio = randint(ta_lim_inf, ta_lim_sup)
-                    ta_lim_sup += aleatorio-ta_lim_inf
-                    ta_lim_inf = aleatorio
-                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(aleatorio))
+                    ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
+                    ta_lim_inf = ta
+                    ta_lim_sup = ta + ta_prom
+                    ta = randint(ta_lim_inf, ta_lim_sup)
                     # CPU 1 debe ser mayor a 0
                     aleatorio = randint(1, lim_sup)
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 1).setText(str(aleatorio))
@@ -217,6 +233,31 @@ class VentanaError(Ui_Dialog_Error):
         ctrl.ventana_error()
 
 
+class VentanaMemoria(Ui_Form_Memoria):
+    def __init__(self):
+        Ui_Form_Memoria.__init__(self)
+        self.Form_Memoria = QtWidgets.QWidget()
+        self.setupUi(self.Form_Memoria)
+        self.eventos()
+        scene = QtWidgets.QGraphicsScene()
+        self.graphicsView.setScene(scene)
+        pen = QtGui.QPen(QtCore.Qt.green)
+
+        side = 20
+
+        for i in range(16):
+            for j in range(16):
+                r = QtCore.QRectF(QtCore.QPointF(i * side, j * side), QtCore.QSizeF(side, side))
+                scene.addRect(r, pen)
+
+    def eventos(self):
+        self.pushButton_Atras.clicked.connect(self.ventana_cdt)
+
+    @staticmethod
+    def ventana_cdt():
+        ctrl.ventana_cdt()
+
+
 class Control:
     def __init__(self):
         self.uiCDT = VentanaCDT()
@@ -224,7 +265,7 @@ class Control:
         self.uiGuardar = VentanaGuardar()
         self.uiGenerar = VentanaGenerar()
         self.uiError = VentanaError()
-        self.eventos()
+        self.uiMemoria = VentanaMemoria()
 
     def conectar_bd(self):
         try:
@@ -240,6 +281,7 @@ class Control:
 
     def ventana_importar(self):
         self.uiImportar.Dialog_Importar.show()
+        self.uiImportar.cargar_cdt()
 
     def ventana_guardar(self):
         self.uiGuardar.lineEdit_NombreCDT.clear()
@@ -251,11 +293,19 @@ class Control:
     def ventana_error(self):
         self.uiError.Dialog_Error.show()
 
-    def eventos(self):
-        self.uiCDT.pushButton_Importar.clicked.connect(self.ventana_importar)
-        self.uiCDT.pushButton_Importar.clicked.connect(self.uiImportar.cargar_cdt)
-        self.uiCDT.pushButton_Guardar.clicked.connect(self.ventana_guardar)
-        self.uiCDT.pushButton_Generar.clicked.connect(self.ventana_generar)
+    def ventana_memoria(self, procesos, nprocesos):
+        self.uiMemoria.tableWidget_Procesos.setRowCount(nprocesos)
+        for i in range(nprocesos):
+            item = QtWidgets.QTableWidgetItem()
+            self.uiMemoria.tableWidget_Procesos.setVerticalHeaderItem(i, item)
+            item.setText("P" + str(i + 1))
+            for j in range(6):
+                item = QtWidgets.QTableWidgetItem()
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.uiMemoria.tableWidget_Procesos.setItem(i, j, item)
+                item.setText(procesos.item(i, j).text())
+                self.uiMemoria.tableWidget_Procesos.item(i, j).disabled()
+        self.uiMemoria.Form_Memoria.show()
 
     def consultar(self, qry):
         cursor = self.bd.cursor()
