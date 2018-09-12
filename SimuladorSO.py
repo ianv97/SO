@@ -28,7 +28,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.pushButton_Importar.clicked.connect(self.ventana_importar)
         self.pushButton_Guardar.clicked.connect(self.ventana_guardar)
         self.pushButton_Generar.clicked.connect(self.ventana_generar)
-        self.pushButton_Siguiente.clicked.connect(self.verificar_procesos)
+        self.pushButton_Siguiente.clicked.connect(self.ventana_memoria)
 
     def obtener_nprocesos(self):
         if len(self.lineEdit_NProcesos.text()) > 0:
@@ -71,7 +71,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
     def ventana_generar():
         ctrl.ventana_generar()
 
-    def verificar_procesos(self):
+    def ventana_memoria(self):
         error_cpu = -1
         error_ta_vacio = -1
         error_ta_menor = -1
@@ -79,7 +79,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         nprocesos = self.obtener_nprocesos()
         if nprocesos > 0:
             for i in range(nprocesos):
-                if (self.tableWidget_Procesos.item(i, 0).text() == ""):
+                if self.tableWidget_Procesos.item(i, 0).text() == "":
                     error_ta_vacio = i+1
                     break
                 elif (self.tableWidget_Procesos.item(i, 1).text() == "0") or \
@@ -99,8 +99,8 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
             elif error_ta_menor != -1:
                 ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
             else:
-                self.Form_CargaDeTrabajo.close()
                 ctrl.ventana_memoria(self.tableWidget_Procesos, nprocesos)
+                self.Form_CargaDeTrabajo.close()
         else:
             ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
@@ -253,9 +253,9 @@ class VentanaMemoria(Ui_Form_Memoria):
     def eventos(self):
         self.pushButton_Atras.clicked.connect(self.ventana_cdt)
 
-    @staticmethod
-    def ventana_cdt():
+    def ventana_cdt(self):
         ctrl.ventana_cdt()
+        self.Form_Memoria.close()
 
 
 class Control:
@@ -304,7 +304,9 @@ class Control:
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.uiMemoria.tableWidget_Procesos.setItem(i, j, item)
                 item.setText(procesos.item(i, j).text())
-                self.uiMemoria.tableWidget_Procesos.item(i, j).disabled()
+                if j != 5:
+                    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+                # self.uiMemoria.tableWidget_Procesos.item(i, j).disabled()
         self.uiMemoria.Form_Memoria.show()
 
     def consultar(self, qry):

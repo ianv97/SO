@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52e29169-9288-41ee-9080-72dde0b8b419" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Convertir UI a PY.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Convertir UI a PY.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Form_CargaDeTrabajo.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Form_CargaDeTrabajo.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Form_Memoria.py" beforeDir="false" afterPath="$PROJECT_DIR$/Form_Memoria.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimuladorSO.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimuladorSO.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,13 +15,13 @@
     <session id="-1244282120">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,12 +36,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1631" />
+          <entry key="py" value="1697" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1631" />
+          <entry key="Python" value="1697" />
         </counts>
       </usages-collector>
     </session>
@@ -53,13 +51,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="249" column="96" lean-forward="true" selection-start-line="249" selection-start-column="96" selection-end-line="249" selection-end-column="96" />
+            <state relative-caret-position="263">
+              <caret line="306" column="26" lean-forward="true" selection-start-line="306" selection-start-column="26" selection-end-line="306" selection-end-column="26" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1536764301870" expanded="true" signature="2401:2593" ph="..." />
-                <marker date="1536764301870" expanded="true" signature="9813:10489" ph="..." />
-                <marker date="1536764301870" expanded="true" signature="12432:12438" ph="..." />
+                <marker date="1536765494107" expanded="true" signature="2398:2590" ph="..." />
+                <marker date="1536765494107" expanded="true" signature="9805:10501" ph="..." />
+                <marker date="1536765494107" expanded="true" signature="12545:12551" ph="..." />
               </folding>
             </state>
           </provider>
@@ -68,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="288" column="22" lean-forward="true" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
+            <state relative-caret-position="4896">
+              <caret line="288" column="22" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -77,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Form_Memoria.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
+            <state relative-caret-position="2346">
               <caret line="138" column="17" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
             </state>
           </provider>
@@ -229,30 +227,30 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="306" column="26" lean-forward="true" selection-start-line="306" selection-start-column="26" selection-end-line="306" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1536765494107" expanded="true" signature="2398:2590" ph="..." />
+            <marker date="1536765494107" expanded="true" signature="9805:10501" ph="..." />
+            <marker date="1536765494107" expanded="true" signature="12545:12551" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="288" column="22" lean-forward="true" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
+        <state relative-caret-position="4896">
+          <caret line="288" column="22" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Form_Memoria.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
+        <state relative-caret-position="2346">
           <caret line="138" column="17" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="249" column="96" lean-forward="true" selection-start-line="249" selection-start-column="96" selection-end-line="249" selection-end-column="96" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1536764301870" expanded="true" signature="2401:2593" ph="..." />
-            <marker date="1536764301870" expanded="true" signature="9813:10489" ph="..." />
-            <marker date="1536764301870" expanded="true" signature="12432:12438" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
