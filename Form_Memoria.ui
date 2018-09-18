@@ -122,7 +122,7 @@
   <widget class="QPushButton" name="pushButton_Importar">
    <property name="geometry">
     <rect>
-     <x>920</x>
+     <x>930</x>
      <y>240</y>
      <width>81</width>
      <height>31</height>
@@ -329,7 +329,7 @@ color: rgb(0, 0, 0);</string>
   <widget class="QPushButton" name="pushButton_Generar">
    <property name="geometry">
     <rect>
-     <x>920</x>
+     <x>930</x>
      <y>360</y>
      <width>81</width>
      <height>31</height>
@@ -358,7 +358,7 @@ color: rgb(0, 0, 0);</string>
   <widget class="QPushButton" name="pushButton_Guardar">
    <property name="geometry">
     <rect>
-     <x>920</x>
+     <x>930</x>
      <y>300</y>
      <width>81</width>
      <height>31</height>
@@ -389,7 +389,7 @@ color: rgb(0, 0, 0);</string>
     <rect>
      <x>190</x>
      <y>130</y>
-     <width>711</width>
+     <width>731</width>
      <height>391</height>
     </rect>
    </property>
@@ -966,7 +966,7 @@ color: rgb(0, 0, 0);</string>
     </rect>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_FCFS">
+  <widget class="QRadioButton" name="radioButton_PartFijas">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -994,7 +994,7 @@ color: rgb(0, 0, 0);</string>
     <string>Particiones Fijas</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_FCFS_2">
+  <widget class="QRadioButton" name="radioButton_PartVariables">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -1022,18 +1022,18 @@ color: rgb(0, 0, 0);</string>
     <string>Particiones Variables</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox">
+  <widget class="QSpinBox" name="spinBox_Tamano">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>110</y>
+     <x>110</x>
+     <y>70</y>
      <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -1048,18 +1048,18 @@ color: rgb(0, 0, 0);</string>
     <number>9999</number>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_Tamano">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>80</y>
-     <width>81</width>
+     <x>10</x>
+     <y>70</y>
+     <width>111</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -1068,21 +1068,47 @@ color: rgb(0, 0, 0);</string>
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Tamaño</string>
+    <string>Tamaño(KB)</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QSpinBox" name="spinBox_Particiones">
    <property name="geometry">
     <rect>
      <x>110</x>
      <y>110</y>
-     <width>31</width>
+     <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="maximum">
+    <number>999</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_Particiones">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -1091,7 +1117,7 @@ color: rgb(0, 0, 0);</string>
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>KB</string>
+    <string>Particiones</string>
    </property>
   </widget>
   <zorder>pushButton_Importar</zorder>
@@ -1102,11 +1128,12 @@ color: rgb(0, 0, 0);</string>
   <zorder>pushButton_Siguiente</zorder>
   <zorder>pushButton_Atras</zorder>
   <zorder>graphicsView</zorder>
-  <zorder>radioButton_FCFS</zorder>
-  <zorder>radioButton_FCFS_2</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>spinBox</zorder>
+  <zorder>radioButton_PartFijas</zorder>
+  <zorder>radioButton_PartVariables</zorder>
+  <zorder>label_Tamano</zorder>
+  <zorder>spinBox_Tamano</zorder>
+  <zorder>label_Particiones</zorder>
+  <zorder>spinBox_Particiones</zorder>
  </widget>
  <tabstops>
   <tabstop>tableWidget_Procesos</tabstop>

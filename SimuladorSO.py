@@ -115,6 +115,8 @@ class VentanaImportar(Ui_Dialog_Importar):
     def eventos(self):
         self.pushButton_Cancelar.clicked.connect(self.Dialog_Importar.close)
         self.pushButton_Importar.clicked.connect(self.importar_cdt)
+        self.listWidget_CargasDeTrabajo.doubleClicked.connect(self.importar_cdt)
+        self.pushButton_Importar.setDefault(True)
 
     def cargar_cdt(self):
         self.listWidget_CargasDeTrabajo.clear()
@@ -147,6 +149,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
     def eventos(self):
         self.pushButton_Cancelar.clicked.connect(self.Dialog_Guardar.close)
         self.pushButton_Guardar.clicked.connect(self.guardar_cdt)
+        self.pushButton_Guardar.setDefault(True)
 
     def guardar_cdt(self):
         nombre = self.lineEdit_NombreCDT.text()
@@ -154,7 +157,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
         qry = "INSERT INTO CDT (nombre, n_procesos) VALUES (%s, %s)"
         valores = (nombre, nprocesos)
         ctrl.insertar(qry, valores)
-        id = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
+        id_cdt = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
         qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3)" \
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         for i in range(nprocesos):
@@ -164,7 +167,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
             cpu2 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 3).text())
             s = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 4).text())
             cpu3 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 5).text())
-            valores = (id, i+1, ta, cpu1, e, cpu2, s, cpu3)
+            valores = (id_cdt, i+1, ta, cpu1, e, cpu2, s, cpu3)
             ctrl.insertar(qry, valores)
         self.Dialog_Guardar.close()
 
@@ -179,21 +182,21 @@ class VentanaGenerar(Ui_Dialog_Generar):
     def eventos(self):
         self.pushButton_Cancelar.clicked.connect(self.Dialog_Generar.close)
         self.pushButton_Generar.clicked.connect(self.generar)
+        self.pushButton_Generar.setDefault(True)
 
     def generar(self):
         nprocesos = ctrl.uiCDT.obtener_nprocesos()
         lim_inf = int(self.lineEdit_LimInf.text())
         lim_sup = int(self.lineEdit_LimSup.text())
         ta = 0
-        ta_prom = round((lim_inf + lim_sup) * 2.5)
-        if lim_sup <= lim_inf:
-            ctrl.uiError.error("El límite superior debe ser mayor al límite inferior.")
+        if lim_sup < lim_inf:
+            ctrl.uiError.error("El límite superior debe ser mayor o igual al límite inferior.")
         else:
             if lim_inf != 0:
                 for i in range(nprocesos):
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
-                    ta_lim_inf = ta
-                    ta_lim_sup += ta + ta_prom
+                    ta_lim_inf = ta + (lim_inf * 5)
+                    ta_lim_sup = ta + (lim_sup * 5)
                     ta = randint(ta_lim_inf, ta_lim_sup)
                     for j in range(1, 6):
                         aleatorio = randint(lim_inf, lim_sup)
@@ -202,8 +205,8 @@ class VentanaGenerar(Ui_Dialog_Generar):
                 for i in range(nprocesos):
                     # Tiempo de Arribo
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
-                    ta_lim_inf = ta
-                    ta_lim_sup = ta + ta_prom
+                    ta_lim_inf = ta + (lim_inf * 5)
+                    ta_lim_sup = ta + (lim_sup * 5)
                     ta = randint(ta_lim_inf, ta_lim_sup)
                     # CPU 1 debe ser mayor a 0
                     aleatorio = randint(1, lim_sup)
@@ -227,6 +230,7 @@ class VentanaError(Ui_Dialog_Error):
 
     def eventos(self):
         self.pushButton_Aceptar.clicked.connect(self.Dialog_Error.close)
+        self.pushButton_Aceptar.setDefault(True)
 
     def error(self, descripcion):
         self.textBrowser_Error.setText("               ¡Error!\n" + descripcion)
@@ -239,19 +243,21 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.Form_Memoria = QtWidgets.QWidget()
         self.setupUi(self.Form_Memoria)
         self.eventos()
-        scene = QtWidgets.QGraphicsScene()
-        self.graphicsView.setScene(scene)
-        pen = QtGui.QPen(QtCore.Qt.green)
 
-        side = 20
+    def graficar(self):
+        escena = QtWidgets.QGraphicsScene()
+        self.gr
+        self.graphicsView.setScene(escena)
+        pincel = QtGui.QPen(QtCore.Qt.green)
+        particiones = int(self.spinBox_Particiones.text())
 
-        for i in range(16):
-            for j in range(16):
-                r = QtCore.QRectF(QtCore.QPointF(i * side, j * side), QtCore.QSizeF(side, side))
-                scene.addRect(r, pen)
+        for i in range(particiones):
+            r = QtCore.QRectF(QtCore.QPointF(0, particiones*20), QtCore.QSizeF(100, 20))
+            escena.addRect(r, pincel)
 
     def eventos(self):
         self.pushButton_Atras.clicked.connect(self.ventana_cdt)
+        self.spinBox_Particiones.valueChanged.connect(self.graficar)
 
     def ventana_cdt(self):
         ctrl.ventana_cdt()
@@ -304,9 +310,10 @@ class Control:
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.uiMemoria.tableWidget_Procesos.setItem(i, j, item)
                 item.setText(procesos.item(i, j).text())
-                if j != 5:
-                    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-                # self.uiMemoria.tableWidget_Procesos.item(i, j).disabled()
+                item.setFlags(QtCore.Qt.ItemIsEditable)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.uiMemoria.tableWidget_Procesos.setItem(i, 6, item)
         self.uiMemoria.Form_Memoria.show()
 
     def consultar(self, qry):
@@ -331,7 +338,7 @@ if __name__ == "__main__":
     ctrl.conectar_bd()
     sys.exit(app.exec_())
 
-    # def importar_cdt(self):
+
     # if ctrl.uiCDT.radioButton_FCFS.isChecked():
     #     algoritmo = "FCFS"
     # elif ctrl.uiCDT.radioButton_SJF.isChecked():
