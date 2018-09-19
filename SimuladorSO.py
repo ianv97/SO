@@ -1,4 +1,6 @@
 import sys
+from re import escape
+
 import mysql.connector
 from mysql.connector import Error
 from Form_CargaDeTrabajo import *
@@ -246,13 +248,13 @@ class VentanaMemoria(Ui_Form_Memoria):
 
     def graficar(self):
         escena = QtWidgets.QGraphicsScene()
-        self.gr
         self.graphicsView.setScene(escena)
         pincel = QtGui.QPen(QtCore.Qt.green)
+        tamano = int(self.spinBox_Tamano.text())
         particiones = int(self.spinBox_Particiones.text())
 
         for i in range(particiones):
-            r = QtCore.QRectF(QtCore.QPointF(0, particiones*20), QtCore.QSizeF(100, 20))
+            r = QtCore.QRectF(QtCore.QPointF(0, i * tamano / particiones), QtCore.QSizeF(180, tamano / particiones))
             escena.addRect(r, pincel)
 
     def eventos(self):
