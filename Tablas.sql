@@ -1,8 +1,6 @@
 CREATE DATABASE IF NOT EXISTS SO;
 CREATE USER IF NOT EXISTS 'so'@'localhost' IDENTIFIED BY 'adminso';
 GRANT ALL PRIVILEGES ON so . * TO 'so'@'localhost';
-drop database SO;
-CREATE DATABASE SO;
 USE SO;
 
 
@@ -22,5 +20,3 @@ salida int,
 cpu3 int,
 PRIMARY KEY (id_cdt, id),
 FOREIGN KEY (id_cdt) REFERENCES CDT(id));
-
-INSERT INTO Algoritmo VALUES ("FCFS"),("SJF"),("SRTF"),("ROUND ROBIN");
