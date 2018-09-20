@@ -343,6 +343,8 @@ class Ui_Form_Memoria(object):
         self.pushButton_Atras.setObjectName("pushButton_Atras")
         self.graphicsView = QtWidgets.QGraphicsView(Form_Memoria)
         self.graphicsView.setGeometry(QtCore.QRect(10, 210, 171, 311))
+        self.graphicsView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.graphicsView.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.graphicsView.setObjectName("graphicsView")
         self.radioButton_PartFijas = QtWidgets.QRadioButton(Form_Memoria)
         self.radioButton_PartFijas.setGeometry(QtCore.QRect(20, 150, 121, 17))

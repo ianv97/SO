@@ -244,21 +244,23 @@ class VentanaMemoria(Ui_Form_Memoria):
         Ui_Form_Memoria.__init__(self)
         self.Form_Memoria = QtWidgets.QWidget()
         self.setupUi(self.Form_Memoria)
+        self.escena = QtWidgets.QGraphicsScene()
         self.eventos()
 
     def graficar(self):
-        escena = QtWidgets.QGraphicsScene()
-        self.graphicsView.setScene(escena)
+        self.escena = QtWidgets.QGraphicsScene()
+        self.graphicsView.setScene(self.escena)
         pincel = QtGui.QPen(QtCore.Qt.green)
         tamano = int(self.spinBox_Tamano.text())
         particiones = int(self.spinBox_Particiones.text())
 
         for i in range(particiones):
-            r = QtCore.QRectF(QtCore.QPointF(0, i * tamano / particiones), QtCore.QSizeF(180, tamano / particiones))
-            escena.addRect(r, pincel)
+            r = QtCore.QRectF(QtCore.QPointF(0, i * tamano / particiones), QtCore.QSizeF(150, tamano / particiones))
+            self.escena.addRect(r, pincel)
 
     def eventos(self):
         self.pushButton_Atras.clicked.connect(self.ventana_cdt)
+        self.spinBox_Tamano.valueChanged.connect(self.graficar)
         self.spinBox_Particiones.valueChanged.connect(self.graficar)
 
     def ventana_cdt(self):
