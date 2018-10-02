@@ -9,6 +9,7 @@ from Dialog_Guardar import *
 from Dialog_Generar import *
 from Dialog_Error import *
 from Form_Memoria import *
+from Dialog_Particion import *
 from random import randint
 from PyQt5.QtGui import QPainter, QColor, QFont
 
@@ -79,32 +80,36 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         error_ta_menor = -1
         ta_anterior = 0
         nprocesos = self.obtener_nprocesos()
-        if nprocesos > 0:
-            for i in range(nprocesos):
-                if self.tableWidget_Procesos.item(i, 0).text() == "":
-                    error_ta_vacio = i+1
-                    break
-                elif (self.tableWidget_Procesos.item(i, 1).text() == "0") or \
-                        (self.tableWidget_Procesos.item(i, 1).text() == "") or \
-                        (self.tableWidget_Procesos.item(i, 5).text() == "0") or \
-                        (self.tableWidget_Procesos.item(i, 5).text() == ""):
-                    error_cpu = i+1
-                    break
-                elif int(self.tableWidget_Procesos.item(i, 0).text()) < ta_anterior:
-                    error_ta_menor = i+1
-                    break
-                ta_anterior = int(self.tableWidget_Procesos.item(i, 0).text())
-            if error_cpu != -1:
-                ctrl.uiError.error("Proceso P"+str(error_cpu)+": Todos los procesos deben iniciar y terminar con un ciclo de CPU.")
-            elif error_ta_vacio != -1:
-                ctrl.uiError.error("Proceso P"+str(error_ta_vacio)+": Se debe especificar el tiempo de arribo.")
-            elif error_ta_menor != -1:
-                ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
-            else:
-                ctrl.ventana_memoria(self.tableWidget_Procesos, nprocesos)
-                self.Form_CargaDeTrabajo.close()
+        if not ctrl.uiCDT.radioButton_FCFS.isChecked() and not ctrl.uiCDT.radioButton_SJF.isChecked() \
+        and not ctrl.uiCDT.radioButton_SRTF.isChecked() and not ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
+            ctrl.uiError.error("Debe seleccionar un algoritmo.")
         else:
-            ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
+            if nprocesos > 0:
+                for i in range(nprocesos):
+                    if self.tableWidget_Procesos.item(i, 0).text() == "":
+                        error_ta_vacio = i+1
+                        break
+                    elif (self.tableWidget_Procesos.item(i, 1).text() == "0") or \
+                            (self.tableWidget_Procesos.item(i, 1).text() == "") or \
+                            (self.tableWidget_Procesos.item(i, 5).text() == "0") or \
+                            (self.tableWidget_Procesos.item(i, 5).text() == ""):
+                        error_cpu = i+1
+                        break
+                    elif int(self.tableWidget_Procesos.item(i, 0).text()) < ta_anterior:
+                        error_ta_menor = i+1
+                        break
+                    ta_anterior = int(self.tableWidget_Procesos.item(i, 0).text())
+                if error_cpu != -1:
+                    ctrl.uiError.error("Proceso P"+str(error_cpu)+": Todos los procesos deben iniciar y terminar con un ciclo de CPU.")
+                elif error_ta_vacio != -1:
+                    ctrl.uiError.error("Proceso P"+str(error_ta_vacio)+": Se debe especificar el tiempo de arribo.")
+                elif error_ta_menor != -1:
+                    ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
+                else:
+                    ctrl.ventana_memoria(self.tableWidget_Procesos, nprocesos)
+                    self.Form_CargaDeTrabajo.close()
+            else:
+                ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
 
 class VentanaImportar(Ui_Dialog_Importar):
@@ -245,27 +250,91 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.Form_Memoria = QtWidgets.QWidget()
         self.setupUi(self.Form_Memoria)
         self.escena = QtWidgets.QGraphicsScene()
+        self.pincel = QtGui.QPen(QtCore.Qt.green)
+        self.graphicsView.setScene(self.escena)
+        self.particiones = []
+        self.tamano_particiones = 0
         self.eventos()
 
-    def graficar(self):
-        self.escena = QtWidgets.QGraphicsScene()
-        self.graphicsView.setScene(self.escena)
-        pincel = QtGui.QPen(QtCore.Qt.green)
-        tamano = int(self.spinBox_Tamano.text())
-        particiones = int(self.spinBox_Particiones.text())
-
-        for i in range(particiones):
-            r = QtCore.QRectF(QtCore.QPointF(0, i * tamano / particiones), QtCore.QSizeF(150, tamano / particiones))
-            self.escena.addRect(r, pincel)
-
     def eventos(self):
+        self.spinBox_Tamano.setReadOnly(True)
+        self.pushButton_AnadirPart.setVisible(False)
         self.pushButton_Atras.clicked.connect(self.ventana_cdt)
-        self.spinBox_Tamano.valueChanged.connect(self.graficar)
-        self.spinBox_Particiones.valueChanged.connect(self.graficar)
+        self.radioButton_PartFijas.clicked.connect(self.desactivar_tamano)
+        self.radioButton_PartFijas.clicked.connect(self.mostrar_boton_particion)
+        self.radioButton_PartFijas.clicked.connect(self.reiniciar_asignacion)
+        self.pushButton_AnadirPart.clicked.connect(self.ventana_particion)
+        self.radioButton_PartVariables.clicked.connect(self.activar_tamano)
+        self.radioButton_PartVariables.clicked.connect(self.ocultar_boton_particion)
+        self.radioButton_PartVariables.clicked.connect(self.reiniciar_asignacion)
+        self.spinBox_Tamano.valueChanged.connect(self.graficar_particiones_variables)
+
+    def graficar_particiones_fijas(self):
+        tamano = int(self.spinBox_Tamano.text())
+        rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(150, self.particiones[i]))
+        self.escena.addRect(rectangulo, self.pincel)
+        tamano_particiones += tamano
+
+    def graficar_particiones_variables(self):
+        if self.radioButton_PartVariables.isChecked():
+            self.escena.clear()
+            tamano = int(self.spinBox_Tamano.text())
+            rectangulo = QtCore.QRectF(QtCore.QPointF(0, 0), QtCore.QSizeF(150, tamano))
+            self.escena.addRect(rectangulo, self.pincel)
 
     def ventana_cdt(self):
         ctrl.ventana_cdt()
         self.Form_Memoria.close()
+
+    @staticmethod
+    def ventana_particion():
+        ctrl.ventana_particion()
+
+    def desactivar_tamano(self):
+        self.spinBox_Tamano.setReadOnly(True)
+
+    def activar_tamano(self):
+        self.spinBox_Tamano.setReadOnly(False)
+
+    def ocultar_boton_particion(self):
+        self.pushButton_AnadirPart.setVisible(False)
+
+    def mostrar_boton_particion(self):
+        self.pushButton_AnadirPart.setVisible(True)
+
+    def reiniciar_asignacion(self):
+        self.particiones = []
+        self.spinBox_Tamano.setValue(0)
+        self.escena.clear()
+
+    def tamano_particiones(self, part_final=0):
+        if part_final == 0:
+            part_final = len(ctrl.uiMemoria.particiones)
+        tamano = 0
+        for i in range(part_final):
+            tamano += self.particiones[i]
+        return tamano
+
+class VentanaParticion(Ui_Dialog_Particion):
+    def __init__(self):
+        Ui_Dialog_Particion.__init__(self)
+        self.Dialog_Particion = QtWidgets.QDialog()
+        self.setupUi(self.Dialog_Particion)
+        self.eventos()
+
+    def eventos(self):
+        self.pushButton_Aceptar.clicked.connect(self.agregar_particion)
+        self.pushButton_Cancelar.clicked.connect(self.Dialog_Particion.close)
+
+    def agregar_particion(self):
+        tamano_nueva_particion = int(self.spinBox_TamanoParticion.text())
+        if tamano_nueva_particion == 0:
+            ctrl.uiError.error("Debe asignar un tamaño mayor a 0 a la partición.")
+        else:
+            ctrl.uiMemoria.spinBox_Tamano.setValue(ctrl.uiMemoria.tamano_particiones() + tamano_nueva_particion)
+            ctrl.uiMemoria.particiones.append(tamano_nueva_particion)
+            ctrl.uiMemoria.graficar_particiones_fijas()
+            self.Dialog_Particion.close()
 
 
 class Control:
@@ -276,6 +345,7 @@ class Control:
         self.uiGenerar = VentanaGenerar()
         self.uiError = VentanaError()
         self.uiMemoria = VentanaMemoria()
+        self.uiParticion = VentanaParticion()
 
     def conectar_bd(self):
         try:
@@ -319,6 +389,9 @@ class Control:
             item.setTextAlignment(QtCore.Qt.AlignCenter)
             self.uiMemoria.tableWidget_Procesos.setItem(i, 6, item)
         self.uiMemoria.Form_Memoria.show()
+
+    def ventana_particion(self):
+        self.uiParticion.Dialog_Particion.show()
 
     def consultar(self, qry):
         cursor = self.bd.cursor()

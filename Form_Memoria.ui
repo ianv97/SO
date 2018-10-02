@@ -1053,6 +1053,9 @@ color: rgb(0, 0, 0);</string>
    <property name="maximum">
     <number>9999</number>
    </property>
+   <property name="singleStep">
+    <number>10</number>
+   </property>
   </widget>
   <widget class="QLabel" name="label_Tamano">
    <property name="geometry">
@@ -1077,7 +1080,7 @@ color: rgb(0, 0, 0);</string>
     <string>Tamaño(KB)</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_Importar_2">
+  <widget class="QPushButton" name="pushButton_AnadirPart">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -1296,7 +1299,7 @@ color: rgb(0, 0, 0);</string>
   <zorder>radioButton_PartVariables</zorder>
   <zorder>label_Tamano</zorder>
   <zorder>spinBox_Tamano</zorder>
-  <zorder>pushButton_Importar_2</zorder>
+  <zorder>pushButton_AnadirPart</zorder>
  </widget>
  <tabstops>
   <tabstop>tableWidget_Procesos</tabstop>
