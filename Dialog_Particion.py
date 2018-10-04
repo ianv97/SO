@@ -178,10 +178,10 @@ class Ui_Dialog_Particion(object):
 
     def retranslateUi(self, Dialog_Particion):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Particion.setWindowTitle(_translate("Dialog_Particion", "Importar carga de trabajo"))
-        self.pushButton_Aceptar.setToolTip(_translate("Dialog_Particion", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        Dialog_Particion.setWindowTitle(_translate("Dialog_Particion", "Añadir Partición"))
+        self.pushButton_Aceptar.setToolTip(_translate("Dialog_Particion", "<html><head/><body><p>Añadir partición</p></body></html>"))
         self.pushButton_Aceptar.setText(_translate("Dialog_Particion", "Aceptar"))
-        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Particion", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Particion", "<html><head/><body><p><br/></p></body></html>"))
         self.pushButton_Cancelar.setText(_translate("Dialog_Particion", "Cancelar"))
         self.label_TamanoParticion.setText(_translate("Dialog_Particion", "Tamaño de la partición (KB)"))
 

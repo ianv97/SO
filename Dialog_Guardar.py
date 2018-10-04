@@ -149,6 +149,7 @@ class Ui_Dialog_Guardar(object):
         font.setWeight(75)
         self.pushButton_Cancelar.setFont(font)
         self.pushButton_Cancelar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_Cancelar.setToolTip("")
         self.pushButton_Cancelar.setStyleSheet("background-color: rgb(0, 123, 255);\n"
 "color: rgb(0, 0, 0);")
         self.pushButton_Cancelar.setAutoDefault(False)
@@ -172,10 +173,9 @@ class Ui_Dialog_Guardar(object):
 
     def retranslateUi(self, Dialog_Guardar):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Guardar.setWindowTitle(_translate("Dialog_Guardar", "Importar carga de trabajo"))
-        self.pushButton_Guardar.setToolTip(_translate("Dialog_Guardar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        Dialog_Guardar.setWindowTitle(_translate("Dialog_Guardar", "Guardar carga de trabajo"))
+        self.pushButton_Guardar.setToolTip(_translate("Dialog_Guardar", "<html><head/><body><p>Guardar carga de trabajo</p></body></html>"))
         self.pushButton_Guardar.setText(_translate("Dialog_Guardar", "Guardar"))
-        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Guardar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
         self.pushButton_Cancelar.setText(_translate("Dialog_Guardar", "Cancelar"))
         self.label.setText(_translate("Dialog_Guardar", "Ingrese el nombre de la carga de trabajo a guardar"))
 

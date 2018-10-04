@@ -259,21 +259,25 @@ class VentanaMemoria(Ui_Form_Memoria):
     def eventos(self):
         self.spinBox_Tamano.setReadOnly(True)
         self.pushButton_AnadirPart.setVisible(False)
+        self.radioButton_FirstFit.setVisible(False)
+        self.radioButton_WorstFit.setVisible(False)
+        self.radioButton_BestFit.setVisible(False)
         self.pushButton_Atras.clicked.connect(self.ventana_cdt)
         self.radioButton_PartFijas.clicked.connect(self.desactivar_tamano)
         self.radioButton_PartFijas.clicked.connect(self.mostrar_boton_particion)
         self.radioButton_PartFijas.clicked.connect(self.reiniciar_asignacion)
+        self.radioButton_PartFijas.clicked.connect(self.mostrar_algoritmos_pfijas)
         self.pushButton_AnadirPart.clicked.connect(self.ventana_particion)
         self.radioButton_PartVariables.clicked.connect(self.activar_tamano)
         self.radioButton_PartVariables.clicked.connect(self.ocultar_boton_particion)
         self.radioButton_PartVariables.clicked.connect(self.reiniciar_asignacion)
+        self.radioButton_PartVariables.clicked.connect(self.mostrar_algoritmos_pvariables)
         self.spinBox_Tamano.valueChanged.connect(self.graficar_particiones_variables)
 
-    def graficar_particiones_fijas(self):
-        tamano = int(self.spinBox_Tamano.text())
-        rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(150, self.particiones[i]))
+    def graficar_particiones_fijas(self, tamano):
+        rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(150, tamano))
         self.escena.addRect(rectangulo, self.pincel)
-        tamano_particiones += tamano
+        self.tamano_particiones += tamano
 
     def graficar_particiones_variables(self):
         if self.radioButton_PartVariables.isChecked():
@@ -304,22 +308,26 @@ class VentanaMemoria(Ui_Form_Memoria):
 
     def reiniciar_asignacion(self):
         self.particiones = []
+        self.tamano_particiones = 0
         self.spinBox_Tamano.setValue(0)
         self.escena.clear()
 
-    def tamano_particiones(self, part_final=0):
-        if part_final == 0:
-            part_final = len(ctrl.uiMemoria.particiones)
-        tamano = 0
-        for i in range(part_final):
-            tamano += self.particiones[i]
-        return tamano
+    def mostrar_algoritmos_pfijas(self):
+        self.radioButton_FirstFit.setVisible(True)
+        self.radioButton_BestFit.setVisible(True)
+        self.radioButton_WorstFit.setVisible(False)
+
+    def mostrar_algoritmos_pvariables(self):
+        self.radioButton_FirstFit.setVisible(True)
+        self.radioButton_BestFit.setVisible(False)
+        self.radioButton_WorstFit.setVisible(True)
 
 class VentanaParticion(Ui_Dialog_Particion):
     def __init__(self):
         Ui_Dialog_Particion.__init__(self)
         self.Dialog_Particion = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Particion)
+        self.pushButton_Aceptar.setDefault(True)
         self.eventos()
 
     def eventos(self):
@@ -331,9 +339,9 @@ class VentanaParticion(Ui_Dialog_Particion):
         if tamano_nueva_particion == 0:
             ctrl.uiError.error("Debe asignar un tamaño mayor a 0 a la partición.")
         else:
-            ctrl.uiMemoria.spinBox_Tamano.setValue(ctrl.uiMemoria.tamano_particiones() + tamano_nueva_particion)
+            ctrl.uiMemoria.spinBox_Tamano.setValue(ctrl.uiMemoria.tamano_particiones + tamano_nueva_particion)
             ctrl.uiMemoria.particiones.append(tamano_nueva_particion)
-            ctrl.uiMemoria.graficar_particiones_fijas()
+            ctrl.uiMemoria.graficar_particiones_fijas(tamano_nueva_particion)
             self.Dialog_Particion.close()
 
 

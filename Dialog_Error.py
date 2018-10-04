@@ -79,6 +79,7 @@ class Ui_Dialog_Error(object):
         font.setWeight(75)
         self.pushButton_Aceptar.setFont(font)
         self.pushButton_Aceptar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_Aceptar.setToolTip("")
         self.pushButton_Aceptar.setStyleSheet("background-color: rgb(0, 123, 255);\n"
 "color: rgb(0, 0, 0);")
         self.pushButton_Aceptar.setAutoDefault(False)
@@ -99,8 +100,7 @@ class Ui_Dialog_Error(object):
 
     def retranslateUi(self, Dialog_Error):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Error.setWindowTitle(_translate("Dialog_Error", "Importar carga de trabajo"))
-        self.pushButton_Aceptar.setToolTip(_translate("Dialog_Error", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        Dialog_Error.setWindowTitle(_translate("Dialog_Error", "Error"))
         self.pushButton_Aceptar.setText(_translate("Dialog_Error", "Aceptar"))
         self.textBrowser_Error.setHtml(_translate("Dialog_Error", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

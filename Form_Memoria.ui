@@ -991,7 +991,7 @@ color: rgb(0, 0, 0);</string>
     </font>
    </property>
    <property name="toolTip">
-    <string>First Come, First Served</string>
+    <string/>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);</string>
@@ -1019,7 +1019,7 @@ color: rgb(0, 0, 0);</string>
     </font>
    </property>
    <property name="toolTip">
-    <string>First Come, First Served</string>
+    <string/>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);</string>
@@ -1274,7 +1274,7 @@ color: rgb(0, 0, 0);</string>
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Importar carga de trabajo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string/>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(0, 123, 255);
@@ -1285,6 +1285,90 @@ color: rgb(0, 0, 0);</string>
    </property>
    <property name="autoDefault">
     <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_BestFit">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>100</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Best Fit</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_WorstFit">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>100</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Worst Fit</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_FirstFit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>100</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>First Fit</string>
    </property>
   </widget>
   <zorder>pushButton_Importar</zorder>
@@ -1300,6 +1384,9 @@ color: rgb(0, 0, 0);</string>
   <zorder>label_Tamano</zorder>
   <zorder>spinBox_Tamano</zorder>
   <zorder>pushButton_AnadirPart</zorder>
+  <zorder>radioButton_BestFit</zorder>
+  <zorder>radioButton_WorstFit</zorder>
+  <zorder>radioButton_FirstFit</zorder>
  </widget>
  <tabstops>
   <tabstop>tableWidget_Procesos</tabstop>

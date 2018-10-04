@@ -3,20 +3,28 @@ CREATE USER IF NOT EXISTS 'so'@'localhost' IDENTIFIED BY 'adminso';
 GRANT ALL PRIVILEGES ON so . * TO 'so'@'localhost';
 USE SO;
 
-
 CREATE TABLE IF NOT EXISTS CDT(
-id smallint PRIMARY KEY AUTO_INCREMENT,
+id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
 nombre varchar(60),
-n_procesos int);
+n_procesos INT,
+t_memoria INT);
 
 CREATE TABLE IF NOT EXISTS Proceso(
-id_cdt smallint,
-id int,
-tiempo_arribo int,
-cpu1 int,
-entrada int,
-cpu2 int,
-salida int,
-cpu3 int,
+id_cdt MEDIUMINT,
+id INT,
+tiempo_arribo INT,
+cpu1 INT,
+entrada INT,
+cpu2 INT,
+salida INT,
+cpu3 INT,
+memoria INT,
+PRIMARY KEY (id_cdt, id),
+FOREIGN KEY (id_cdt) REFERENCES CDT(id));
+
+CREATE TABLE Particiones(
+id_cdt MEDIUMINT,
+id INT,
+tamano INT,
 PRIMARY KEY (id_cdt, id),
 FOREIGN KEY (id_cdt) REFERENCES CDT(id));

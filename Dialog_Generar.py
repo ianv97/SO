@@ -149,6 +149,7 @@ class Ui_Dialog_Generar(object):
         font.setWeight(75)
         self.pushButton_Cancelar.setFont(font)
         self.pushButton_Cancelar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_Cancelar.setToolTip("")
         self.pushButton_Cancelar.setStyleSheet("background-color: rgb(0, 123, 255);\n"
 "color: rgb(0, 0, 0);")
         self.pushButton_Cancelar.setAutoDefault(False)
@@ -192,10 +193,9 @@ class Ui_Dialog_Generar(object):
 
     def retranslateUi(self, Dialog_Generar):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Generar.setWindowTitle(_translate("Dialog_Generar", "Importar carga de trabajo"))
-        self.pushButton_Generar.setToolTip(_translate("Dialog_Generar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
+        Dialog_Generar.setWindowTitle(_translate("Dialog_Generar", "Generar carga aleatoria"))
+        self.pushButton_Generar.setToolTip(_translate("Dialog_Generar", "<html><head/><body><p>Generar carga de trabajo aleatoria</p></body></html>"))
         self.pushButton_Generar.setText(_translate("Dialog_Generar", "Generar"))
-        self.pushButton_Cancelar.setToolTip(_translate("Dialog_Generar", "<html><head/><body><p>Importar carga de trabajo</p></body></html>"))
         self.pushButton_Cancelar.setText(_translate("Dialog_Generar", "Cancelar"))
         self.label.setText(_translate("Dialog_Generar", "Ingrese el rango de valores a generar"))
         self.lineEdit_LimInf.setInputMask(_translate("Dialog_Generar", "000"))
