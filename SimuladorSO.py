@@ -11,6 +11,10 @@ from Dialog_Error import *
 from Form_Memoria import *
 from Dialog_Particion import *
 from random import randint
+import plotly
+import plotly.plotly as pl
+import plotly.figure_factory as ff
+plotly.tools.set_credentials_file(username='ianv97', api_key='ob0gwkzMhWNltSFbA5QT')
 from PyQt5.QtGui import QPainter, QColor, QFont
 
 
@@ -357,7 +361,7 @@ class Control:
 
     def conectar_bd(self):
         try:
-            self.bd = mysql.connector.connect(host='localhost', database='so', user='so', password='adminso')
+            self.bd = mysql.connector.connect(host='localhost', port=3306, database='so', user='so', password='adminso')
         except Error as err:
             self.uiError.error("No se pudo conectar con la base de datos.\n"
                                "Las funciones Importar y Guardar estarán deshabilitadas.\n" + str(err))
@@ -417,6 +421,17 @@ class Control:
 
 
 if __name__ == "__main__":
+    df = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='CPU'),
+          dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Entrada'),
+          dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Salida')]
+
+    colors = dict(CPU='rgb(220, 0, 0)',
+                  Entrada='rgb(170, 14, 200)',
+                  Salida=(1, 0.9, 0.16))
+
+    fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True)
+    pl.iplot(fig, filename='gantt-dictioanry-colors', world_readable=True)
+
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
     ctrl.ventana_cdt()
