@@ -11,10 +11,10 @@ from Dialog_Error import *
 from Form_Memoria import *
 from Dialog_Particion import *
 from random import randint
-import plotly
-import plotly.plotly as pl
-import plotly.figure_factory as ff
-plotly.tools.set_credentials_file(username='ianv97', api_key='ob0gwkzMhWNltSFbA5QT')
+# import plotly
+# import plotly.plotly as pl
+# import plotly.figure_factory as ff
+# plotly.tools.set_credentials_file(username='ianv97', api_key='ob0gwkzMhWNltSFbA5QT')
 from PyQt5.QtGui import QPainter, QColor, QFont
 
 
@@ -24,9 +24,9 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
         self.eventos()
-        self.ocultar_quantum()
 
     def eventos(self):
+        self.ocultar_quantum()
         self.lineEdit_NProcesos.textChanged.connect(self.mostrar_filas)
         self.radioButton_FCFS.clicked.connect(self.ocultar_quantum)
         self.radioButton_SJF.clicked.connect(self.ocultar_quantum)
@@ -139,10 +139,10 @@ class VentanaImportar(Ui_Dialog_Importar):
     def importar_cdt(self):
         qry = "SELECT id, n_procesos FROM CDT WHERE nombre = '" + self.listWidget_CargasDeTrabajo.currentItem().text() + "'"
         resultado = ctrl.consultar(qry)[0]
-        idcdt = resultado[0]
+        ctrl.id_cdt = resultado[0]
         nprocesos = resultado[1]
         ctrl.uiCDT.lineEdit_NProcesos.setText(str(nprocesos))
-        qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(idcdt)
+        qry = "SELECT tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3 FROM Proceso WHERE id_cdt = " + str(ctrl.id_cdt)
         procesos = ctrl.consultar(qry)
         for i in range(len(procesos)):
             for j in range(6):
@@ -168,7 +168,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
         qry = "INSERT INTO CDT (nombre, n_procesos) VALUES (%s, %s)"
         valores = (nombre, nprocesos)
         ctrl.insertar(qry, valores)
-        id_cdt = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
+        ctrl.id_cdt = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
         qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3)" \
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         for i in range(nprocesos):
@@ -178,7 +178,7 @@ class VentanaGuardar(Ui_Dialog_Guardar):
             cpu2 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 3).text())
             s = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 4).text())
             cpu3 = int(ctrl.uiCDT.tableWidget_Procesos.item(i, 5).text())
-            valores = (id_cdt, i+1, ta, cpu1, e, cpu2, s, cpu3)
+            valores = (ctrl.id_cdt, i+1, ta, cpu1, e, cpu2, s, cpu3)
             ctrl.insertar(qry, valores)
         self.Dialog_Guardar.close()
 
@@ -277,6 +277,7 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.radioButton_PartVariables.clicked.connect(self.reiniciar_asignacion)
         self.radioButton_PartVariables.clicked.connect(self.mostrar_algoritmos_pvariables)
         self.spinBox_Tamano.valueChanged.connect(self.graficar_particiones_variables)
+        self.pushButton_Guardar.clicked.connect(self.guardar_memoria)
 
     def graficar_particiones_fijas(self, tamano):
         rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(150, tamano))
@@ -326,6 +327,22 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.radioButton_BestFit.setVisible(False)
         self.radioButton_WorstFit.setVisible(True)
 
+    def guardar_memoria(self):
+        qry = "UPDATE CDT SET t_memoria = %s WHERE id = %s"
+        valores = (int(self.spinBox_Tamano.text()), ctrl.id_cdt)
+        ctrl.insertar(qry, valores)
+
+        qry = "UPDATE Proceso SET memoria = %s WHERE id_cdt = %s AND id = %s"
+        for i in range(int(self.tableWidget_Procesos.rowCount())):
+            valores = (int(self.tableWidget_Procesos.item(i, 6).text()), ctrl.id_cdt, i)
+            ctrl.insertar(qry, valores)
+
+        # qry = "INSERT INTO Particiones (id_cdt, id, tamano) VALUES (%s, %s, %s)"
+        # for i in range(int(self.tableWidget_Procesos.rowCount())):
+        #     valores = (int(self.tableWidget_Procesos.item(i, 6).text()), ctrl.id_cdt)
+        #     ctrl.insertar(qry, valores)
+
+
 class VentanaParticion(Ui_Dialog_Particion):
     def __init__(self):
         Ui_Dialog_Particion.__init__(self)
@@ -358,10 +375,11 @@ class Control:
         self.uiError = VentanaError()
         self.uiMemoria = VentanaMemoria()
         self.uiParticion = VentanaParticion()
+        self.id_cdt = 0
 
     def conectar_bd(self):
         try:
-            self.bd = mysql.connector.connect(host='localhost', port=3306, database='so', user='so', password='adminso')
+            self.bd = mysql.connector.connect(host='db4free.net', port=3306, database='simuladorso', user='simuladorso', password='adminsimuladorso')
         except Error as err:
             self.uiError.error("No se pudo conectar con la base de datos.\n"
                                "Las funciones Importar y Guardar estarán deshabilitadas.\n" + str(err))
@@ -421,20 +439,20 @@ class Control:
 
 
 if __name__ == "__main__":
-    df = [dict(Task="Proceso 1", Start='0000', Finish='0002', Resource='CPU'),
-          dict(Task="Proceso 1", Start='0001', Finish='0003', Resource='Entrada'),
-          dict(Task="Proceso 2", Start='2018-01-01 00:00:02', Finish='2018-01-01 00:00:04', Resource='CPU'),
-          dict(Task="Proceso 2", Start='2018-01-01 00:00:06', Finish='2018-01-01 00:00:09', Resource='Salida'),
-          dict(Task="Proceso 3", Start='2018-01-01 00:00:10', Finish='2018-01-01 00:00:11', Resource='CPU'),
-          dict(Task="Proceso 3", Start='2018-01-01 00:00:11', Finish='2018-01-01 00:00:13', Resource='Entrada'),
-          dict(Task="Proceso 3", Start='2018-01-01 00:00:15', Finish='2018-01-01 00:00:17', Resource='Salida')]
-
-    colors = {'CPU': 'rgb(220, 0, 0)',
-              'Entrada': (1, 0.9, 0.16),
-              'Salida': 'rgb(0, 255, 100)'}
-
-    fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True, group_tasks=True)
-    pl.iplot(fig, filename='Simulador-Sistema-Operativo', world_readable=True)
+    # df = [dict(Task="Proceso 1", Start='0000', Finish='0002', Resource='CPU'),
+    #       dict(Task="Proceso 1", Start='0001', Finish='0003', Resource='Entrada'),
+    #       dict(Task="Proceso 2", Start='2018-01-01 00:00:02', Finish='2018-01-01 00:00:04', Resource='CPU'),
+    #       dict(Task="Proceso 2", Start='2018-01-01 00:00:06', Finish='2018-01-01 00:00:09', Resource='Salida'),
+    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:10', Finish='2018-01-01 00:00:11', Resource='CPU'),
+    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:11', Finish='2018-01-01 00:00:13', Resource='Entrada'),
+    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:15', Finish='2018-01-01 00:00:17', Resource='Salida')]
+    #
+    # colors = {'CPU': 'rgb(220, 0, 0)',
+    #           'Entrada': (1, 0.9, 0.16),
+    #           'Salida': 'rgb(0, 255, 100)'}
+    #
+    # fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True, group_tasks=True)
+    # pl.iplot(fig, filename='Simulador-Sistema-Operativo', world_readable=True)
 
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
