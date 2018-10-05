@@ -421,16 +421,20 @@ class Control:
 
 
 if __name__ == "__main__":
-    df = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='CPU'),
-          dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Entrada'),
-          dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Salida')]
+    df = [dict(Task="Proceso 1", Start='0000', Finish='0002', Resource='CPU'),
+          dict(Task="Proceso 1", Start='0001', Finish='0003', Resource='Entrada'),
+          dict(Task="Proceso 2", Start='2018-01-01 00:00:02', Finish='2018-01-01 00:00:04', Resource='CPU'),
+          dict(Task="Proceso 2", Start='2018-01-01 00:00:06', Finish='2018-01-01 00:00:09', Resource='Salida'),
+          dict(Task="Proceso 3", Start='2018-01-01 00:00:10', Finish='2018-01-01 00:00:11', Resource='CPU'),
+          dict(Task="Proceso 3", Start='2018-01-01 00:00:11', Finish='2018-01-01 00:00:13', Resource='Entrada'),
+          dict(Task="Proceso 3", Start='2018-01-01 00:00:15', Finish='2018-01-01 00:00:17', Resource='Salida')]
 
-    colors = dict(CPU='rgb(220, 0, 0)',
-                  Entrada='rgb(170, 14, 200)',
-                  Salida=(1, 0.9, 0.16))
+    colors = {'CPU': 'rgb(220, 0, 0)',
+              'Entrada': (1, 0.9, 0.16),
+              'Salida': 'rgb(0, 255, 100)'}
 
-    fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True)
-    pl.iplot(fig, filename='gantt-dictioanry-colors', world_readable=True)
+    fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True, group_tasks=True)
+    pl.iplot(fig, filename='Simulador-Sistema-Operativo', world_readable=True)
 
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
