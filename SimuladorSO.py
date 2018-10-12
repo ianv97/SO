@@ -277,6 +277,7 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.radioButton_PartVariables.clicked.connect(self.reiniciar_asignacion)
         self.radioButton_PartVariables.clicked.connect(self.mostrar_algoritmos_pvariables)
         self.spinBox_Tamano.valueChanged.connect(self.graficar_particiones_variables)
+        self.pushButton_Importar.clicked.connect(self.importar_memoria)
         self.pushButton_Guardar.clicked.connect(self.guardar_memoria)
 
     def graficar_particiones_fijas(self, tamano):
@@ -326,6 +327,13 @@ class VentanaMemoria(Ui_Form_Memoria):
         self.radioButton_FirstFit.setVisible(True)
         self.radioButton_BestFit.setVisible(False)
         self.radioButton_WorstFit.setVisible(True)
+
+    def importar_memoria(self):
+        qry = "SELECT t_memoria FROM CDT WHERE id = " + str(ctrl.id_cdt)
+        resultado = ctrl.consultar(qry)
+        self.spinBox_Tamano.setValue(resultado[0][0])
+        qry = "SELECT memoria FROM Proceso WHERE id = " + str(ctrl.id_cdt)
+        resultado = ctrl.consultar(qry)
 
     def guardar_memoria(self):
         qry = "UPDATE CDT SET t_memoria = %s WHERE id = %s"
@@ -379,7 +387,8 @@ class Control:
 
     def conectar_bd(self):
         try:
-            self.bd = mysql.connector.connect(host='db4free.net', port=3306, database='simuladorso', user='simuladorso', password='adminsimuladorso')
+            # self.bd = mysql.connector.connect(host='db4free.net', port=3306, database='simuladorso', user='simuladorso', password='adminsimuladorso')
+            self.bd = mysql.connector.connect(host='localhost', port=3306, database='so', user='so', password='adminso')
         except Error as err:
             self.uiError.error("No se pudo conectar con la base de datos.\n"
                                "Las funciones Importar y Guardar estarán deshabilitadas.\n" + str(err))
