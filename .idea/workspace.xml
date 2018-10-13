@@ -108,36 +108,47 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1204855648">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="911" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="911" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="4" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
+        <entry file="file://$PROJECT_DIR$/SimuladorSO2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-754">
-              <caret line="280" column="69" lean-forward="true" selection-start-line="280" selection-start-column="69" selection-end-line="280" selection-end-column="69" />
+            <state relative-caret-position="143">
+              <caret line="420" column="33" lean-forward="true" selection-start-line="420" selection-start-column="33" selection-end-line="420" selection-end-column="33" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1539301717764" expanded="true" signature="14113:14401" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4896">
-              <caret line="288" column="22" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Form_Memoria.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -152,6 +163,17 @@
       <find>AlignCenter</find>
       <find>Tamano.setV</find>
       <find>defau</find>
+      <find>atras</find>
+      <find>lineedit_n</find>
+      <find>limin</find>
+      <find>line</find>
+      <find>qua</find>
+      <find>textc</find>
+      <find>settex</find>
+      <find>nombreC</find>
+      <find>recursos</find>
+      <find>fond</find>
+      <find>uim</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -160,9 +182,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
+        <option value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
+        <option value="$PROJECT_DIR$/SimuladorSO2.py" />
       </list>
     </option>
   </component>
@@ -193,7 +216,20 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SO" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
@@ -202,6 +238,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ian\GitHub\SO" />
       <recent name="C:\Users\Cristian\Desktop" />
       <recent name="C:\" />
     </key>
@@ -218,7 +255,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.SimuladorSO">
+  <component name="RunManager" selected="Python.SimuladorSO2">
     <configuration name="SimuladorSO" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -232,6 +269,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SimuladorSO.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SimuladorSO2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SimuladorSO2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -286,9 +344,11 @@
       <item itemvalue="Python.SimuladorSO" />
       <item itemvalue="Python.scratch" />
       <item itemvalue="Python.scratch (1)" />
+      <item itemvalue="Python.SimuladorSO2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SimuladorSO2" />
         <item itemvalue="Python.SimuladorSO" />
         <item itemvalue="Python.scratch (1)" />
         <item itemvalue="Python.scratch" />
@@ -310,14 +370,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2496474" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24920969" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22459017" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22451194" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -350,19 +410,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-754">
-          <caret line="280" column="69" lean-forward="true" selection-start-line="280" selection-start-column="69" selection-end-line="280" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1539301717764" expanded="true" signature="14113:14401" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4896">
-          <caret line="288" column="22" selection-start-line="288" selection-start-column="22" selection-end-line="288" selection-end-column="22" />
+        <state relative-caret-position="170">
+          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -370,6 +419,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="689" lean-forward="true" selection-start-line="689" selection-end-line="689" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimuladorSO2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="420" column="33" lean-forward="true" selection-start-line="420" selection-start-column="33" selection-end-line="420" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

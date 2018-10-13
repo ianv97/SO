@@ -451,54 +451,6 @@ color: rgb(0, 0, 0);</string>
     <string>Ingrese el rango de valores a generar</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_LimInf">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>80</y>
-     <width>61</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="inputMask">
-    <string>000</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_LimSup">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>80</y>
-     <width>61</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="inputMask">
-    <string>000</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -520,10 +472,66 @@ color: rgb(0, 0, 0);</string>
     <string>-</string>
    </property>
   </widget>
+  <widget class="QSpinBox" name="spinBox_LimInf">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>80</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="maximum">
+    <number>99</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="spinBox_LimSup">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>80</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="maximum">
+    <number>99</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
+   </property>
+  </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEdit_LimInf</tabstop>
-  <tabstop>lineEdit_LimSup</tabstop>
   <tabstop>pushButton_Generar</tabstop>
   <tabstop>pushButton_Cancelar</tabstop>
  </tabstops>
