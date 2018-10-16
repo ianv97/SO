@@ -1,4 +1,5 @@
 import sys
+from PyQt5 import QtWebEngineWidgets
 import mysql.connector
 from mysql.connector import Error
 from Form_CargaDeTrabajo import *
@@ -7,11 +8,10 @@ from Dialog_Guardar import *
 from Dialog_Generar import *
 from Dialog_Error import *
 from Dialog_Particion import *
+import Form_Resultado
 from random import randint
-# import plotly
-# import plotly.plotly as pl
-# import plotly.figure_factory as ff
-# plotly.tools.set_credentials_file(username='ianv97', api_key='ob0gwkzMhWNltSFbA5QT')
+import plotly
+import plotly.figure_factory as ff
 
 
 class VentanaCDT(Ui_Form_CargaDeTrabajo):
@@ -403,6 +403,18 @@ class VentanaParticion(Ui_Dialog_Particion):
             self.Dialog_Particion.close()
 
 
+class Navegador(QtWebEngineWidgets.QWebEngineView):
+    def __init__(self):
+        QtWebEngineWidgets.QWebEngineView.__init__(self)
+
+    def cargar(self):
+        self.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
+        self.loadFinished.connect(self.carga_completa)
+
+    def carga_completa(self):
+        self.show()
+
+
 class Control:
     def __init__(self):
         self.uiCDT = VentanaCDT()
@@ -411,6 +423,7 @@ class Control:
         self.uiGenerar = VentanaGenerar()
         self.uiError = VentanaError()
         self.uiParticion = VentanaParticion()
+        self.navegador = Navegador()
         self.id_cdt = 0
         self.error_bd = 0
 
@@ -428,7 +441,7 @@ class Control:
             self.uiCDT.pushButton_Guardar.setStyleSheet("background-color: rgb(50,50,50)")
 
     def ventana_cdt(self):
-        self.uiCDT.Form_CargaDeTrabajo.show()
+        self.uiCDT.Form_CargaDeTrabajo.showMaximized()
 
     def ventana_importar(self):
         self.uiImportar.Dialog_Importar.show()
@@ -463,21 +476,21 @@ class Control:
 
 
 if __name__ == "__main__":
-    # df = [dict(Task="Proceso 1", Start='0000', Finish='0002', Resource='CPU'),
-    #       dict(Task="Proceso 1", Start='0001', Finish='0003', Resource='Entrada'),
-    #       dict(Task="Proceso 2", Start='2018-01-01 00:00:02', Finish='2018-01-01 00:00:04', Resource='CPU'),
-    #       dict(Task="Proceso 2", Start='2018-01-01 00:00:06', Finish='2018-01-01 00:00:09', Resource='Salida'),
-    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:10', Finish='2018-01-01 00:00:11', Resource='CPU'),
-    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:11', Finish='2018-01-01 00:00:13', Resource='Entrada'),
-    #       dict(Task="Proceso 3", Start='2018-01-01 00:00:15', Finish='2018-01-01 00:00:17', Resource='Salida')]
-    #
-    # colors = {'CPU': 'rgb(220, 0, 0)',
-    #           'Entrada': (1, 0.9, 0.16),
-    #           'Salida': 'rgb(0, 255, 100)'}
-    #
-    # fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True, group_tasks=True)
-    # pl.iplot(fig, filename='Simulador-Sistema-Operativo', world_readable=True)
+    prueba = [1, 2, 3]
+    procesos = [dict(Task="Proceso "+str(prueba[0]), Start='0000', Finish='0002', Resource='CPU'),
+          dict(Task="Proceso "+str(prueba[0]), Start='0002', Finish='0003', Resource='Entrada'),
+          dict(Task="Proceso "+str(prueba[1]), Start='0003', Finish='0004', Resource='CPU'),
+          dict(Task="Proceso "+str(prueba[1]), Start='0006', Finish='0009', Resource='Salida'),
+          dict(Task="Proceso 3", Start='0010', Finish='0011', Resource='CPU'),
+          dict(Task="Proceso 3", Start='0011', Finish='0013', Resource='Entrada'),
+          dict(Task="Proceso 3", Start='0015', Finish='0017', Resource='Salida')]
 
+    colores = {'CPU': 'rgb(220, 0, 0)',
+              'Entrada': (1, 0.9, 0.16),
+              'Salida': 'rgb(0, 123, 255)'}
+
+    diagrama = ff.create_gantt(procesos, colors=colores, index_col='Resource', show_colorbar=True, group_tasks=True, title="Diagrama de Gantt", width=1600, height=900, data=None)
+    plotly.offline.plot(diagrama, auto_open=False)
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
     ctrl.ventana_cdt()

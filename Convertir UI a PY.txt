@@ -13,7 +13,7 @@ python -m PyQt5.uic.pyuic Dialog_Generar.ui -o Dialog_Generar.py -x
 python -m PyQt5.uic.pyuic Dialog_Error.ui -o Dialog_Error.py -x
 
 
-python -m PyQt5.uic.pyuic Form_Memoria.ui -o Form_Memoria.py -x
-
-
 python -m PyQt5.uic.pyuic Dialog_Particion.ui -o Dialog_Particion.py -x
+
+
+python -m PyQt5.uic.pyuic Form_Resultado.ui -o Form_Resultado.py -x
