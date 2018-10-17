@@ -77,33 +77,34 @@
     <session id="-2136053657">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.41" value="2" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.55" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="695" />
+          <entry key="py" value="1041" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="673" />
+          <entry key="Python" value="1019" />
           <entry key="Scratch" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="2" />
+          <entry key="py" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="1" />
+          <entry key="Python" value="2" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -150,11 +151,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="213" column="21" lean-forward="true" selection-start-line="213" selection-start-column="21" selection-end-line="213" selection-end-column="21" />
+            <state relative-caret-position="392">
+              <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <marker date="1539809359581" expanded="true" signature="21070:21076" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -399,14 +410,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24920969" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22451194" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22295082" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -446,19 +457,21 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO2.py" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
+    <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="42" />
+        <state relative-caret-position="255">
+          <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="213" column="21" lean-forward="true" selection-start-line="213" selection-start-column="21" selection-end-line="213" selection-end-column="21" />
+        <state relative-caret-position="392">
+          <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <marker date="1539809359581" expanded="true" signature="21070:21076" ph="..." />
           </folding>
         </state>
       </provider>

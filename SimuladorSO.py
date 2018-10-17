@@ -8,6 +8,7 @@ from Dialog_Guardar import *
 from Dialog_Generar import *
 from Dialog_Error import *
 from Dialog_Particion import *
+from Form_Resultado import *
 import Form_Resultado
 from random import randint
 import plotly
@@ -212,7 +213,8 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                 elif error_particion_insuficiente != -1:
                     ctrl.uiError.error("Proceso P" + str(error_particion_insuficiente) + ": Ninguna partición posee el tamaño requerido por este proceso.")
                 else:
-                    self.Form_CargaDeTrabajo.close()
+                    ctrl.ventana_resultado()
+                    # self.Form_CargaDeTrabajo.close()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
@@ -403,16 +405,24 @@ class VentanaParticion(Ui_Dialog_Particion):
             self.Dialog_Particion.close()
 
 
-class Navegador(QtWebEngineWidgets.QWebEngineView):
+class VentanaResultado(Ui_Form_Resultado):
     def __init__(self):
-        QtWebEngineWidgets.QWebEngineView.__init__(self)
+        Ui_Form_Resultado.__init__(self)
+        self.Form_Resultado = QtWidgets.QWidget()
+        self.setupUi(self.Form_Resultado)
+        self.navegador = QtWebEngineWidgets.QWebEngineView(self.Form_Resultado)
+        self.navegador.setGeometry(QtCore.QRect(0, 0, 1600, 550))
+        self.eventos()
+
+    def eventos(self):
+        pass
 
     def cargar(self):
-        self.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
-        self.loadFinished.connect(self.carga_completa)
+        self.navegador.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
+        self.navegador.loadFinished.connect(self.carga_completa)
 
     def carga_completa(self):
-        self.show()
+        self.Form_Resultado.show()
 
 
 class Control:
@@ -423,7 +433,7 @@ class Control:
         self.uiGenerar = VentanaGenerar()
         self.uiError = VentanaError()
         self.uiParticion = VentanaParticion()
-        self.navegador = Navegador()
+        self.uiResultado = VentanaResultado()
         self.id_cdt = 0
         self.error_bd = 0
 
@@ -459,6 +469,9 @@ class Control:
 
     def ventana_particion(self):
         self.uiParticion.Dialog_Particion.show()
+
+    def ventana_resultado(self):
+        self.uiResultado.cargar()
 
     def consultar(self, qry):
         cursor = self.bd.cursor()
