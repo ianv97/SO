@@ -112,35 +112,35 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3169" />
+          <entry key="py" value="4593" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3080" />
+          <entry key="Python" value="4504" />
           <entry key="Scratch" value="89" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="5" />
+          <entry key="py" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="4" />
+          <entry key="Python" value="13" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -151,21 +151,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
+            <state relative-caret-position="1179">
+              <caret line="461" column="27" lean-forward="true" selection-start-line="461" selection-start-column="27" selection-end-line="461" selection-end-column="27" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1539809359581" expanded="true" signature="21070:21076" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -191,6 +181,8 @@
       <find>recursos</find>
       <find>fond</find>
       <find>uim</find>
+      <find>recur</find>
+      <find>gridLa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,6 +195,7 @@
         <option value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
         <option value="$PROJECT_DIR$/SimuladorSO2.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
+        <option value="$PROJECT_DIR$/Form_Resultado.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
       </list>
     </option>
@@ -246,7 +239,20 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SO" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
@@ -273,6 +279,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.SimuladorSO">
+    <configuration name="Form_Resultado" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SO" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Form_Resultado.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="SimuladorSO" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -336,27 +363,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="SO" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="scratch_9" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -380,18 +386,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.SimuladorSO" />
-      <item itemvalue="Python.scratch" />
       <item itemvalue="Python.scratch (1)" />
       <item itemvalue="Python.SimuladorSO2" />
       <item itemvalue="Python.scratch_9" />
+      <item itemvalue="Python.Form_Resultado" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.SimuladorSO" />
+        <item itemvalue="Python.Form_Resultado" />
         <item itemvalue="Python.scratch_9" />
         <item itemvalue="Python.SimuladorSO2" />
         <item itemvalue="Python.scratch (1)" />
-        <item itemvalue="Python.scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -410,14 +416,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24920969" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22295082" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22234273" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -458,20 +464,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO2.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
+    <entry file="file://$PROJECT_DIR$/Form_Resultado_bkp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="61" column="50" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="61" />
+        <state relative-caret-position="250">
+          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
+        <state relative-caret-position="1179">
+          <caret line="461" column="27" lean-forward="true" selection-start-line="461" selection-start-column="27" selection-end-line="461" selection-end-column="27" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-            <marker date="1539809359581" expanded="true" signature="21070:21076" ph="..." />
           </folding>
         </state>
       </provider>

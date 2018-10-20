@@ -1,5 +1,4 @@
 import sys
-from PyQt5 import QtWebEngineWidgets
 import mysql.connector
 from mysql.connector import Error
 from Form_CargaDeTrabajo import *
@@ -9,11 +8,27 @@ from Dialog_Generar import *
 from Dialog_Error import *
 from Dialog_Particion import *
 from Form_Resultado import *
-import Form_Resultado
 from random import randint
 import plotly
 import plotly.figure_factory as ff
 
+def screen_size():
+    if sys.platform == 'win32':
+        import ctypes
+        user32 = ctypes.windll.user32
+        user32.SetProcessDPIAware()
+        return [user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)]
+    else:
+        import subprocess
+        size = (None, None)
+        args = ["xrandr", "-q", "-d", ":0"]
+        proc = subprocess.Popen(args,stdout=subprocess.PIPE)
+        for line in proc.stdout:
+            if isinstance(line, bytes):
+                line = line.decode("utf-8")
+                if "Screen" in line:
+                    size = (int(line.split()[7]),  int(line.split()[9][:-1]))
+        return size
 
 class VentanaCDT(Ui_Form_CargaDeTrabajo):
     def __init__(self):
@@ -214,7 +229,6 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     ctrl.uiError.error("Proceso P" + str(error_particion_insuficiente) + ": Ninguna partición posee el tamaño requerido por este proceso.")
                 else:
                     ctrl.ventana_resultado()
-                    # self.Form_CargaDeTrabajo.close()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
@@ -410,20 +424,52 @@ class VentanaResultado(Ui_Form_Resultado):
         Ui_Form_Resultado.__init__(self)
         self.Form_Resultado = QtWidgets.QWidget()
         self.setupUi(self.Form_Resultado)
-        self.navegador = QtWebEngineWidgets.QWebEngineView(self.Form_Resultado)
-        self.navegador.setGeometry(QtCore.QRect(0, 0, 1600, 550))
+        self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.splitter.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
+        self.Form_Resultado.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
         self.eventos()
 
     def eventos(self):
-        pass
+        self.pushButton_Cerrar.clicked.connect(self.Form_Resultado.close)
+        self.pushButton_Minimizar.clicked.connect(self.Form_Resultado.showMinimized)
+        self.pushButton_Ventana.clicked.connect(self.modo_ventana)
 
     def cargar(self):
+        prueba = [1, 2, 3]
+        procesos = [dict(Task="Proceso " + str(prueba[0]), Start='0000', Finish='0002', Resource='CPU'),
+                    dict(Task="Proceso " + str(prueba[0]), Start='0002', Finish='0003', Resource='Entrada'),
+                    dict(Task="Proceso " + str(prueba[1]), Start='0003', Finish='0004', Resource='CPU'),
+                    dict(Task="Proceso " + str(prueba[1]), Start='0006', Finish='0009', Resource='Salida'),
+                    dict(Task="Proceso 3", Start='0010', Finish='0011', Resource='CPU'),
+                    dict(Task="Proceso 3", Start='0011', Finish='0013', Resource='Entrada'),
+                    dict(Task="Proceso 3", Start='0015', Finish='0017', Resource='Salida')]
+
+        colores = {'CPU': 'rgb(220, 0, 0)',
+                   'Entrada': (1, 0.9, 0.16),
+                   'Salida': 'rgb(0, 123, 255)'}
+
+        diagrama = ff.create_gantt(procesos, colors=colores, index_col='Resource', show_colorbar=True, group_tasks=True,
+                                   title="Diagrama de Gantt", width=screen_size()[0] * 0.95,
+                                   height=screen_size()[1] * 0.90, data=None)
+        plotly.offline.plot(diagrama, auto_open=False)
         self.navegador.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
         self.navegador.loadFinished.connect(self.carga_completa)
 
     def carga_completa(self):
-        self.Form_Resultado.show()
+        self.Form_Resultado.showFullScreen()
+        ctrl.uiCDT.Form_CargaDeTrabajo.close()
 
+    def modo_ventana(self):
+        if self.Form_Resultado.isFullScreen():
+            self.pushButton_Minimizar.setHidden(True)
+            # self.pushButton_Ventana.setHidden(True)
+            self.pushButton_Cerrar.setHidden(True)
+            self.Form_Resultado.showMaximized()
+        else:
+            self.pushButton_Minimizar.setHidden(False)
+            # self.pushButton_Ventana.setHidden(False)
+            self.pushButton_Cerrar.setHidden(False)
+            self.Form_Resultado.showFullScreen()
 
 class Control:
     def __init__(self):
@@ -438,9 +484,14 @@ class Control:
         self.error_bd = 0
 
     def conectar_bd(self):
+        archivo = open('DB.txt', 'r')
+        host = archivo.readline()[6:-2]
+        port = int(archivo.readline()[5:])
+        database = archivo.readline()[10:-2]
+        user = archivo.readline()[6:-2]
+        password = archivo.readline()[10:-2]
         try:
-            self.bd = mysql.connector.connect(host='db4free.net', port=3306, database='simuladorso', user='simuladorso', password='adminsimuladorso')
-            # self.bd = mysql.connector.connect(host='localhost', port=3306, database='so', user='so', password='adminso')
+            self.bd = mysql.connector.connect(host=host, port=port, database=database, user=user, password=password)
         except Error as err:
             self.uiError.error("No se pudo conectar con la base de datos.\n"
                                "Las funciones Importar y Guardar estarán deshabilitadas.\n" + str(err))
@@ -489,21 +540,6 @@ class Control:
 
 
 if __name__ == "__main__":
-    prueba = [1, 2, 3]
-    procesos = [dict(Task="Proceso "+str(prueba[0]), Start='0000', Finish='0002', Resource='CPU'),
-          dict(Task="Proceso "+str(prueba[0]), Start='0002', Finish='0003', Resource='Entrada'),
-          dict(Task="Proceso "+str(prueba[1]), Start='0003', Finish='0004', Resource='CPU'),
-          dict(Task="Proceso "+str(prueba[1]), Start='0006', Finish='0009', Resource='Salida'),
-          dict(Task="Proceso 3", Start='0010', Finish='0011', Resource='CPU'),
-          dict(Task="Proceso 3", Start='0011', Finish='0013', Resource='Entrada'),
-          dict(Task="Proceso 3", Start='0015', Finish='0017', Resource='Salida')]
-
-    colores = {'CPU': 'rgb(220, 0, 0)',
-              'Entrada': (1, 0.9, 0.16),
-              'Salida': 'rgb(0, 123, 255)'}
-
-    diagrama = ff.create_gantt(procesos, colors=colores, index_col='Resource', show_colorbar=True, group_tasks=True, title="Diagrama de Gantt", width=1600, height=900, data=None)
-    plotly.offline.plot(diagrama, auto_open=False)
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
     ctrl.ventana_cdt()
