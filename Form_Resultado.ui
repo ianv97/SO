@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Resultados</string>
+   <string>Simulador de Sistema Operativo</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -69,50 +69,120 @@
           <property name="text">
            <string>Tiempo</string>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Listo</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
           </property>
          </column>
          <column>
           <property name="text">
            <string>Bloqueado</string>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Ejecución</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
           </property>
          </column>
          <column>
           <property name="text">
            <string>Cola de Listos</string>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Cola de Entrada</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
           </property>
          </column>
          <column>
           <property name="text">
            <string>Cola de Salida</string>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>CPU</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
           </property>
          </column>
          <column>
           <property name="text">
            <string>Entrada</string>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Salida</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
           </property>
          </column>
         </widget>

@@ -35,6 +35,8 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         Ui_Form_CargaDeTrabajo.__init__(self)
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
+        self.Form_CargaDeTrabajo.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
+        self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.escena = QtWidgets.QGraphicsScene()
         self.pincel = QtGui.QPen(QtCore.Qt.yellow)
         self.graphicsView.setScene(self.escena)
@@ -58,7 +60,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.pushButton_Importar.clicked.connect(self.ventana_importar)
         self.pushButton_Guardar.clicked.connect(self.ventana_guardar)
         self.pushButton_Generar.clicked.connect(self.ventana_generar)
-        self.pushButton_Siguiente.clicked.connect(self.correr_simulacion)
+        self.pushButton_CorrerSimulacion.clicked.connect(self.correr_simulacion)
         self.radioButton_PartFijas.clicked.connect(self.desactivar_tamano)
         self.radioButton_PartFijas.clicked.connect(self.mostrar_boton_particion)
         self.radioButton_PartFijas.clicked.connect(self.reiniciar_asignacion)
@@ -69,6 +71,9 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.radioButton_PartVariables.clicked.connect(self.reiniciar_asignacion)
         self.radioButton_PartVariables.clicked.connect(self.mostrar_algoritmos_pvariables)
         self.spinBox_Tamano.valueChanged.connect(self.graficar_particiones_variables)
+        self.pushButton_Cerrar.clicked.connect(self.Form_CargaDeTrabajo.close)
+        self.pushButton_Minimizar.clicked.connect(self.Form_CargaDeTrabajo.showMinimized)
+        self.pushButton_Ventana.clicked.connect(self.modo_ventana)
 
     def obtener_nprocesos(self):
         if len(self.spinBox_NProcesos.text()) > 0:
@@ -82,14 +87,14 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         if self.spinBox_NProcesos.value() > 0:
             if ctrl.error_bd == 0:
                 self.pushButton_Guardar.setEnabled(True)
-                self.pushButton_Guardar.setStyleSheet("background-color: rgb(0, 123, 255)")
+                self.pushButton_Guardar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255)")
             self.pushButton_Generar.setEnabled(True)
-            self.pushButton_Generar.setStyleSheet("background-color: rgb(0, 123, 255)")
+            self.pushButton_Generar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255)")
         else:
             self.pushButton_Guardar.setDisabled(True)
             self.pushButton_Generar.setDisabled(True)
-            self.pushButton_Guardar.setStyleSheet("background-color: rgb(50,50,50)")
-            self.pushButton_Generar.setStyleSheet("background-color: rgb(50,50,50)")
+            self.pushButton_Guardar.setStyleSheet("background-image:url(); background-color: rgb(50, 50, 50)")
+            self.pushButton_Generar.setStyleSheet("background-image:url(); background-color: rgb(50, 50, 50)")
         # CREAR FILAS
         nprocesos = self.obtener_nprocesos()
         self.tableWidget_Procesos.setRowCount(nprocesos)
@@ -231,6 +236,16 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     ctrl.ventana_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
+
+    def modo_ventana(self):
+        if self.Form_CargaDeTrabajo.isFullScreen():
+            self.pushButton_Minimizar.setHidden(True)
+            self.pushButton_Cerrar.setHidden(True)
+            self.Form_CargaDeTrabajo.showMaximized()
+        else:
+            self.pushButton_Minimizar.setHidden(False)
+            self.pushButton_Cerrar.setHidden(False)
+            self.Form_CargaDeTrabajo.showFullScreen()
 
 
 class VentanaImportar(Ui_Dialog_Importar):
@@ -462,12 +477,10 @@ class VentanaResultado(Ui_Form_Resultado):
     def modo_ventana(self):
         if self.Form_Resultado.isFullScreen():
             self.pushButton_Minimizar.setHidden(True)
-            # self.pushButton_Ventana.setHidden(True)
             self.pushButton_Cerrar.setHidden(True)
             self.Form_Resultado.showMaximized()
         else:
             self.pushButton_Minimizar.setHidden(False)
-            # self.pushButton_Ventana.setHidden(False)
             self.pushButton_Cerrar.setHidden(False)
             self.Form_Resultado.showFullScreen()
 
@@ -498,11 +511,11 @@ class Control:
             self.error_bd = 1
             self.uiCDT.pushButton_Importar.setDisabled(True)
             self.uiCDT.pushButton_Guardar.setDisabled(True)
-            self.uiCDT.pushButton_Importar.setStyleSheet("background-color: rgb(50,50,50)")
-            self.uiCDT.pushButton_Guardar.setStyleSheet("background-color: rgb(50,50,50)")
+            self.uiCDT.pushButton_Importar.setStyleSheet("background-image:url(); background-color: rgb(50,50,50)")
+            self.uiCDT.pushButton_Guardar.setStyleSheet("background-image:url(); background-color: rgb(50,50,50)")
 
     def ventana_cdt(self):
-        self.uiCDT.Form_CargaDeTrabajo.showMaximized()
+        self.uiCDT.Form_CargaDeTrabajo.showFullScreen()
 
     def ventana_importar(self):
         self.uiImportar.Dialog_Importar.show()

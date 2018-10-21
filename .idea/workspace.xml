@@ -112,35 +112,36 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4593" />
+          <entry key="py" value="4804" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4504" />
+          <entry key="Python" value="4715" />
           <entry key="Scratch" value="89" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="14" />
+          <entry key="py" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="13" />
+          <entry key="Python" value="21" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -151,8 +152,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1179">
-              <caret line="461" column="27" lean-forward="true" selection-start-line="461" selection-start-column="27" selection-end-line="461" selection-end-column="27" />
+            <state relative-caret-position="435">
+              <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -183,6 +184,10 @@
       <find>uim</find>
       <find>recur</find>
       <find>gridLa</find>
+      <find>importar</find>
+      <find>pushButton_Guardar</find>
+      <find>NProcesos</find>
+      <find>header</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,8 +200,8 @@
         <option value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
         <option value="$PROJECT_DIR$/SimuladorSO2.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
-        <option value="$PROJECT_DIR$/Form_Resultado.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
+        <option value="$PROJECT_DIR$/Form_Resultado.py" />
       </list>
     </option>
   </component>
@@ -240,6 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -251,7 +257,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -473,15 +478,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+        <state relative-caret-position="85">
+          <caret line="8" column="62" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1179">
-          <caret line="461" column="27" lean-forward="true" selection-start-line="461" selection-start-column="27" selection-end-line="461" selection-end-column="27" />
+        <state relative-caret-position="435">
+          <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
