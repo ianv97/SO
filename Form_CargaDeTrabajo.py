@@ -665,7 +665,7 @@ class Ui_Form_CargaDeTrabajo(object):
         self.pushButton_Importar.setText(_translate("Form_CargaDeTrabajo", "Importar"))
         self.pushButton_Generar.setToolTip(_translate("Form_CargaDeTrabajo", "<html><head/><body><p>Generar una carga de trabajo aleatoria</p></body></html>"))
         self.pushButton_Generar.setText(_translate("Form_CargaDeTrabajo", "Generar"))
-        self.pushButton_CorrerSimulacion.setText(_translate("Form_CargaDeTrabajo", "Correr simulación"))
+        self.pushButton_CorrerSimulacion.setText(_translate("Form_CargaDeTrabajo", "Correr Simulación"))
 
 
 if __name__ == "__main__":

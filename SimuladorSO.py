@@ -36,6 +36,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
         self.Form_CargaDeTrabajo.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
+        self.pushButton_CorrerSimulacion.setStyleSheet("background-image: url(Recursos/Fondo2.jpg); color: rgb(255,255,255);")
         self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.escena = QtWidgets.QGraphicsScene()
         self.pincel = QtGui.QPen(QtCore.Qt.yellow)
