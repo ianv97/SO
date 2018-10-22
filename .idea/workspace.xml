@@ -112,25 +112,25 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
-          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4804" />
+          <entry key="py" value="5664" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4715" />
+          <entry key="Python" value="5575" />
           <entry key="Scratch" value="89" />
         </counts>
       </usages-collector>
@@ -152,8 +152,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
+            <state relative-caret-position="272">
+              <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -188,6 +188,7 @@
       <find>pushButton_Guardar</find>
       <find>NProcesos</find>
       <find>header</find>
+      <find>escena</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -200,8 +201,8 @@
         <option value="$PROJECT_DIR$/Form_CargaDeTrabajo.py" />
         <option value="$PROJECT_DIR$/SimuladorSO2.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
-        <option value="$PROJECT_DIR$/SimuladorSO.py" />
         <option value="$PROJECT_DIR$/Form_Resultado.py" />
+        <option value="$PROJECT_DIR$/SimuladorSO.py" />
       </list>
     </option>
   </component>
@@ -485,8 +486,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
+        <state relative-caret-position="272">
+          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

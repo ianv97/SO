@@ -39,7 +39,12 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.escena = QtWidgets.QGraphicsScene()
         self.pincel = QtGui.QPen(QtCore.Qt.yellow)
+        self.pincel.setWidth(5)
         self.graphicsView.setScene(self.escena)
+        self.escena_altura = self.escena.height()
+        self.escena_fuente = QtGui.QFont()
+        self.escena_fuente.setBold(True)
+        self.escena_fuente.setPixelSize(20)
         self.particiones = []
         self.tamano_particiones = 0
         self.eventos()
@@ -129,16 +134,22 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         ctrl.ventana_generar()
 
     def graficar_particiones_fijas(self, tamano):
-        rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(150, tamano))
+        rectangulo = QtCore.QRectF(QtCore.QPointF(0, self.tamano_particiones), QtCore.QSizeF(350, tamano*2))
         self.escena.addRect(rectangulo, self.pincel)
-        self.tamano_particiones += tamano
+        texto = self.escena.addText(str(tamano)+' KB', self.escena_fuente)
+        texto.setPos(135, self.tamano_particiones + tamano - 15)
+        texto.setDefaultTextColor(QtGui.QColor(255, 255, 255, 255))
+        self.tamano_particiones += tamano*2
 
     def graficar_particiones_variables(self):
         if self.radioButton_PartVariables.isChecked():
             self.escena.clear()
             tamano = int(self.spinBox_Tamano.text())
-            rectangulo = QtCore.QRectF(QtCore.QPointF(0, 0), QtCore.QSizeF(150, tamano))
+            rectangulo = QtCore.QRectF(QtCore.QPointF(0, 0), QtCore.QSizeF(350, tamano*2))
             self.escena.addRect(rectangulo, self.pincel)
+            texto = self.escena.addText(str(tamano) + ' KB', self.escena_fuente)
+            texto.setPos(135, tamano - 15)
+            texto.setDefaultTextColor(QtGui.QColor(255, 255, 255, 255))
 
     @staticmethod
     def ventana_particion():
