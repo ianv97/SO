@@ -245,6 +245,10 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                 elif error_particion_insuficiente != -1:
                     ctrl.uiError.error("Proceso P" + str(error_particion_insuficiente) + ": Ninguna partición posee el tamaño requerido por este proceso.")
                 else:
+                    for i in range(nprocesos):
+                        ctrl.matriz.append([])
+                        for j in range(7):
+                            ctrl.matriz[i].append(int(self.tableWidget_Procesos.item(i, j).text()))
                     ctrl.ventana_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
@@ -507,6 +511,7 @@ class Control:
         self.uiResultado = VentanaResultado()
         self.id_cdt = 0
         self.error_bd = 0
+        self.matriz = []
 
     def conectar_bd(self):
         archivo = open('DB.txt', 'r')
