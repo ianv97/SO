@@ -36,6 +36,8 @@ def fcfs(particiones, alg_particiones):
     tiempo = 0
     ultimo_proceso_agregado = 0
     cpu = 0
+    entrada = 0
+    salida = 0
     fin = False
     while not fin:
         e_listo = ''
@@ -68,6 +70,26 @@ def fcfs(particiones, alg_particiones):
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append(cpu)
                     cola_listos.pop(0)
+                    cpu = 0
+                elif matriz_procesos[cpu][3] > 0:
+                    cola_listos[0][1] = 3
+                elif matriz_procesos[cpu][4] > 0:
+                    cola_salida.append(cpu)
+                    cola_listos.pop(0)
+                    cpu = 0
+                elif matriz_procesos[cpu][5] > 0:
+                    cola_listos[0][1] = 5
+        elif cpu != 0:
+            matriz_procesos[cpu][casilla_cpu] -= 1  # Descuento 1 al tiempo de cpu restante del proceso
+
+        if (entrada == 0) and (len(cola_entrada) > 0): #Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero
+            entrada = cola_entrada[0]
+            casilla_cpu = [cola_listos[0][1]]
+            matriz_procesos[cpu][casilla_cpu] -= 1 #Descuento 1 al tiempo de cpu restante del proceso
+            if matriz_procesos[cpu][casilla_cpu] == 0: #Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y lo saco de la cola de listos
+                if matriz_procesos[cpu][2] > 0:
+                    cola_entrada.append(cpu)
+                    cola_listos.pop(0)
                 elif matriz_procesos[cpu][3] > 0:
                     cola_listos[0][1] = 3
                 elif matriz_procesos[cpu][4] > 0:
@@ -75,11 +97,12 @@ def fcfs(particiones, alg_particiones):
                     cola_listos.pop(0)
                 elif matriz_procesos[cpu][5] > 0:
                     cola_listos[0][1] = 5
+
         for i in range(len(cola_listos)):
             c_listo += str(cola_listos[i]) + ', '
         for i in range(len(cola_entrada)):
             c_entrada += str(cola_entrada[i]) + ', '
         for i in range(len(cola_salida)):
             c_salida += str(cola_salida[i]) + ', '
-        matriz_resultados.append([tiempo, e_listo[:-1], e_bloqueado[:-1] , cpu, c_listo[:-1], c_entrada[:-1], c_salida[:-1]])
+        matriz_resultados.append([tiempo, e_listo[:-1], e_bloqueado[:-1] , cpu, c_listo[:-1], c_entrada[:-1], c_salida[:-1]], cpu)
         tiempo += 1
