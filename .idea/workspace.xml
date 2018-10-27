@@ -113,36 +113,36 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="3" />
+          <entry key="project.open.time.3" value="4" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="8006" />
+          <entry key="py" value="10212" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="7917" />
+          <entry key="Python" value="10123" />
           <entry key="Scratch" value="89" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="22" />
+          <entry key="py" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="21" />
+          <entry key="Python" value="22" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -184,11 +184,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2678">
+              <caret line="171" column="26" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
+              <folding>
+                <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Algoritmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="119" column="47" lean-forward="true" selection-start-line="119" selection-start-column="47" selection-end-line="119" selection-end-column="47" />
+            <state relative-caret-position="529">
+              <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+              <folding>
+                <marker date="1540683499851" expanded="true" signature="1973:2101" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ordenar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="115" column="21" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -204,14 +228,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>grap</find>
-      <find>qtwidget</find>
-      <find>tablr</find>
-      <find>AlignCenter</find>
-      <find>Tamano.setV</find>
-      <find>defau</find>
-      <find>atras</find>
-      <find>lineedit_n</find>
       <find>limin</find>
       <find>line</find>
       <find>qua</find>
@@ -228,12 +244,20 @@
       <find>NProcesos</find>
       <find>header</find>
       <find>escena</find>
-      <find>particiones</find>
       <find>particione</find>
       <find>matriz</find>
       <find>cola_listos</find>
       <find>cola_list</find>
+      <find>-1</find>
+      <find>cola_entrada</find>
+      <find>memoria</find>
+      <find>t_me</find>
+      <find>t_</find>
+      <find>particiones</find>
+      <find>reinic</find>
       <find>print</find>
+      <find>reini</find>
+      <find>pfijas</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -250,6 +274,7 @@
         <option value="$PROJECT_DIR$/venv/PFFf.py" />
         <option value="$PROJECT_DIR$/initial.py" />
         <option value="$PROJECT_DIR$/Initial.py" />
+        <option value="$PROJECT_DIR$/ordenar.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
         <option value="$PROJECT_DIR$/Algoritmos.py" />
       </list>
@@ -320,7 +345,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Algoritmos">
+  <component name="RunManager" selected="Python.SimuladorSO">
     <configuration name="Algoritmos" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SO" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -435,8 +460,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Algoritmos" />
         <item itemvalue="Python.SimuladorSO" />
+        <item itemvalue="Python.Algoritmos" />
         <item itemvalue="Python.Form_Resultado" />
         <item itemvalue="Python.scratch_9" />
         <item itemvalue="Python.SimuladorSO2" />
@@ -540,15 +565,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
-          <caret line="128" column="17" lean-forward="true" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
+        <state relative-caret-position="2678">
+          <caret line="171" column="26" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
+          <folding>
+            <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Algoritmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="119" column="47" lean-forward="true" selection-start-line="119" selection-start-column="47" selection-end-line="119" selection-end-column="47" />
+        <state relative-caret-position="529">
+          <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+          <folding>
+            <marker date="1540683499851" expanded="true" signature="1973:2101" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ordenar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="115" column="21" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
         </state>
       </provider>
     </entry>

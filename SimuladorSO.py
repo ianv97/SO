@@ -11,6 +11,7 @@ from Form_Resultado import *
 from random import randint
 import plotly
 import plotly.figure_factory as ff
+from Algoritmos import *
 
 def screen_size():
     if sys.platform == 'win32':
@@ -46,7 +47,6 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.escena_fuente = QtGui.QFont()
         self.escena_fuente.setBold(True)
         self.escena_fuente.setPixelSize(20)
-        self.particiones = []
         self.tamano_particiones = 0
         self.eventos()
 
@@ -169,7 +169,8 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.pushButton_AnadirPart.setVisible(True)
 
     def reiniciar_asignacion(self):
-        self.particiones = []
+        global particiones
+        particiones.clear()
         self.tamano_particiones = 0
         self.spinBox_Tamano.setValue(0)
         self.escena.clear()
@@ -195,11 +196,13 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         nprocesos = self.obtener_nprocesos()
         if self.radioButton_PartVariables.isChecked():
             t_memoria = self.spinBox_Tamano.value()
+        elif len(particiones) > 0:
+            t_memoria = 0
+            for i in particiones:
+                if i[0] > t_memoria:
+                    t_memoria = i[0]
         else:
-            if len(self.particiones) > 0:
-                t_memoria = max(self.particiones)
-            else:
-                t_memoria = 0
+            t_memoria = 0
         if not self.radioButton_FCFS.isChecked() and not self.radioButton_SJF.isChecked() \
         and not self.radioButton_SRTF.isChecked() and not self.radioButton_ROUNDROBIN.isChecked():
             ctrl.uiError.error("Debe seleccionar un algoritmo.")
@@ -207,6 +210,9 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
             ctrl.uiError.error("Debe ingresar un quantum mayor a 0.")
         elif not self.radioButton_PartFijas.isChecked() and not self.radioButton_PartVariables.isChecked():
             ctrl.uiError.error("Debe seleccionar un mecanismo de particiones.")
+        elif (self.radioButton_PartFijas.isChecked() and not (self.radioButton_FirstFit.isChecked() or self.radioButton_BestFit.isChecked()))\
+                or (self.radioButton_PartVariables.isChecked() and not (self.radioButton_FirstFit.isChecked() or self.radioButton_WorstFit.isChecked())):
+            ctrl.uiError.error("Debe seleccionar un algoritmo de asignación de memoria.")
         else:
             if nprocesos > 0:
                 for i in range(nprocesos):
@@ -246,9 +252,54 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     ctrl.uiError.error("Proceso P" + str(error_particion_insuficiente) + ": Ninguna partición posee el tamaño requerido por este proceso.")
                 else:
                     for i in range(nprocesos):
-                        ctrl.matriz.append([])
+                        matriz_procesos.append([])
                         for j in range(7):
-                            ctrl.matriz[i].append(int(self.tableWidget_Procesos.item(i, j).text()))
+                            matriz_procesos[i+1].append(int(self.tableWidget_Procesos.item(i, j).text()))
+
+                    if ctrl.uiCDT.radioButton_FCFS.isChecked():
+                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                fcfs('fijas', 'ff')
+                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
+                                fcfs('fijas', 'bf')
+                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                fcfs('variables', 'ff')
+                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
+                                fcfs('variables', 'wf')
+                    elif ctrl.uiCDT.radioButton_SJF.isChecked():
+                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                sjf('fijas', 'ff')
+                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
+                                sjf('fijas', 'bf')
+                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                sjf('variables', 'ff')
+                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
+                                sjf('variables', 'wf')
+                    elif ctrl.uiCDT.radioButton_SRTF.isChecked():
+                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                srtf('fijas', 'ff')
+                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
+                                srtf('fijas', 'bf')
+                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                srtf('variables', 'ff')
+                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
+                                srtf('variables', 'wf')
+                    elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
+                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                rr('fijas', 'ff')
+                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
+                                rr('fijas', 'bf')
+                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
+                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                                r('variables', 'ff')
+                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
+                                rr('variables', 'wf')
                     ctrl.ventana_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
@@ -332,8 +383,8 @@ class VentanaGuardar(Ui_Dialog_Guardar):
         ctrl.id_cdt = ctrl.consultar("SELECT LAST_INSERT_ID()")[0][0]
         if ctrl.uiCDT.radioButton_PartFijas.isChecked():
             qry = "INSERT INTO Particiones (id_cdt, id, tamano) VALUES (%s, %s, %s)"
-            for j in range(len(ctrl.uiCDT.particiones)):
-                valores = (ctrl.id_cdt, j, ctrl.uiCDT.particiones[j])
+            for j in range(len(particiones)):
+                valores = (ctrl.id_cdt, j, particiones[j][0])
                 ctrl.insertar(qry, valores)
         qry = "INSERT INTO Proceso (id_cdt, id, tiempo_arribo, cpu1, entrada, cpu2, salida, cpu3, memoria)" \
               "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -445,7 +496,7 @@ class VentanaParticion(Ui_Dialog_Particion):
                 error = True
         if not error:
             ctrl.uiCDT.spinBox_Tamano.setValue(ctrl.uiCDT.tamano_particiones + tamano_nueva_particion)
-            ctrl.uiCDT.particiones.append(tamano_nueva_particion)
+            particiones.append([tamano_nueva_particion, 0])
             ctrl.uiCDT.graficar_particiones_fijas(tamano_nueva_particion)
             self.Dialog_Particion.close()
 
@@ -465,15 +516,62 @@ class VentanaResultado(Ui_Form_Resultado):
         self.pushButton_Minimizar.clicked.connect(self.Form_Resultado.showMinimized)
         self.pushButton_Ventana.clicked.connect(self.modo_ventana)
 
+    def formatear_tiempos(self, cadena):
+        for i in range(4-len(cadena)):
+            cadena = '0' + cadena
+        return cadena
+
     def cargar(self):
-        prueba = [1, 2, 3]
-        procesos = [dict(Task="Proceso " + str(prueba[0]), Start='0000', Finish='0002', Resource='CPU'),
-                    dict(Task="Proceso " + str(prueba[0]), Start='0002', Finish='0003', Resource='Entrada'),
-                    dict(Task="Proceso " + str(prueba[1]), Start='0003', Finish='0004', Resource='CPU'),
-                    dict(Task="Proceso " + str(prueba[1]), Start='0006', Finish='0009', Resource='Salida'),
-                    dict(Task="Proceso 3", Start='0010', Finish='0011', Resource='CPU'),
-                    dict(Task="Proceso 3", Start='0011', Finish='0013', Resource='Entrada'),
-                    dict(Task="Proceso 3", Start='0015', Finish='0017', Resource='Salida')]
+        self.tableWidget_Procesos.setRowCount(len(matriz_resultados))
+        procesos = []
+        cpu = ''
+        finish_cpu = 0
+        entrada = ''
+        finish_entrada = 0
+        salida = ''
+        finish_salida = 0
+        for i in range(len(matriz_resultados)):
+            item = QtWidgets.QTableWidgetItem()
+            self.tableWidget_Procesos.setVerticalHeaderItem(i, item)
+            for j in range(10):
+                item = QtWidgets.QTableWidgetItem()
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.tableWidget_Procesos.setItem(i, j, item)
+                self.tableWidget_Procesos.item(i, j).setText(matriz_resultados[i][j])
+
+            if cpu != matriz_resultados[i][7]:
+                if cpu != '':
+                    procesos.append(dict(Task="Proceso "+cpu, Start=self.formatear_tiempos(start_cpu), Finish=self.formatear_tiempos(str(finish_cpu)), Resource='CPU'))
+                cpu = matriz_resultados[i][7]
+                start_cpu = matriz_resultados[i][0]
+                finish_cpu = int(start_cpu) + 1
+            else:
+                finish_cpu += 1
+
+            if entrada != matriz_resultados[i][8]:
+                if entrada != '':
+                    procesos.append(dict(Task="Proceso "+entrada, Start=self.formatear_tiempos(start_entrada), Finish=self.formatear_tiempos(str(finish_entrada)), Resource='Entrada'))
+                entrada = matriz_resultados[i][8]
+                start_entrada = matriz_resultados[i][0]
+                finish_entrada = int(start_entrada) + 1
+            else:
+                finish_entrada += 1
+
+            if salida != matriz_resultados[i][9]:
+                if salida != '':
+                    procesos.append(dict(Task="Proceso "+salida, Start=self.formatear_tiempos(start_salida), Finish=self.formatear_tiempos(str(finish_salida)), Resource='Salida'))
+                salida = matriz_resultados[i][9]
+                start_salida = matriz_resultados[i][0]
+                finish_salida = int(start_salida) + 1
+            else:
+                finish_salida += 1
+
+        if cpu != '':
+            procesos.append(dict(Task="Proceso " + cpu, Start=self.formatear_tiempos(start_cpu), Finish=self.formatear_tiempos(str(finish_cpu)), Resource='CPU'))
+        if entrada != '':
+            procesos.append(dict(Task="Proceso " + entrada, Start=self.formatear_tiempos(start_entrada), Finish=self.formatear_tiempos(str(finish_entrada)), Resource='Entrada'))
+        if salida != '':
+            procesos.append(dict(Task="Proceso " + salida, Start=self.formatear_tiempos(start_salida), Finish=self.formatear_tiempos(str(finish_salida)), Resource='Salida'))
 
         colores = {'CPU': 'rgb(220, 0, 0)',
                    'Entrada': (1, 0.9, 0.16),
@@ -484,6 +582,9 @@ class VentanaResultado(Ui_Form_Resultado):
                                    height=screen_size()[1] * 0.90, data=None)
         plotly.offline.plot(diagrama, auto_open=False)
         self.navegador.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
+
+
+
         self.navegador.loadFinished.connect(self.carga_completa)
 
     def carga_completa(self):
@@ -511,7 +612,6 @@ class Control:
         self.uiResultado = VentanaResultado()
         self.id_cdt = 0
         self.error_bd = 0
-        self.matriz = []
 
     def conectar_bd(self):
         archivo = open('DB.txt', 'r')
@@ -575,13 +675,3 @@ if __name__ == "__main__":
     ctrl.ventana_cdt()
     ctrl.conectar_bd()
     sys.exit(app.exec_())
-
-
-    # if ctrl.uiCDT.radioButton_FCFS.isChecked():
-    #     algoritmo = "FCFS"
-    # elif ctrl.uiCDT.radioButton_SJF.isChecked():
-    #     algoritmo = "SJF"
-    # elif ctrl.uiCDT.radioButton_SRTF.isChecked():
-    #     algoritmo = "SRTF"
-    # elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
-    #     algoritmo = "ROUND ROBIN"
