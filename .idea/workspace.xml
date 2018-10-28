@@ -113,25 +113,26 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="4" />
+          <entry key="project.open.time.3" value="5" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="10212" />
+          <entry key="py" value="10384" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="10123" />
+          <entry key="Python" value="10295" />
           <entry key="Scratch" value="89" />
         </counts>
       </usages-collector>
@@ -187,8 +188,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2678">
-              <caret line="171" column="26" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
+            <state relative-caret-position="680">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
               <folding>
                 <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
               </folding>
@@ -196,23 +197,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Algoritmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+            <state relative-caret-position="630">
+              <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
               <folding>
-                <marker date="1540683499851" expanded="true" signature="1973:2101" ph="..." />
+                <marker date="1540737642140" expanded="true" signature="2118:2629" ph="..." />
+                <marker date="1540737642140" expanded="true" signature="2656:2667" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ordenar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="115" column="21" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
+            <state relative-caret-position="451">
+              <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -563,10 +565,17 @@
     <entry file="file://$PROJECT_DIR$/Convertir UI a PY.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/ordenar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2678">
-          <caret line="171" column="26" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
+        <state relative-caret-position="680">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
           <folding>
             <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
           </folding>
@@ -575,18 +584,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Algoritmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+        <state relative-caret-position="630">
+          <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
           <folding>
-            <marker date="1540683499851" expanded="true" signature="1973:2101" ph="..." />
+            <marker date="1540737642140" expanded="true" signature="2118:2629" ph="..." />
+            <marker date="1540737642140" expanded="true" signature="2656:2667" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ordenar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="115" column="21" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
         </state>
       </provider>
     </entry>

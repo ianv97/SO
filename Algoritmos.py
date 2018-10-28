@@ -46,6 +46,20 @@ def ordenar_particiones(alg_particiones):
     else:
         particiones.sort(key=lambda part: part[0], reverse=True)
 
+def pvariables():
+    memoria_llena = True
+    n = 0
+    while n < len(cola_memoria): #Para cada proceso en la cola de memoria
+        i = 0
+        while i < (len(particiones)-1) and ((particiones[i][0] < cola_memoria[n][0]) or (particiones[i][1] != 0)): #Busco una partición libre con tamaño mayor al proceso en la cola
+            i += 1
+        if (particiones[i][0] > cola_memoria[n][0]) and (particiones[i][1] == 0):
+            particiones.insert(i, cola_memoria[n])
+            particiones[-1][0] -= cola_memoria[n][0]
+
+def compactacion_memoria():
+    pass
+
 def fcfs(esquema_particiones, alg_particiones):
     tiempo = 0
     prox_proceso_agregar = 1
