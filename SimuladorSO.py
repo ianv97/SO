@@ -196,6 +196,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         nprocesos = self.obtener_nprocesos()
         if self.radioButton_PartVariables.isChecked():
             t_memoria = self.spinBox_Tamano.value()
+            particiones.append([t_memoria, 0])
         elif len(particiones) > 0:
             t_memoria = 0
             for i in particiones:

@@ -78,23 +78,23 @@
     <session id="-2136053657">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.32" value="1" />
-          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.36" value="2" />
           <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.41" value="2" />
           <entry key="project.open.time.55" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1041" />
+          <entry key="py" value="2910" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1019" />
+          <entry key="Python" value="2888" />
           <entry key="Scratch" value="22" />
         </counts>
       </usages-collector>
@@ -188,11 +188,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="127" selection-start-line="127" selection-end-line="127" />
-              <folding>
-                <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="170" column="12" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -200,11 +197,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Algoritmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
+            <state relative-caret-position="446">
+              <caret line="181" column="28" lean-forward="true" selection-start-line="181" selection-start-column="28" selection-end-line="181" selection-end-column="28" />
               <folding>
-                <marker date="1540737642140" expanded="true" signature="2118:2629" ph="..." />
-                <marker date="1540737642140" expanded="true" signature="2656:2667" ph="..." />
+                <marker date="1540757582634" expanded="true" signature="3277:3869" ph="..." />
               </folding>
             </state>
           </provider>
@@ -213,8 +209,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ordenar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
+            <state relative-caret-position="2414">
+              <caret line="142" column="30" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -230,9 +226,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>limin</find>
-      <find>line</find>
-      <find>qua</find>
       <find>textc</find>
       <find>settex</find>
       <find>nombreC</find>
@@ -257,9 +250,12 @@
       <find>t_</find>
       <find>particiones</find>
       <find>reinic</find>
-      <find>print</find>
       <find>reini</find>
       <find>pfijas</find>
+      <find>graficar_particiones_v</find>
+      <find>particiones.ap</find>
+      <find>rein</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -485,14 +481,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24925596" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.1637744" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.16229509" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -567,28 +563,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ordenar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
+        <state relative-caret-position="2414">
+          <caret line="142" column="30" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-          <folding>
-            <marker date="1540678722471" expanded="true" signature="25263:25364" ph="..." />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="170" column="12" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Algoritmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="56" column="50" lean-forward="true" selection-start-line="56" selection-start-column="50" selection-end-line="56" selection-end-column="50" />
+        <state relative-caret-position="446">
+          <caret line="181" column="28" lean-forward="true" selection-start-line="181" selection-start-column="28" selection-end-line="181" selection-end-column="28" />
           <folding>
-            <marker date="1540737642140" expanded="true" signature="2118:2629" ph="..." />
-            <marker date="1540737642140" expanded="true" signature="2656:2667" ph="..." />
+            <marker date="1540757582634" expanded="true" signature="3277:3869" ph="..." />
           </folding>
         </state>
       </provider>

@@ -29,7 +29,7 @@ def pfijas():
 
 def liberar_particion(n_proceso):
     i = 0
-    while (particiones[i][1] != n_proceso) and (i < len(particiones)):
+    while (i < len(particiones)-1) and (particiones[i][1] != n_proceso):
         i += 1
     if particiones[i][1] == n_proceso:
         particiones[i][1] = 0
@@ -40,25 +40,40 @@ def agregar_cola_memoria(tiempo, prox_proceso_agregar):
         prox_proceso_agregar += 1
     return prox_proceso_agregar
 
-def ordenar_particiones(alg_particiones):
-    if alg_particiones == 'bf':
-        particiones.sort(key=lambda part: part[0])
-    else:
-        particiones.sort(key=lambda part: part[0], reverse=True)
 
 def pvariables():
-    memoria_llena = True
     n = 0
     while n < len(cola_memoria): #Para cada proceso en la cola de memoria
         i = 0
         while i < (len(particiones)-1) and ((particiones[i][0] < cola_memoria[n][0]) or (particiones[i][1] != 0)): #Busco una partición libre con tamaño mayor al proceso en la cola
             i += 1
-        if (particiones[i][0] > cola_memoria[n][0]) and (particiones[i][1] == 0):
-            particiones.insert(i, cola_memoria[n])
-            particiones[-1][0] -= cola_memoria[n][0]
+        if (particiones[i][0] >= cola_memoria[n][0]) and (particiones[i][1] == 0):
+            if (particiones[i][0] == cola_memoria[n][0]) and (particiones[i][1] == 0):
+                #Si el tamaño de la particion libre es igual a la del proceso, la asigno al proceso sin crear otra partición
+                particiones[i][1] = cola_memoria[n][1]
+            else:
+                #Sino, creo una nueva partición de tamaño igual al requerido por el proceso, restandole ese espacio al espacio libre de la particion contigua
+                particiones[i][0] -= cola_memoria[n][0]
+                particiones.insert(i, cola_memoria[n])
+            cola_listos.append([cola_memoria[n][1], 1])  #Agrego el n_proceso y la casilla de cpu a descontar (1, 3 o 5) a la cola de listos
+            cola_memoria.pop(n)  #Elimino el proceso de la cola de memoria
+        else: #Si no se eliminó un elemento de la cola de memoria, paso al siguiente proceso en la cola de memoria
+            n += 1
 
 def compactacion_memoria():
-    pass
+    particion_a_incrementar = -1
+    i = 0
+    while i < len(particiones): #Para cada partición
+        if particiones[i][1] == 0: #Si está libre
+            if particion_a_incrementar == -1: #Y no hay una partición libre anterior a ella, resguardo el número de partición
+                particion_a_incrementar = i
+                i += 1
+            else: #Si hay una libre anterior, elimino la partición actual y le sumo su tamaño a la anterior
+                particiones[particion_a_incrementar][0] += particiones[i][0]
+                particiones.pop(i)
+        else:
+            particion_a_incrementar = -1
+            i += 1
 
 def fcfs(esquema_particiones, alg_particiones):
     tiempo = 0
@@ -70,41 +85,42 @@ def fcfs(esquema_particiones, alg_particiones):
     cpu_aux = ''
     entrada_aux = ''
     salida_aux = ''
-    if alg_particiones != 'ff':
-        ordenar_particiones(alg_particiones)
-    while len(lista_completados) != len(matriz_procesos)-1:
+    if alg_particiones == 'bf': #Si se utiliza best fit, ordeno las particiones por su tamaño y la trato como first fit
+        particiones.sort(key=lambda part: part[0])
+    while len(lista_completados) != len(matriz_procesos)-1: #Bucle principal: mientras no se terminen todos los procesos
         e_bloqueado = ''
         c_listo = ''
         c_entrada = ''
         c_salida = ''
-        prox_proceso_agregar = agregar_cola_memoria(tiempo, prox_proceso_agregar)
-        if not memoria_llena:
-            if esquema_particiones == 'fijas':
+        prox_proceso_agregar = agregar_cola_memoria(tiempo, prox_proceso_agregar) #Agrego procesos a la cola de memoria
+        #Cargo los procesos de la cola en memoria
+        if esquema_particiones == 'fijas':
+            if not memoria_llena:
                 memoria_llena = pfijas()
+        else: #Particiones variables
+            if not memoria_llena:
+                compactacion_memoria()
+            if alg_particiones == 'ff':
+                pvariables()
             else:
-                if alg_particiones == 'ff':
-                    pass
-                    # pvariables_ff
-                else:
-                    pass
-                    # pvariables_wf
+                pass
+                # pvariables_wf
 
-        if entrada != 0:
-            e_bloqueado += str(entrada) + ', '
-        if salida != 0:
-            e_bloqueado += str(salida) + ', '
-        for i in range(len(cola_entrada)):
-            e_bloqueado += str(cola_entrada[i]) + ', '
-        for i in range(len(cola_salida)):
-            e_bloqueado += str(cola_salida[i]) + ', '
+        #Strings de salida en la tabla de resultados
         for i in range(len(cola_listos)):
             c_listo += str(cola_listos[i][0]) + ', '
         for i in range(len(cola_entrada)):
             c_entrada += str(cola_entrada[i]) + ', '
         for i in range(len(cola_salida)):
             c_salida += str(cola_salida[i]) + ', '
+        if entrada != 0:
+            e_bloqueado += str(entrada) + ', '
+        if salida != 0:
+            e_bloqueado += str(salida) + ', '
+        e_bloqueado += c_entrada + c_salida
 
-        if (cpu == 0) and (len(cola_listos) > 0) and (str(cola_listos[0]) != entrada_aux) and (str(cola_listos[0]) != salida_aux): #Si la cpu está libre y hay procesos en la cola de listos, le asigno la cpu al primero y lo saco de la cola de listos
+        # Si la cpu está libre y hay procesos en la cola de listos, le asigno la cpu al primero y lo saco de la cola de listos
+        if (cpu == 0) and (len(cola_listos) > 0) and (str(cola_listos[0]) != entrada_aux) and (str(cola_listos[0]) != salida_aux):
             cpu = cola_listos[0][0]
             cpu_aux = str(cpu)
             casilla_cpu = cola_listos[0][1]
@@ -130,7 +146,8 @@ def fcfs(esquema_particiones, alg_particiones):
         else:
             cpu_aux = ''
 
-        if (entrada == 0) and (len(cola_entrada) > 0) and (str(cola_entrada[0]) != cpu_aux) and (str(cola_entrada[0]) != salida_aux): #Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero y lo saco de la cola de entrada
+        # Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero y lo saco de la cola de entrada
+        if (entrada == 0) and (len(cola_entrada) > 0) and (str(cola_entrada[0]) != cpu_aux) and (str(cola_entrada[0]) != salida_aux):
             entrada = cola_entrada[0]
             entrada_aux = str(entrada)
             cola_entrada.pop(0)
@@ -147,7 +164,8 @@ def fcfs(esquema_particiones, alg_particiones):
         else:
             entrada_aux = ''
 
-        if (salida == 0) and (len(cola_salida) > 0) and (str(cola_salida[0]) != cpu_aux) and (str(cola_salida[0]) != entrada_aux): #Si la salida está libre y hay procesos en la cola de salida, le asigno la salida al primero y lo saco de la cola de salida
+        # Si la salida está libre y hay procesos en la cola de salida, le asigno la salida al primero y lo saco de la cola de salida
+        if (salida == 0) and (len(cola_salida) > 0) and (str(cola_salida[0]) != cpu_aux) and (str(cola_salida[0]) != entrada_aux):
             salida = cola_salida[0]
             salida_aux = str(salida)
             cola_salida.pop(0)
@@ -161,3 +179,4 @@ def fcfs(esquema_particiones, alg_particiones):
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
         tiempo += 1
+        # print(particiones)
