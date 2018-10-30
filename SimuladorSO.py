@@ -257,50 +257,26 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                         for j in range(7):
                             matriz_procesos[i+1].append(int(self.tableWidget_Procesos.item(i, j).text()))
 
+                    if ctrl.uiCDT.radioButton_PartFijas.isChecked():
+                        part = 'FIJAS'
+                        if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                            alg_part = 'FF'
+                        elif ctrl.uiCDT.radioButton_BestFit.isChecked():
+                            alg_part = 'BF'
+                    elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
+                        part = 'VARIABLES'
+                        if ctrl.uiCDT.radioButton_FirstFit.isChecked():
+                            alg_part = 'FF'
+                        elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
+                            alg_part = 'WF'
                     if ctrl.uiCDT.radioButton_FCFS.isChecked():
-                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                fcfs('fijas', 'ff')
-                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
-                                fcfs('fijas', 'bf')
-                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                fcfs('variables', 'ff')
-                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
-                                fcfs('variables', 'wf')
+                        no_apropiativos(part, alg_part, 'FCFS')
                     elif ctrl.uiCDT.radioButton_SJF.isChecked():
-                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                sjf('fijas', 'ff')
-                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
-                                sjf('fijas', 'bf')
-                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                sjf('variables', 'ff')
-                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
-                                sjf('variables', 'wf')
+                        no_apropiativos(part, alg_part, 'SJF')
                     elif ctrl.uiCDT.radioButton_SRTF.isChecked():
-                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                srtf('fijas', 'ff')
-                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
-                                srtf('fijas', 'bf')
-                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                srtf('variables', 'ff')
-                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
-                                srtf('variables', 'wf')
+                        apropiativos(part, alg_part, 'SRTF')
                     elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
-                        if ctrl.uiCDT.radioButton_PartFijas.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                rr('fijas', 'ff')
-                            elif ctrl.uiCDT.radioButton_BestFit.isChecked():
-                                rr('fijas', 'bf')
-                        elif ctrl.uiCDT.radioButton_PartVariables.isChecked():
-                            if ctrl.uiCDT.radioButton_FirstFit.isChecked():
-                                r('variables', 'ff')
-                            elif ctrl.uiCDT.radioButton_WorstFit.isChecked():
-                                rr('variables', 'wf')
+                        apropiativos(part, alg_part, 'RR')
                     ctrl.ventana_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
