@@ -291,7 +291,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'SRTF':
                 indice = cola_entrada.index(min(cola_entrada, key=lambda ent: ent[1]))
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
-                if (cola_entrada[indice][1] < matriz_procesos[entrada][2]) and (str(cola_entrada[0]) != cpu_aux):
+                if (cola_entrada[indice][1] < matriz_procesos[entrada][2]) and (str(cola_entrada[indice][0]) != cpu_aux):
                     cola_entrada.append([entrada, matriz_procesos[entrada][2]])
                     entrada = cola_entrada[indice][0]
                     entrada_aux = str(cpu)
@@ -314,7 +314,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'SRTF':
                 indice = cola_salida.index(min(cola_salida, key=lambda sal: sal[1]))
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
-                if cola_salida[indice][1] < matriz_procesos[salida][4] and (str(cola_salida[indice]) != cpu_aux) and (str(cola_salida[indice]) != entrada_aux):
+                if cola_salida[indice][1] < matriz_procesos[salida][4] and (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux):
                     cola_salida.append([salida, matriz_procesos[salida][2]])
                     entrada = cola_salida[indice][0]
                     entrada_aux = str(cpu)
@@ -332,3 +332,4 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         # print(particiones)
         # print(cola_memoria)
         print(matriz_procesos)
+        print("CPU:"+str(cpu)+" Entrada:"+str(entrada)+" Salida:"+str(salida))
