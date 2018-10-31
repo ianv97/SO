@@ -1,0 +1,7 @@
+Consideraciones tenidas en cuenta:
+- Un proceso puede tener en 0 las columnas correspondientes a entrada, cpu del medio o salida, siendo obligatorio un valor mayor a 0 en la primera y última columna de cpu.
+- En SRTF, si un proceso en la cola de listos tiene el mismo tiempo restante que el que está asignado a la cpu/entrada/salida, se continúa ejecutando el proceso actual (el que ya tiene asignado el recurso).
+- En la tabla de resultados, en el instante de tiempo en que un proceso pasa de la cola de listos a ejecución, aparece tanto en la columna correspondiente a los procesos en estado de listo como en la correspondiente a los procesos en ejecución.
+- Si a un proceso se le asigna un tiempo de cpu en la columna 1 (por ej: 2), no se le asigna entrada (0), y se le vuelve a asignar un tiempo de cpu en la columna 3 (por ej: 3), se considera que el tiempo de cpu es la suma de los 2 (5) y el proceso lo ejecuta sin salir de la cpu en caso de ser un algoritmo no apropiativo.
+
+VER QUE UN PROCESO QUE EJECUTÓ UN RECURSO NO SE EJECUTE EN EL SIGUIENTE RECURSO CUANDO SE USA SJF O SRTF

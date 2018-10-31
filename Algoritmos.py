@@ -1,4 +1,4 @@
-matriz_procesos = [[0, 0, 99999999]]
+matriz_procesos = [[0, 99999999, 99999999, 99999999, 99999999, 99999999]]
 matriz_resultados = []
 cola_memoria = []
 cola_listos = []
@@ -136,7 +136,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'FCFS':
                 indice = 0
             else: #SJF
-                indice = cola_listos.index(min(cola_listos, key = lambda listos: listos[2]))  # lambda parametros: return
+                indice = cola_listos.index(min(cola_listos, key = lambda listos: listos[2]))
             cpu = cola_listos[indice][0]
             cpu_aux = str(cpu)
             casilla_cpu = cola_listos[indice][1]
@@ -169,7 +169,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'FCFS':
                 indice = 0
             else: # SJF
-                indice = cola_entrada.index(min(cola_entrada, key = lambda ent: ent[1]))  # lambda parametros: return
+                indice = cola_entrada.index(min(cola_entrada, key = lambda ent: ent[1]))
             if str(cola_entrada[indice][0]) != cpu_aux: # Si el proceso en la cola de entrada no es el que se agregó recién
                 entrada = cola_entrada[indice][0]
                 entrada_aux = str(entrada)
@@ -180,7 +180,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             # Si el proceso no tiene mas tiempo de entrada, lo agrego a otra cola y pongo en 0 la entrada
             if matriz_procesos[entrada][2] == 0:
                 if matriz_procesos[entrada][3] > 0:
-                    cola_listos.append([entrada, 3, matriz_procesos[entrada][5]])
+                    cola_listos.append([entrada, 3, matriz_procesos[entrada][3]])
                 elif matriz_procesos[entrada][4] > 0:
                     cola_salida.append([entrada, matriz_procesos[entrada][4]])
                 elif matriz_procesos[entrada][5] > 0:
@@ -194,7 +194,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'FCFS':
                 indice = 0
             else: # SJF
-                indice = cola_salida.index(min(cola_salida, key = lambda sal: sal[1]))  # lambda parametros: return
+                indice = cola_salida.index(min(cola_salida, key = lambda sal: sal[1]))
             if (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice]) != entrada_aux): # Si el proceso en la cola de salida no es el que se agregó recién
                 salida = cola_salida[indice][0]
                 salida_aux = str(salida)
@@ -210,8 +210,9 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
         tiempo += 1
-        print(particiones)
-        print(cola_memoria)
+        # print(particiones)
+        # print(cola_memoria)
+        # print(matriz_procesos)
 
 
 def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
@@ -221,10 +222,11 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
     entrada = 0
     salida = 0
     memoria_llena = False
+    casilla_cpu = 1
     cpu_aux = ''
     entrada_aux = ''
     salida_aux = ''
-    while len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
+    while tiempo < 10:#len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
         e_bloqueado = ''
         c_listo = ''
         c_entrada = ''
@@ -252,103 +254,81 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             e_bloqueado += str(salida) + ', '
         e_bloqueado += c_entrada + c_salida
 
-        # Si la cpu está libre y hay procesos en la cola de listos, le asigno la cpu al primero y lo saco de la cola de listos
+        # Si hay procesos en la cola de listos y el menor de la cola de listos es menor que el actual, le asigno la cpu
         if len(cola_listos) > 0:
             if alg_procesos == 'SRTF':
-                indice = cola_listos.index(min(cola_listos, key=lambda listos: listos[2]))  # lambda parametros: return
+                indice = cola_listos.index(min(cola_listos, key=lambda listos: listos[2]))
                 if cola_listos[indice][2] < matriz_procesos[cpu][casilla_cpu]:  # Si hay un proceso en la cola de listos con tiempo restante menor al que se estaba ejecutando, le asigno la cpu
                     cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
                     cpu = cola_listos[indice][0]
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[indice][1]
-                    aux_proceso = cola_listos[indice]
                     cola_listos.pop(indice)
-                elif aux_proceso[0] != 0:
-                    cpu = aux_proceso[0]
-                    cpu_aux = str(cpu)
-                    casilla_cpu = aux_proceso[1]
-                    aux_proceso = cola_listos[indice]
-            elif aux_proceso[0] != 0:
-                cpu = aux_proceso[0]
-                cpu_aux = str(cpu)
-                casilla_cpu = aux_proceso[1]
-                aux_proceso = cola_listos[indice]
 
         if cpu != 0:  # Si la cpu está asignada a un proceso, descuento 1 al tiempo de cpu restante
             matriz_procesos[cpu][casilla_cpu] -= 1
-            if alg_procesos == 'srtf':  # En srtf descuento 1 al tiempo de cpu restante en la cola de listos
-                cola_listos[cpu][2] -= 1
-            if matriz_procesos[cpu][
-                casilla_cpu] == 0:  # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
+            if matriz_procesos[cpu][casilla_cpu] == 0:  # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append([cpu, matriz_procesos[cpu][2]])
                     cpu = 0
                 elif matriz_procesos[cpu][3] > 0:
                     casilla_cpu = 3
-                    if alg_procesos == 'SRTF':
-                        cpu = 0
                 elif matriz_procesos[cpu][4] > 0:
                     cola_salida.append([cpu, matriz_procesos[cpu][4]])
                     cpu = 0
                 elif matriz_procesos[cpu][5] > 0:
                     casilla_cpu = 5
-                    if alg_procesos == 'srtf':
-                        cpu = 0
                 else:  # Si tod0 está en 0 lo agrego a la lista de procesos completados y libero la memoria
                     lista_completados.append(cpu)
                     liberar_particion(cpu)
                     memoria_llena = False
                     cpu = 0
-            elif alg_procesos == 'srtf':  # Le saco la cpu al proceso actual para que en el próximo ciclo se evalúe cuál es el más corto
-                cpu = 0
         else:
             cpu_aux = ''
 
-        # Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero y lo saco de la cola de entrada
-        if (entrada == 0) and (len(cola_entrada) > 0) and (str(cola_entrada[0]) != cpu_aux) and (
-                str(cola_entrada[0]) != salida_aux):
-            if alg_procesos == 'FCFS':
-                entrada = cola_entrada[0][0]
-            elif (alg_procesos == 'SJF') or (alg_procesos == 'SRTF'):
-                entrada = min(cola_entrada, key=lambda ent: ent[1])[0]  # lambda parametros: return
-            entrada_aux = str(entrada)
-            cola_entrada.pop(0)
+        # Si hay procesos en la cola de entrada y el menor de la cola de entrada es menor que el actual, le asigno la entrada
+        if (len(cola_entrada) > 0):
+            if alg_procesos == 'SRTF':
+                indice = cola_entrada.index(min(cola_entrada, key=lambda ent: ent[1]))
+                # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
+                if (cola_entrada[indice][1] < matriz_procesos[entrada][2]) and (str(cola_entrada[0]) != cpu_aux):
+                    cola_entrada.append([entrada, matriz_procesos[entrada][2]])
+                    entrada = cola_entrada[indice][0]
+                    entrada_aux = str(cpu)
+                    cola_entrada.pop(indice)
         if entrada != 0:  # Si la entrada está asignada a un proceso, descuento 1 al tiempo de entrada restante
             matriz_procesos[entrada][2] -= 1
-            if matriz_procesos[entrada][
-                2] == 0:  # Si el proceso no tiene mas tiempo de entrada, lo agrego a otra cola y pongo en 0 la entrada
+            if matriz_procesos[entrada][2] == 0:  # Si el proceso no tiene mas tiempo de entrada, lo agrego a otra cola y pongo en 0 la entrada
                 if matriz_procesos[entrada][3] > 0:
-                    cola_listos.append([entrada, 3])
+                    cola_listos.append([entrada, 3, matriz_procesos[entrada][3]])
                 elif matriz_procesos[entrada][4] > 0:
-                    cola_salida.append(entrada)
+                    cola_salida.append([entrada, matriz_procesos[entrada][4]])
                 elif matriz_procesos[entrada][5] > 0:
-                    cola_listos.append([entrada, 5])
-                entrada = 0
-            elif alg_procesos == 'SRTF':
+                    cola_listos.append([entrada, 5, matriz_procesos[entrada][5]])
                 entrada = 0
         else:
             entrada_aux = ''
 
-        # Si la salida está libre y hay procesos en la cola de salida, le asigno la salida al primero y lo saco de la cola de salida
-        if (salida == 0) and (len(cola_salida) > 0) and (str(cola_salida[0]) != cpu_aux) and (
-                str(cola_salida[0]) != entrada_aux):
-            salida = cola_salida[0]
-            salida_aux = str(salida)
-            cola_salida.pop(0)
+        # Si hay procesos en la cola de salida y el menor de la cola de salida es menor que el actual, le asigno la salida
+        if (len(cola_salida) > 0):
+            if alg_procesos == 'SRTF':
+                indice = cola_salida.index(min(cola_salida, key=lambda sal: sal[1]))
+                # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
+                if cola_salida[indice][1] < matriz_procesos[salida][4] and (str(cola_salida[indice]) != cpu_aux) and (str(cola_salida[indice]) != entrada_aux):
+                    cola_salida.append([salida, matriz_procesos[salida][2]])
+                    entrada = cola_salida[indice][0]
+                    entrada_aux = str(cpu)
+                    cola_salida.pop(indice)
         if salida != 0:  # Si la salida está asignada a un proceso, descuento 1 al tiempo de salida restante
             matriz_procesos[salida][4] -= 1
-            if matriz_procesos[salida][
-                4] == 0:  # Si el proceso no tiene mas tiempo de salida, lo agrego a la cola de cpu(5) y pongo en 0 la salida
-                cola_listos.append([salida, 5])
-                salida = 0
-            elif alg_procesos == 'SRTF':
+            if matriz_procesos[salida][4] == 0:  # Si el proceso no tiene mas tiempo de salida, lo agrego a la cola de cpu(5) y pongo en 0 la salida
+                cola_listos.append([salida, 5, matriz_procesos[salida][5]])
                 salida = 0
         else:
             salida_aux = ''
 
-        matriz_resultados.append(
-            [str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2],
-             c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
+        matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
         tiempo += 1
-        print(particiones)
-        print(cola_memoria)
+        # print(particiones)
+        # print(cola_memoria)
+        print(matriz_procesos)
