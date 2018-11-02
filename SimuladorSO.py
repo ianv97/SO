@@ -527,14 +527,16 @@ class VentanaResultado(Ui_Form_Resultado):
         n_proceso = self.tableWidget_Procesos.selectedIndexes()[0].row()
         tamano_particiones = 0
         global matriz_particiones
-        print(matriz_particiones)
-        print(n_proceso)
         for i in matriz_particiones[n_proceso]:
             tamano = i[0]
             rectangulo = QtCore.QRectF(QtCore.QPointF(0, tamano_particiones), QtCore.QSizeF(300, tamano * 2))
             self.escena.addRect(rectangulo, self.pincel)
-            texto = self.escena.addText(str(tamano) + ' KB' + ' - P' + str(i[1]), self.escena_fuente)
-            texto.setPos(95, tamano_particiones + tamano - 15)
+            if i[1] != 0:
+                texto = self.escena.addText(str(tamano) + ' KB' + ' - P' + str(i[1]), self.escena_fuente)
+                texto.setPos(95, tamano_particiones + tamano - 15)
+            else:
+                texto = self.escena.addText(str(tamano) + ' KB', self.escena_fuente)
+                texto.setPos(110, tamano_particiones + tamano - 15)
             texto.setDefaultTextColor(QtGui.QColor(255, 255, 255, 255))
             tamano_particiones += tamano * 2
 
