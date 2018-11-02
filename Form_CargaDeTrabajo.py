@@ -205,8 +205,7 @@ class Ui_Form_CargaDeTrabajo(object):
         font.setBold(True)
         font.setWeight(75)
         self.spinBox_Tamano.setFont(font)
-        self.spinBox_Tamano.setStyleSheet("background-image: url();\n"
-"background-color: rgb(0, 0, 0, 0);\n"
+        self.spinBox_Tamano.setStyleSheet("background-color: rgb(0, 0, 0);\n"
 "color: rgb(255, 255, 255);")
         self.spinBox_Tamano.setAlignment(QtCore.Qt.AlignCenter)
         self.spinBox_Tamano.setMaximum(9999)
@@ -308,8 +307,7 @@ class Ui_Form_CargaDeTrabajo(object):
         font.setBold(True)
         font.setWeight(75)
         self.spinBox_NProcesos.setFont(font)
-        self.spinBox_NProcesos.setStyleSheet("background-color: rgb(0, 0, 0, 0);\n"
-"background-image: url();\n"
+        self.spinBox_NProcesos.setStyleSheet("background-color: rgb(0, 0, 0);\n"
 "color: rgb(255, 255, 255);")
         self.spinBox_NProcesos.setAlignment(QtCore.Qt.AlignCenter)
         self.spinBox_NProcesos.setMaximum(999)
@@ -481,8 +479,7 @@ class Ui_Form_CargaDeTrabajo(object):
         font.setBold(True)
         font.setWeight(75)
         self.spinBox_Quantum.setFont(font)
-        self.spinBox_Quantum.setStyleSheet("background-color: rgb(0, 0, 0, 0);\n"
-"background-image: url();\n"
+        self.spinBox_Quantum.setStyleSheet("background-color: rgb(0, 0, 0);\n"
 "color: rgb(255, 255, 255);")
         self.spinBox_Quantum.setAlignment(QtCore.Qt.AlignCenter)
         self.spinBox_Quantum.setMaximum(99)

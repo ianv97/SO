@@ -458,8 +458,7 @@ background-color: rgb(0, 0, 0, 0);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-image: url();
-background-color: rgb(0, 0, 0, 0);
+            <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);</string>
            </property>
            <property name="alignment">
@@ -648,8 +647,7 @@ background-color: rgb(0, 0, 0, 0);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(0, 0, 0, 0);
-background-image: url();
+            <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);</string>
            </property>
            <property name="alignment">
@@ -983,8 +981,7 @@ color: rgb(255, 255, 255);</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(0, 0, 0, 0);
-background-image: url();
+               <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);</string>
               </property>
               <property name="alignment">

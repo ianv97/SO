@@ -1,4 +1,4 @@
-matriz_procesos = [[0, 99999999, 99999999, 99999999, 99999999, 99999999]]
+matriz_procesos = []
 matriz_resultados = []
 cola_memoria = []
 cola_listos = []

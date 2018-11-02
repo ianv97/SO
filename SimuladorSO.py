@@ -186,6 +186,22 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         self.radioButton_WorstFit.setVisible(True)
 
     def correr_simulacion(self):
+        global matriz_procesos
+        matriz_procesos.clear()
+        matriz_procesos.append([0, 99999999, 99999999, 99999999, 99999999, 99999999])
+        global matriz_resultados
+        matriz_resultados.clear()
+        global cola_memoria
+        cola_memoria.clear()
+        global cola_listos
+        cola_listos.clear()
+        global cola_entrada
+        cola_entrada.clear()
+        global cola_salida
+        cola_salida.clear()
+        global lista_completados
+        lista_completados.clear()
+
         error_cpu = -1
         error_ta_vacio = -1
         error_ta_menor = -1
@@ -561,12 +577,11 @@ class VentanaResultado(Ui_Form_Resultado):
         self.navegador.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
 
 
-
         self.navegador.loadFinished.connect(self.carga_completa)
 
     def carga_completa(self):
+        ctrl.uiCDT.Form_CargaDeTrabajo.showMinimized()
         self.Form_Resultado.showFullScreen()
-        ctrl.uiCDT.Form_CargaDeTrabajo.close()
 
     def modo_ventana(self):
         if self.Form_Resultado.isFullScreen():
