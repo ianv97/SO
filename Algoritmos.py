@@ -7,6 +7,7 @@ cola_entrada = []
 cola_salida = []
 lista_completados = []
 particiones = []
+matriz_particiones = []
 
 def agregar_cola_memoria(tiempo, prox_proceso_agregar):
     while (prox_proceso_agregar < len(matriz_procesos)) and (matriz_procesos[prox_proceso_agregar][0] <= tiempo): # Agrego procesos con tiempo de arribo menor o igual al actual
@@ -236,6 +237,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             salida_aux = ''
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
+        matriz_particiones.append(particiones)
         tiempo += 1
 
 
@@ -416,6 +418,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
             salida_aux = ''
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
+        matriz_particiones.append(particiones)
         tiempo += 1
         # print(particiones)
         # print(cola_memoria)

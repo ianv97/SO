@@ -201,6 +201,8 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         cola_salida.clear()
         global lista_completados
         lista_completados.clear()
+        global matriz_particiones
+        matriz_particiones.clear()
 
         error_cpu = -1
         error_ta_vacio = -1
@@ -211,6 +213,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         ta_anterior = 0
         nprocesos = self.obtener_nprocesos()
         if self.radioButton_PartVariables.isChecked():
+            particiones.clear()
             t_memoria = self.spinBox_Tamano.value()
             particiones.append([t_memoria, 0])
         elif len(particiones) > 0:
@@ -503,12 +506,37 @@ class VentanaResultado(Ui_Form_Resultado):
         self.splitter.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
         self.splitter_2.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
         self.Form_Resultado.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
+        self.escena = QtWidgets.QGraphicsScene()
+        self.pincel = QtGui.QPen(QtCore.Qt.yellow)
+        self.pincel.setWidth(5)
+        self.graphicsView_2.setScene(self.escena)
+        self.escena_altura = self.escena.height()
+        self.escena_fuente = QtGui.QFont()
+        self.escena_fuente.setBold(True)
+        self.escena_fuente.setPixelSize(20)
         self.eventos()
 
     def eventos(self):
         self.pushButton_Cerrar.clicked.connect(self.Form_Resultado.close)
         self.pushButton_Minimizar.clicked.connect(self.Form_Resultado.showMinimized)
         self.pushButton_Ventana.clicked.connect(self.modo_ventana)
+        self.tableWidget_Procesos.doubleClicked.connect(self.graficar_particiones)
+
+    def graficar_particiones(self):
+        self.escena.clear()
+        n_proceso = self.tableWidget_Procesos.selectedIndexes()[0].row()
+        tamano_particiones = 0
+        global matriz_particiones
+        print(matriz_particiones)
+        print(n_proceso)
+        for i in matriz_particiones[n_proceso]:
+            tamano = i[0]
+            rectangulo = QtCore.QRectF(QtCore.QPointF(0, tamano_particiones), QtCore.QSizeF(300, tamano * 2))
+            self.escena.addRect(rectangulo, self.pincel)
+            texto = self.escena.addText(str(tamano) + ' KB' + ' - P' + str(i[1]), self.escena_fuente)
+            texto.setPos(95, tamano_particiones + tamano - 15)
+            texto.setDefaultTextColor(QtGui.QColor(255, 255, 255, 255))
+            tamano_particiones += tamano * 2
 
     def formatear_tiempos(self, cadena):
         for i in range(4-len(cadena)):
@@ -581,6 +609,7 @@ class VentanaResultado(Ui_Form_Resultado):
         self.navegador.loadFinished.connect(self.carga_completa)
 
     def carga_completa(self):
+        self.escena.clear()
         ctrl.uiCDT.Form_CargaDeTrabajo.showMinimized()
         self.Form_Resultado.showFullScreen()
 
