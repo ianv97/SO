@@ -195,7 +195,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
                 indice = 0
             else: # SJF
                 indice = cola_salida.index(min(cola_salida, key = lambda sal: sal[1]))
-            if (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice]) != entrada_aux): # Si el proceso en la cola de salida no es el que se agregó recién
+            if (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux): # Si el proceso en la cola de salida no es el que se agregó recién
                 salida = cola_salida[indice][0]
                 salida_aux = str(salida)
                 cola_salida.pop(indice)
@@ -210,9 +210,6 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
         tiempo += 1
-        # print(particiones)
-        # print(cola_memoria)
-        # print(matriz_procesos)
 
 
 def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
@@ -226,7 +223,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
     cpu_aux = ''
     entrada_aux = ''
     salida_aux = ''
-    while tiempo < 10:#len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
+    while len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
         e_bloqueado = ''
         c_listo = ''
         c_entrada = ''
@@ -245,9 +242,9 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         for i in range(len(cola_listos)):
             c_listo += str(cola_listos[i][0]) + ', '
         for i in range(len(cola_entrada)):
-            c_entrada += str(cola_entrada[i]) + ', '
+            c_entrada += str(cola_entrada[i][0]) + ', '
         for i in range(len(cola_salida)):
-            c_salida += str(cola_salida[i]) + ', '
+            c_salida += str(cola_salida[i][0]) + ', '
         if entrada != 0:
             e_bloqueado += str(entrada) + ', '
         if salida != 0:
@@ -259,7 +256,8 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if alg_procesos == 'SRTF':
                 indice = cola_listos.index(min(cola_listos, key=lambda listos: listos[2]))
                 if cola_listos[indice][2] < matriz_procesos[cpu][casilla_cpu]:  # Si hay un proceso en la cola de listos con tiempo restante menor al que se estaba ejecutando, le asigno la cpu
-                    cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
+                    if cpu != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
+                        cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
                     cpu = cola_listos[indice][0]
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[indice][1]
@@ -287,14 +285,15 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             cpu_aux = ''
 
         # Si hay procesos en la cola de entrada y el menor de la cola de entrada es menor que el actual, le asigno la entrada
-        if (len(cola_entrada) > 0):
+        if len(cola_entrada) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_entrada.index(min(cola_entrada, key=lambda ent: ent[1]))
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
                 if (cola_entrada[indice][1] < matriz_procesos[entrada][2]) and (str(cola_entrada[indice][0]) != cpu_aux):
-                    cola_entrada.append([entrada, matriz_procesos[entrada][2]])
+                    if entrada != 0: # Si la entrada no es el proceso 0, lo agrego nuevamente a la cola de entrada (proceso que no terminó)
+                        cola_entrada.append([entrada, matriz_procesos[entrada][2]])
                     entrada = cola_entrada[indice][0]
-                    entrada_aux = str(cpu)
+                    entrada_aux = str(entrada)
                     cola_entrada.pop(indice)
         if entrada != 0:  # Si la entrada está asignada a un proceso, descuento 1 al tiempo de entrada restante
             matriz_procesos[entrada][2] -= 1
@@ -310,14 +309,15 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             entrada_aux = ''
 
         # Si hay procesos en la cola de salida y el menor de la cola de salida es menor que el actual, le asigno la salida
-        if (len(cola_salida) > 0):
+        if len(cola_salida) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_salida.index(min(cola_salida, key=lambda sal: sal[1]))
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
                 if cola_salida[indice][1] < matriz_procesos[salida][4] and (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux):
-                    cola_salida.append([salida, matriz_procesos[salida][2]])
-                    entrada = cola_salida[indice][0]
-                    entrada_aux = str(cpu)
+                    if salida != 0: # Si la salida no es el proceso 0, lo agrego nuevamente a la cola de salida (proceso que no terminó)
+                        cola_salida.append([salida, matriz_procesos[salida][2]])
+                    salida = cola_salida[indice][0]
+                    salida_aux = str(salida)
                     cola_salida.pop(indice)
         if salida != 0:  # Si la salida está asignada a un proceso, descuento 1 al tiempo de salida restante
             matriz_procesos[salida][4] -= 1
@@ -331,5 +331,4 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         tiempo += 1
         # print(particiones)
         # print(cola_memoria)
-        print(matriz_procesos)
-        print("CPU:"+str(cpu)+" Entrada:"+str(entrada)+" Salida:"+str(salida))
+        # print(matriz_procesos)
