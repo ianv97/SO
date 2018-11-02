@@ -501,6 +501,7 @@ class VentanaResultado(Ui_Form_Resultado):
         self.setupUi(self.Form_Resultado)
         self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.splitter.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
+        self.splitter_2.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
         self.Form_Resultado.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
         self.eventos()
 
