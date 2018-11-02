@@ -1,3 +1,4 @@
+import copy
 matriz_procesos = []
 matriz_resultados = []
 cola_memoria = []
@@ -166,11 +167,21 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
 
         # Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero y lo saco de la cola de entrada
         if (entrada == 0) and (len(cola_entrada) > 0):
+            hay_procesos = True
             if alg_procesos == 'FCFS':
                 indice = 0
             else: # SJF
                 indice = cola_entrada.index(min(cola_entrada, key = lambda ent: ent[1]))
-            if str(cola_entrada[indice][0]) != cpu_aux: # Si el proceso en la cola de entrada no es el que se agregó recién
+
+                if str(cola_entrada[indice][0]) == cpu_aux:  # Si el índice corresponde al proceso que recién terminó cpu, busco otro índice
+                    cola_entrada_aux = copy.deepcopy(cola_entrada)
+                    cola_entrada_aux.pop(indice)
+                    if len(cola_entrada_aux) > 0:
+                        indice = cola_entrada.index(min(cola_entrada_aux, key=lambda ent: ent[1]))
+                    else:
+                        hay_procesos = False
+
+            if hay_procesos and (str(cola_entrada[indice][0]) != cpu_aux): # Si el proceso en la cola de entrada no es el que se agregó recién
                 entrada = cola_entrada[indice][0]
                 entrada_aux = str(entrada)
                 cola_entrada.pop(indice)
@@ -191,11 +202,27 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
 
         # Si la salida está libre y hay procesos en la cola de salida, le asigno la salida al primero y lo saco de la cola de salida
         if (salida == 0) and (len(cola_salida) > 0):
+            hay_procesos = True
             if alg_procesos == 'FCFS':
                 indice = 0
             else: # SJF
                 indice = cola_salida.index(min(cola_salida, key = lambda sal: sal[1]))
-            if (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux): # Si el proceso en la cola de salida no es el que se agregó recién
+
+                if (str(cola_salida[indice][0]) == cpu_aux) or str(cola_salida[indice][0]) == entrada_aux:  # Si el índice corresponde al proceso que recién terminó cpu o entrada, busco otro índice
+                    cola_salida_aux = copy.deepcopy(cola_salida)
+                    cola_salida_aux.pop(indice)
+                    if len(cola_salida_aux) > 0:
+                        indice = cola_salida.index(min(cola_salida_aux, key=lambda ent: ent[1]))
+                        if (str(cola_salida[indice][0]) == cpu_aux) or str(cola_salida[indice][0]) == entrada_aux:  # Si el índice corresponde al proceso que recién terminó cpu o entrada, busco otro índice
+                            cola_salida_aux.pop(indice)
+                            if len(cola_salida_aux) > 0:
+                                indice = cola_salida.index(min(cola_salida_aux, key=lambda ent: ent[1]))
+                            else:
+                                hay_procesos = False
+                    else:
+                        hay_procesos = False
+
+            if hay_procesos and (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux): # Si el proceso en la cola de salida no es el que se agregó recién
                 salida = cola_salida[indice][0]
                 salida_aux = str(salida)
                 cola_salida.pop(indice)
@@ -212,7 +239,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         tiempo += 1
 
 
-def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
+def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
     tiempo = 0
     prox_proceso_agregar = 1
     cpu = 0
@@ -223,6 +250,9 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
     cpu_aux = ''
     entrada_aux = ''
     salida_aux = ''
+    quantum_cpu = 0
+    quantum_entrada = 0
+    quantum_salida = 0
     while len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
         e_bloqueado = ''
         c_listo = ''
@@ -251,7 +281,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             e_bloqueado += str(salida) + ', '
         e_bloqueado += c_entrada + c_salida
 
-        # Si hay procesos en la cola de listos y el menor de la cola de listos es menor que el actual, le asigno la cpu
+
         if len(cola_listos) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_listos.index(min(cola_listos, key=lambda listos: listos[2]))
@@ -262,18 +292,29 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[indice][1]
                     cola_listos.pop(indice)
-
+            elif alg_procesos == 'RR':
+                if quantum_cpu <= 0:  # Si se terminó el quantum
+                    if cpu != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
+                        cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
+                    cpu = cola_listos[0][0]
+                    quantum_cpu = quantum
+                    cpu_aux = str(cpu)
+                    casilla_cpu = cola_listos[0][1]
+                    cola_listos.pop(0)
         if cpu != 0:  # Si la cpu está asignada a un proceso, descuento 1 al tiempo de cpu restante
             matriz_procesos[cpu][casilla_cpu] -= 1
+            quantum_cpu -= 1
             if matriz_procesos[cpu][casilla_cpu] == 0:  # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append([cpu, matriz_procesos[cpu][2]])
                     cpu = 0
+                    quantum_cpu = 0
                 elif matriz_procesos[cpu][3] > 0:
                     casilla_cpu = 3
                 elif matriz_procesos[cpu][4] > 0:
                     cola_salida.append([cpu, matriz_procesos[cpu][4]])
                     cpu = 0
+                    quantum_cpu = 0
                 elif matriz_procesos[cpu][5] > 0:
                     casilla_cpu = 5
                 else:  # Si tod0 está en 0 lo agrego a la lista de procesos completados y libero la memoria
@@ -281,22 +322,42 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
                     liberar_particion(cpu)
                     memoria_llena = False
                     cpu = 0
+                    quantum_cpu = 0
         else:
             cpu_aux = ''
 
-        # Si hay procesos en la cola de entrada y el menor de la cola de entrada es menor que el actual, le asigno la entrada
+
         if len(cola_entrada) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_entrada.index(min(cola_entrada, key=lambda ent: ent[1]))
+
+                hay_procesos = True
+                if str(cola_entrada[indice][0]) == cpu_aux:  # Si el índice corresponde al proceso que recién terminó cpu, busco otro índice
+                    cola_entrada_aux = copy.deepcopy(cola_entrada)
+                    cola_entrada_aux.pop(indice)
+                    if len(cola_entrada_aux) > 0:
+                        indice = cola_entrada.index(min(cola_entrada_aux, key=lambda ent: ent[1]))
+                    else:
+                        hay_procesos = False
+
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
-                if (cola_entrada[indice][1] < matriz_procesos[entrada][2]) and (str(cola_entrada[indice][0]) != cpu_aux):
+                if hay_procesos and (cola_entrada[indice][1] < matriz_procesos[entrada][2]):
                     if entrada != 0: # Si la entrada no es el proceso 0, lo agrego nuevamente a la cola de entrada (proceso que no terminó)
                         cola_entrada.append([entrada, matriz_procesos[entrada][2]])
                     entrada = cola_entrada[indice][0]
                     entrada_aux = str(entrada)
                     cola_entrada.pop(indice)
+
+            elif alg_procesos == 'RR' and (quantum_entrada <= 0) and (str(cola_entrada[0][0]) != cpu_aux):
+                if entrada != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
+                    cola_entrada.append([entrada, matriz_procesos[entrada][2]])
+                entrada = cola_entrada[0][0]
+                quantum_entrada = quantum
+                entrada_aux = str(entrada)
+                cola_entrada.pop(0)
         if entrada != 0:  # Si la entrada está asignada a un proceso, descuento 1 al tiempo de entrada restante
             matriz_procesos[entrada][2] -= 1
+            quantum_entrada -= 1
             if matriz_procesos[entrada][2] == 0:  # Si el proceso no tiene mas tiempo de entrada, lo agrego a otra cola y pongo en 0 la entrada
                 if matriz_procesos[entrada][3] > 0:
                     cola_listos.append([entrada, 3, matriz_procesos[entrada][3]])
@@ -305,25 +366,52 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos):
                 elif matriz_procesos[entrada][5] > 0:
                     cola_listos.append([entrada, 5, matriz_procesos[entrada][5]])
                 entrada = 0
+                quantum_entrada = 0
         else:
             entrada_aux = ''
 
-        # Si hay procesos en la cola de salida y el menor de la cola de salida es menor que el actual, le asigno la salida
+
         if len(cola_salida) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_salida.index(min(cola_salida, key=lambda sal: sal[1]))
+
+                hay_procesos = True
+                if (str(cola_salida[indice][0]) == cpu_aux) or str(cola_salida[indice][0]) == entrada_aux:  # Si el índice corresponde al proceso que recién terminó cpu o entrada, busco otro índice
+                    cola_salida_aux = copy.deepcopy(cola_salida)
+                    cola_salida_aux.pop(indice)
+                    if len(cola_salida_aux) > 0:
+                        indice = cola_salida.index(min(cola_salida_aux, key=lambda ent: ent[1]))
+                        if (str(cola_salida[indice][0]) == cpu_aux) or str(cola_salida[indice][0]) == entrada_aux:  # Si el índice corresponde al proceso que recién terminó cpu o entrada, busco otro índice
+                            cola_salida_aux.pop(indice)
+                            if len(cola_salida_aux) > 0:
+                                indice = cola_salida.index(min(cola_salida_aux, key=lambda ent: ent[1]))
+                            else:
+                                hay_procesos = False
+                    else:
+                        hay_procesos = False
+
                 # Si hay un proceso en la cola de entrada con tiempo restante menor al que se estaba ejecutando, le asigno la entrada
-                if cola_salida[indice][1] < matriz_procesos[salida][4] and (str(cola_salida[indice][0]) != cpu_aux) and (str(cola_salida[indice][0]) != entrada_aux):
+                if hay_procesos and (cola_salida[indice][1] < matriz_procesos[salida][4]):
                     if salida != 0: # Si la salida no es el proceso 0, lo agrego nuevamente a la cola de salida (proceso que no terminó)
                         cola_salida.append([salida, matriz_procesos[salida][2]])
                     salida = cola_salida[indice][0]
                     salida_aux = str(salida)
                     cola_salida.pop(indice)
+
+            elif alg_procesos == 'RR' and (quantum_salida <= 0) and (str(cola_salida[0][0]) != cpu_aux) and (str(cola_salida[0][0]) != entrada_aux):
+                if salida != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
+                    cola_salida.append([salida, matriz_procesos[salida][2]])
+                salida = cola_salida[0][0]
+                quantum_salida = quantum
+                salida_aux = str(salida)
+                cola_salida.pop(0)
         if salida != 0:  # Si la salida está asignada a un proceso, descuento 1 al tiempo de salida restante
             matriz_procesos[salida][4] -= 1
+            quantum_salida -= 1
             if matriz_procesos[salida][4] == 0:  # Si el proceso no tiene mas tiempo de salida, lo agrego a la cola de cpu(5) y pongo en 0 la salida
                 cola_listos.append([salida, 5, matriz_procesos[salida][5]])
                 salida = 0
+                quantum_salida = 0
         else:
             salida_aux = ''
 

@@ -292,7 +292,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     elif ctrl.uiCDT.radioButton_SRTF.isChecked():
                         apropiativos(part, alg_part, 'SRTF')
                     elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
-                        apropiativos(part, alg_part, 'RR')
+                        apropiativos(part, alg_part, 'RR', self.spinBox_Quantum.value())
                     ctrl.ventana_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
@@ -448,7 +448,7 @@ class VentanaGenerar(Ui_Dialog_Generar):
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 5).setText(str(aleatorio))
                     memoria += aleatorio
                     # Memoria
-                    ctrl.uiCDT.tableWidget_Procesos.item(i,6).setText(str(memoria))
+                    ctrl.uiCDT.tableWidget_Procesos.item(i,6).setText(str(memoria * 3))
         self.Dialog_Generar.close()
 
 
