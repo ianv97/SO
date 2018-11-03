@@ -143,6 +143,8 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             e_bloqueado += str(salida) + ', '
         e_bloqueado += c_entrada + c_salida
 
+        matriz_particiones.append(copy.deepcopy(particiones))
+
         # Si la cpu está libre y hay procesos en la cola de listos, le asigno la cpu al primero y lo saco de la cola de listos
         if (cpu == 0) and (len(cola_listos) > 0):
             if alg_procesos == 'FCFS':
@@ -257,7 +259,6 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             salida_aux = ''
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
-        matriz_particiones.append(copy.deepcopy(particiones))
         tiempo += 1
 
     estadisticas[0] = round(estadisticas[0] / (len(matriz_procesos)-1), 2)
@@ -308,6 +309,8 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
         if salida != 0:
             e_bloqueado += str(salida) + ', '
         e_bloqueado += c_entrada + c_salida
+
+        matriz_particiones.append(copy.deepcopy(particiones))
 
         if len(cola_listos) > 0:
             if alg_procesos == 'SRTF':
@@ -455,7 +458,6 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
             salida_aux = ''
 
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
-        matriz_particiones.append(copy.deepcopy(particiones))
         tiempo += 1
 
     estadisticas[0] = round(estadisticas[0] / (len(matriz_procesos) - 1), 2)

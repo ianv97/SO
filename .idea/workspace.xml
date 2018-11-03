@@ -115,7 +115,7 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
+          <entry key="project.closed" value="27" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="4" />
           <entry key="project.open.time.13" value="3" />
@@ -123,30 +123,30 @@
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="9" />
-          <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="25" />
+          <entry key="project.open.time.3" value="11" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.opened" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="16897" />
+          <entry key="py" value="17286" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="16794" />
+          <entry key="Python" value="17183" />
           <entry key="Scratch" value="103" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="42" />
+          <entry key="py" value="44" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="40" />
+          <entry key="Python" value="42" />
           <entry key="Scratch" value="2" />
         </counts>
       </usages-collector>
@@ -189,40 +189,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="572" column="119" lean-forward="true" selection-start-line="572" selection-start-column="119" selection-end-line="572" selection-end-column="119" />
+            <state relative-caret-position="3803">
+              <caret line="613" column="75" lean-forward="true" selection-start-line="613" selection-start-column="75" selection-end-line="613" selection-end-column="75" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
                 <marker date="1541280332908" expanded="true" signature="24626:24668" ph="..." />
                 <marker date="1541280332908" expanded="true" signature="29539:30473" ph="..." />
                 <marker date="1541280332908" expanded="true" signature="30487:30492" ph="..." />
-                <marker date="1541280332908" expanded="true" signature="32569:32683" ph="..." />
-                <marker date="1541280332908" expanded="true" signature="32714:32775" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Algoritmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="247" column="40" selection-start-line="247" selection-start-column="40" selection-end-line="247" selection-end-column="40" />
-              <folding>
-                <marker date="1541261751411" expanded="true" signature="503:607" ph="..." />
-              </folding>
+            <state relative-caret-position="449">
+              <caret line="143" column="43" lean-forward="true" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -285,15 +271,16 @@
         <option value="$PROJECT_DIR$/Initial.py" />
         <option value="$PROJECT_DIR$/ordenar.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_10.py" />
-        <option value="$PROJECT_DIR$/Algoritmos.py" />
         <option value="$PROJECT_DIR$/Dialog_Estadisticas.py" />
         <option value="$PROJECT_DIR$/Form_Resultado_bkp.py" />
         <option value="$PROJECT_DIR$/Form_Resultado.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/Algoritmos.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1386" />
@@ -498,6 +485,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24925596" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -545,30 +533,12 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Algoritmos.py</url>
-          <line>180</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Desktop/scratch.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
     <entry file="file://$PROJECT_DIR$/Form_Memoria.py" />
     <entry file="file://$PROJECT_DIR$/SimuladorSO2.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_9.py" />
-    <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="501" column="22" selection-start-line="501" selection-start-column="22" selection-end-line="501" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/PFFf.py" />
     <entry file="file://$PROJECT_DIR$/Initial.py" />
     <entry file="file://$PROJECT_DIR$/Convertir UI a PY.txt">
@@ -591,23 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Algoritmos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="247" column="40" selection-start-line="247" selection-start-column="40" selection-end-line="247" selection-end-column="40" />
-          <folding>
-            <marker date="1541261751411" expanded="true" signature="503:607" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Form_Resultado_bkp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -615,18 +568,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="501" column="22" selection-start-line="501" selection-start-column="22" selection-end-line="501" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="572" column="119" lean-forward="true" selection-start-line="572" selection-start-column="119" selection-end-line="572" selection-end-column="119" />
+        <state relative-caret-position="3803">
+          <caret line="613" column="75" lean-forward="true" selection-start-line="613" selection-start-column="75" selection-end-line="613" selection-end-column="75" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
             <marker date="1541280332908" expanded="true" signature="24626:24668" ph="..." />
             <marker date="1541280332908" expanded="true" signature="29539:30473" ph="..." />
             <marker date="1541280332908" expanded="true" signature="30487:30492" ph="..." />
-            <marker date="1541280332908" expanded="true" signature="32569:32683" ph="..." />
-            <marker date="1541280332908" expanded="true" signature="32714:32775" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Algoritmos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="143" column="43" lean-forward="true" selection-start-line="143" selection-start-column="43" selection-end-line="143" selection-end-column="43" />
         </state>
       </provider>
     </entry>
