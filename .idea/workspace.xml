@@ -115,9 +115,9 @@
     <session id="1204855648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="24" />
+          <entry key="project.closed" value="25" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.12" value="3" />
+          <entry key="project.open.time.12" value="4" />
           <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
@@ -125,28 +125,28 @@
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="9" />
           <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="24" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="14254" />
+          <entry key="py" value="16897" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="14151" />
+          <entry key="Python" value="16794" />
           <entry key="Scratch" value="103" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="32" />
+          <entry key="py" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="30" />
+          <entry key="Python" value="40" />
           <entry key="Scratch" value="2" />
         </counts>
       </usages-collector>
@@ -192,11 +192,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="431" column="44" lean-forward="true" selection-start-line="431" selection-start-column="44" selection-end-line="431" selection-end-column="44" />
+            <state relative-caret-position="288">
+              <caret line="572" column="119" lean-forward="true" selection-start-line="572" selection-start-column="119" selection-end-line="572" selection-end-column="119" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <marker date="1541280332908" expanded="true" signature="24626:24668" ph="..." />
+                <marker date="1541280332908" expanded="true" signature="29539:30473" ph="..." />
+                <marker date="1541280332908" expanded="true" signature="30487:30492" ph="..." />
+                <marker date="1541280332908" expanded="true" signature="32569:32683" ph="..." />
+                <marker date="1541280332908" expanded="true" signature="32714:32775" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -204,8 +218,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Algoritmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="241" selection-start-line="241" selection-end-line="241" />
+            <state relative-caret-position="213">
+              <caret line="247" column="40" selection-start-line="247" selection-start-column="40" selection-end-line="247" selection-end-column="40" />
+              <folding>
+                <marker date="1541261751411" expanded="true" signature="503:607" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -221,20 +238,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>header</find>
-      <find>escena</find>
-      <find>particione</find>
-      <find>matriz</find>
-      <find>cola_list</find>
-      <find>-1</find>
-      <find>cola_entrada</find>
-      <find>memoria</find>
-      <find>t_me</find>
-      <find>t_</find>
-      <find>reinic</find>
-      <find>reini</find>
-      <find>pfijas</find>
-      <find>graficar_particiones_v</find>
       <find>particiones.ap</find>
       <find>rein</find>
       <find>print</find>
@@ -242,7 +245,6 @@
       <find>fcfs</find>
       <find>srtf</find>
       <find>entrada_a</find>
-      <find>gra</find>
       <find>nave</find>
       <find>navegad</find>
       <find>graficar_particiones</find>
@@ -251,6 +253,21 @@
       <find>matriz_parti</find>
       <find>naveg</find>
       <find>generar</find>
+      <find>estad</find>
+      <find>estadisticas[2]</find>
+      <find>tool</find>
+      <find>flag</find>
+      <find>label_tespera</find>
+      <find>ventana_ge</find>
+      <find>ventana_res</find>
+      <find>styles</find>
+      <find>navega</find>
+      <find>gra</find>
+      <find>resultado</find>
+      <find>m</find>
+      <find>editad</find>
+      <find>grap</find>
+      <find>nav</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -269,13 +286,16 @@
         <option value="$PROJECT_DIR$/ordenar.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_10.py" />
         <option value="$PROJECT_DIR$/Algoritmos.py" />
+        <option value="$PROJECT_DIR$/Dialog_Estadisticas.py" />
+        <option value="$PROJECT_DIR$/Form_Resultado_bkp.py" />
         <option value="$PROJECT_DIR$/Form_Resultado.py" />
         <option value="$PROJECT_DIR$/SimuladorSO.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="14" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
   </component>
@@ -340,7 +360,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.SimuladorSO">
-    <configuration name="Algoritmos" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Dialog_Estadisticas" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SO" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -352,7 +372,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algoritmos.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Dialog_Estadisticas.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -448,17 +468,17 @@
     <list>
       <item itemvalue="Python.SimuladorSO" />
       <item itemvalue="Python.Form_Resultado" />
-      <item itemvalue="Python.Algoritmos" />
       <item itemvalue="Python.scratch_10" />
       <item itemvalue="Python.Dialog_Generar" />
+      <item itemvalue="Python.Dialog_Estadisticas" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.SimuladorSO" />
+        <item itemvalue="Python.Dialog_Estadisticas" />
         <item itemvalue="Python.Dialog_Generar" />
         <item itemvalue="Python.Form_Resultado" />
         <item itemvalue="Python.scratch_10" />
-        <item itemvalue="Python.Algoritmos" />
       </list>
     </recent_temporary>
   </component>
@@ -525,6 +545,17 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Algoritmos.py</url>
+          <line>180</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Desktop/scratch.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
@@ -543,36 +574,9 @@
     <entry file="file://$PROJECT_DIR$/Convertir UI a PY.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ordenar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="136" column="16" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ordenar.py" />
     <entry file="file://$PROJECT_DIR$/Form_CargaDeTrabajo_bkp.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_10.py" />
-    <entry file="file://$PROJECT_DIR$/Form_Resultado_bkp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="53" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Algoritmos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="241" selection-start-line="241" selection-end-line="241" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Dialog_Generar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -580,12 +584,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Dialog_Estadisticas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Algoritmos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="247" column="40" selection-start-line="247" selection-start-column="40" selection-end-line="247" selection-end-column="40" />
+          <folding>
+            <marker date="1541261751411" expanded="true" signature="503:607" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Form_Resultado.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Form_Resultado_bkp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="56" column="8" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="58" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SimuladorSO.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="431" column="44" lean-forward="true" selection-start-line="431" selection-start-column="44" selection-end-line="431" selection-end-column="44" />
+        <state relative-caret-position="288">
+          <caret line="572" column="119" lean-forward="true" selection-start-line="572" selection-start-column="119" selection-end-line="572" selection-end-column="119" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <marker date="1541280332908" expanded="true" signature="24626:24668" ph="..." />
+            <marker date="1541280332908" expanded="true" signature="29539:30473" ph="..." />
+            <marker date="1541280332908" expanded="true" signature="30487:30492" ph="..." />
+            <marker date="1541280332908" expanded="true" signature="32569:32683" ph="..." />
+            <marker date="1541280332908" expanded="true" signature="32714:32775" ph="..." />
           </folding>
         </state>
       </provider>

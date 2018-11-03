@@ -6,57 +6,64 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets, QtWebEngineWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtWebEngineWidgets # EDITADO
 
 class Ui_Form_Resultado(object):
     def setupUi(self, Form_Resultado):
         Form_Resultado.setObjectName("Form_Resultado")
         Form_Resultado.resize(800, 600)
-        Form_Resultado.setStyleSheet("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("Recursos/Logo.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form_Resultado.setWindowIcon(icon)
+        Form_Resultado.setStyleSheet("background-image:url(Recursos/Fondo.jpg);")
         self.gridLayout = QtWidgets.QGridLayout(Form_Resultado)
         self.gridLayout.setObjectName("gridLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton = QtWidgets.QPushButton(Form_Resultado)
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton.setStyleSheet("background-image:url();\n"
-"background-color: rgb(0, 0, 0);\n"
+        self.pushButton_estadisticas = QtWidgets.QPushButton(Form_Resultado)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_estadisticas.setFont(font)
+        self.pushButton_estadisticas.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_estadisticas.setStyleSheet("background-image:url();\n"
+"background-color: rgb(0, 123, 255, 150);\n"
 "color: rgb(255, 255, 255);")
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.pushButton_estadisticas.setObjectName("pushButton_estadisticas")
+        self.horizontalLayout.addWidget(self.pushButton_estadisticas)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButton_Minimizar = QtWidgets.QPushButton(Form_Resultado)
         self.pushButton_Minimizar.setStyleSheet("background-image: url();")
         self.pushButton_Minimizar.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Recursos/Minimizar.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Minimizar.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("Recursos/Minimizar.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_Minimizar.setIcon(icon1)
         self.pushButton_Minimizar.setObjectName("pushButton_Minimizar")
         self.horizontalLayout.addWidget(self.pushButton_Minimizar)
         self.pushButton_Ventana = QtWidgets.QPushButton(Form_Resultado)
         self.pushButton_Ventana.setStyleSheet("background-image: url();")
         self.pushButton_Ventana.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("Recursos/Ventana.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Ventana.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("Recursos/Ventana.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_Ventana.setIcon(icon2)
         self.pushButton_Ventana.setObjectName("pushButton_Ventana")
         self.horizontalLayout.addWidget(self.pushButton_Ventana)
         self.pushButton_Cerrar = QtWidgets.QPushButton(Form_Resultado)
         self.pushButton_Cerrar.setStyleSheet("background-image: url();")
         self.pushButton_Cerrar.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("Recursos/Cerrar.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Cerrar.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("Recursos/Cerrar.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_Cerrar.setIcon(icon3)
         self.pushButton_Cerrar.setObjectName("pushButton_Cerrar")
         self.horizontalLayout.addWidget(self.pushButton_Cerrar)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.splitter_2 = QtWidgets.QSplitter(Form_Resultado)
         self.splitter_2.setOrientation(QtCore.Qt.Vertical)
         self.splitter_2.setObjectName("splitter_2")
-        self.navegador = QtWebEngineWidgets.QWebEngineView(self.splitter_2)
-        self.navegador.setStyleSheet("background-image: url();")
-        self.navegador.setObjectName("graphicsView")
+        self.navegador = QtWebEngineWidgets.QWebEngineView(self.splitter_2) # EDITADO
+        self.navegador.setStyleSheet("background-image: url();") # EDITADO
+        self.navegador.setObjectName("graphicsView") # EDITADO
         self.splitter = QtWidgets.QSplitter(self.splitter_2)
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
         self.splitter.setObjectName("splitter")
@@ -153,7 +160,7 @@ class Ui_Form_Resultado(object):
     def retranslateUi(self, Form_Resultado):
         _translate = QtCore.QCoreApplication.translate
         Form_Resultado.setWindowTitle(_translate("Form_Resultado", "Simulador de Sistema Operativo"))
-        self.pushButton.setText(_translate("Form_Resultado", "Estadísticas"))
+        self.pushButton_estadisticas.setText(_translate("Form_Resultado", "Estadísticas"))
         item = self.tableWidget_Procesos.horizontalHeaderItem(0)
         item.setText(_translate("Form_Resultado", "Tiempo"))
         item = self.tableWidget_Procesos.horizontalHeaderItem(1)

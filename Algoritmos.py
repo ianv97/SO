@@ -8,6 +8,15 @@ cola_salida = []
 lista_completados = []
 particiones = []
 matriz_particiones = []
+estadisticas = [0, 0, 0, 0] # [Tiempo de espera, Tiempo de respuesta, Tiempo de retorno, % Uso de CPU]
+t_respuesta = []
+
+
+def restar_tiempos(): # Resta los tiempos de arribo y de irrupción de todos los procesos para calcular las estadísticas
+    for i in range(1, len(matriz_procesos)):
+        for j in range(6):
+            estadisticas[0] -= matriz_procesos[i][j]
+        estadisticas[2] -= matriz_procesos[i][0]
 
 def agregar_cola_memoria(tiempo, prox_proceso_agregar):
     while (prox_proceso_agregar < len(matriz_procesos)) and (matriz_procesos[prox_proceso_agregar][0] <= tiempo): # Agrego procesos con tiempo de arribo menor o igual al actual
@@ -104,6 +113,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
     cpu_aux = ''
     entrada_aux = ''
     salida_aux = ''
+    restar_tiempos()
     while len(lista_completados) != len(matriz_procesos)-1: # Bucle principal: mientras no se terminen todos los procesos
         # Agrego procesos a la cola de memoria
         prox_proceso_agregar = agregar_cola_memoria(tiempo, prox_proceso_agregar)
@@ -121,12 +131,12 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         c_listo = ''
         c_entrada = ''
         c_salida = ''
-        for i in range(len(cola_listos)):
-            c_listo += str(cola_listos[i][0]) + ', '
-        for i in range(len(cola_entrada)):
-            c_entrada += str(cola_entrada[i][0]) + ', '
-        for i in range(len(cola_salida)):
-            c_salida += str(cola_salida[i][0]) + ', '
+        for i in cola_listos:
+            c_listo += str(i[0]) + ', '
+        for i in cola_entrada:
+            c_entrada += str(i[0]) + ', '
+        for i in cola_salida:
+            c_salida += str(i[0]) + ', '
         if entrada != 0:
             e_bloqueado += str(entrada) + ', '
         if salida != 0:
@@ -143,9 +153,13 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             cpu_aux = str(cpu)
             casilla_cpu = cola_listos[indice][1]
             cola_listos.pop(indice)
+            # Tiempo de respuesta
+            if cpu in t_respuesta:
+                t_respuesta.pop(t_respuesta.index(cpu))
         # Si la cpu está asignada a un proceso, descuento 1 al tiempo de cpu restante
         if cpu != 0:
             matriz_procesos[cpu][casilla_cpu] -= 1
+            estadisticas[3] += 1 # % Uso de cpu
             # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
             if matriz_procesos[cpu][casilla_cpu] == 0:
                 if matriz_procesos[cpu][2] > 0:
@@ -162,9 +176,14 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
                     lista_completados.append(cpu)
                     liberar_particion(cpu)
                     memoria_llena = False
+                    estadisticas[0] += tiempo + 1
+                    estadisticas[2] += tiempo + 1
                     cpu = 0
         else:
             cpu_aux = ''
+
+        # Tiempo de respuesta
+        estadisticas[1] += len(t_respuesta)
 
         # Si la entrada está libre y hay procesos en la cola de entrada, le asigno la entrada al primero y lo saco de la cola de entrada
         if (entrada == 0) and (len(cola_entrada) > 0):
@@ -193,6 +212,7 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if matriz_procesos[entrada][2] == 0:
                 if matriz_procesos[entrada][3] > 0:
                     cola_listos.append([entrada, 3, matriz_procesos[entrada][3]])
+                    t_respuesta.append(entrada) #Tiempo de respuesta
                 elif matriz_procesos[entrada][4] > 0:
                     cola_salida.append([entrada, matriz_procesos[entrada][4]])
                 elif matriz_procesos[entrada][5] > 0:
@@ -240,6 +260,11 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
         matriz_particiones.append(copy.deepcopy(particiones))
         tiempo += 1
 
+    estadisticas[0] = round(estadisticas[0] / (len(matriz_procesos)-1), 2)
+    estadisticas[1] = round(estadisticas[1] / (len(matriz_procesos)-1), 2)
+    estadisticas[2] = round(estadisticas[2] / (len(matriz_procesos)-1), 2)
+    estadisticas[3] = round(estadisticas[3] * 100 / tiempo, 2)
+
 
 def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
     tiempo = 0
@@ -255,6 +280,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
     quantum_cpu = 0
     quantum_entrada = 0
     quantum_salida = 0
+    restar_tiempos()
     while len(lista_completados) != len(matriz_procesos) - 1:  # Bucle principal: mientras no se terminen todos los procesos
         e_bloqueado = ''
         c_listo = ''
@@ -283,7 +309,6 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
             e_bloqueado += str(salida) + ', '
         e_bloqueado += c_entrada + c_salida
 
-
         if len(cola_listos) > 0:
             if alg_procesos == 'SRTF':
                 indice = cola_listos.index(min(cola_listos, key=lambda listos: listos[2]))
@@ -294,6 +319,9 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[indice][1]
                     cola_listos.pop(indice)
+                    # Tiempo de respuesta
+                    if cpu in t_respuesta:
+                        t_respuesta.pop(t_respuesta.index(cpu))
             elif alg_procesos == 'RR':
                 if quantum_cpu <= 0:  # Si se terminó el quantum
                     if cpu != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
@@ -303,9 +331,13 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[0][1]
                     cola_listos.pop(0)
+                    # Tiempo de respuesta
+                    if cpu in t_respuesta:
+                        t_respuesta.pop(t_respuesta.index(cpu))
         if cpu != 0:  # Si la cpu está asignada a un proceso, descuento 1 al tiempo de cpu restante
             matriz_procesos[cpu][casilla_cpu] -= 1
             quantum_cpu -= 1
+            estadisticas[3] += 1  # % Uso de cpu
             if matriz_procesos[cpu][casilla_cpu] == 0:  # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append([cpu, matriz_procesos[cpu][2]])
@@ -323,11 +355,15 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
                     lista_completados.append(cpu)
                     liberar_particion(cpu)
                     memoria_llena = False
+                    estadisticas[0] += tiempo + 1
+                    estadisticas[2] += tiempo + 1
                     cpu = 0
                     quantum_cpu = 0
         else:
             cpu_aux = ''
 
+        # Tiempo de respuesta
+        estadisticas[1] += len(t_respuesta)
 
         if len(cola_entrada) > 0:
             if alg_procesos == 'SRTF':
@@ -363,6 +399,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
             if matriz_procesos[entrada][2] == 0:  # Si el proceso no tiene mas tiempo de entrada, lo agrego a otra cola y pongo en 0 la entrada
                 if matriz_procesos[entrada][3] > 0:
                     cola_listos.append([entrada, 3, matriz_procesos[entrada][3]])
+                    t_respuesta.append(entrada)  # Tiempo de respuesta
                 elif matriz_procesos[entrada][4] > 0:
                     cola_salida.append([entrada, matriz_procesos[entrada][4]])
                 elif matriz_procesos[entrada][5] > 0:
@@ -420,6 +457,8 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
         matriz_resultados.append([str(tiempo), c_listo[:-2], e_bloqueado[:-2], str(cpu_aux), c_listo[:-2], c_entrada[:-2], c_salida[:-2], cpu_aux, entrada_aux, salida_aux])
         matriz_particiones.append(copy.deepcopy(particiones))
         tiempo += 1
-        # print(particiones)
-        # print(cola_memoria)
-        # print(matriz_procesos)
+
+    estadisticas[0] = round(estadisticas[0] / (len(matriz_procesos) - 1), 2)
+    estadisticas[1] = round(estadisticas[1] / (len(matriz_procesos) - 1), 2)
+    estadisticas[2] = round(estadisticas[2] / (len(matriz_procesos) - 1), 2)
+    estadisticas[3] = round(estadisticas[3] * 100 / tiempo, 2)

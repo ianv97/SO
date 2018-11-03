@@ -13,20 +13,30 @@
   <property name="windowTitle">
    <string>Simulador de Sistema Operativo</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Recursos/Logo.svg</normaloff>Recursos/Logo.svg</iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-image:url(Recursos/Fondo.jpg);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_estadisticas">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
         <string notr="true">background-image:url();
-background-color: rgb(0, 0, 0);
+background-color: rgb(0, 123, 255, 150);
 color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">

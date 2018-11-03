@@ -13,8 +13,15 @@
   <property name="windowTitle">
    <string>Error</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Recursos/Logo.svg</normaloff>Recursos/Logo.svg</iconset>
+  </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(57, 57, 57);</string>
+   <string notr="true">background-image:url(Recursos/Fondo.jpg)</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <widget class="QPushButton" name="pushButton_Aceptar">
    <property name="geometry">
@@ -31,15 +38,15 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -49,24 +56,24 @@
       <colorrole role="Text">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="ButtonText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -75,7 +82,7 @@
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -87,15 +94,15 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -105,24 +112,24 @@
       <colorrole role="Text">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="ButtonText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -131,7 +138,7 @@
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -143,15 +150,15 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -161,24 +168,24 @@
       <colorrole role="Text">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="ButtonText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
         </color>
        </brush>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -187,7 +194,7 @@
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="255">
+        <color alpha="150">
          <red>0</red>
          <green>123</green>
          <blue>255</blue>
@@ -213,8 +220,9 @@
     <string/>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 123, 255);
-color: rgb(0, 0, 0);</string>
+    <string notr="true">background-image:url();
+background-color: rgb(0, 123, 255, 150);
+color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Aceptar</string>
@@ -240,7 +248,8 @@ color: rgb(0, 0, 0);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
+    <string notr="true">background-image:url();
+color: rgb(255, 255, 255);
 background-color: rgb(0, 0, 0);</string>
    </property>
    <property name="html">

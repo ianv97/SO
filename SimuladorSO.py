@@ -8,10 +8,13 @@ from Dialog_Generar import *
 from Dialog_Error import *
 from Dialog_Particion import *
 from Form_Resultado import *
+from Dialog_Estadisticas import *
 from random import randint
 import plotly
 import plotly.figure_factory as ff
 from Algoritmos import *
+from PyQt5 import QtCore
+from PyQt5 import QtGui
 
 def screen_size():
     if sys.platform == 'win32':
@@ -33,11 +36,8 @@ def screen_size():
 
 class VentanaCDT(Ui_Form_CargaDeTrabajo):
     def __init__(self):
-        Ui_Form_CargaDeTrabajo.__init__(self)
         self.Form_CargaDeTrabajo = QtWidgets.QWidget()
         self.setupUi(self.Form_CargaDeTrabajo)
-        self.Form_CargaDeTrabajo.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
-        self.pushButton_CorrerSimulacion.setStyleSheet("background-image: url(Recursos/Fondo2.jpg); color: rgb(255,255,255);")
         self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.escena = QtWidgets.QGraphicsScene()
         self.pincel = QtGui.QPen(QtCore.Qt.yellow)
@@ -93,9 +93,9 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         if self.spinBox_NProcesos.value() > 0:
             if ctrl.error_bd == 0:
                 self.pushButton_Guardar.setEnabled(True)
-                self.pushButton_Guardar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255)")
+                self.pushButton_Guardar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255, 150); color: rgb(255, 255, 255);")
             self.pushButton_Generar.setEnabled(True)
-            self.pushButton_Generar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255)")
+            self.pushButton_Generar.setStyleSheet("background-image:url(); background-color: rgb(0, 123, 255, 150); color: rgb(255, 255, 255);")
         else:
             self.pushButton_Guardar.setDisabled(True)
             self.pushButton_Generar.setDisabled(True)
@@ -203,9 +203,14 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         lista_completados.clear()
         global matriz_particiones
         matriz_particiones.clear()
+        global estadisticas
+        estadisticas.clear()
+        estadisticas.append(0)
+        estadisticas.append(0)
+        estadisticas.append(0)
+        estadisticas.append(0)
 
         error_cpu = -1
-        error_ta_vacio = -1
         error_ta_menor = -1
         error_proceso_sin_memoria = -1
         error_memoria_insuficiente = -1
@@ -236,13 +241,14 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
         else:
             if nprocesos > 0:
                 for i in range(nprocesos):
-                    if self.tableWidget_Procesos.item(i, 0).text() == "":
-                        error_ta_vacio = i+1
+                    for j in range(7):
+                        if self.tableWidget_Procesos.item(i, j).text() == "":
+                            self.tableWidget_Procesos.item(i, j).setText("0")
+                    if self.tableWidget_Procesos.item(i, 1).text() == "0":
+                        error_cpu = i+1
                         break
-                    elif (self.tableWidget_Procesos.item(i, 1).text() == "0") or \
-                            (self.tableWidget_Procesos.item(i, 1).text() == "") or \
-                            (self.tableWidget_Procesos.item(i, 5).text() == "0") or \
-                            (self.tableWidget_Procesos.item(i, 5).text() == ""):
+                    elif (self.tableWidget_Procesos.item(i, 5).text() == "0") and ((self.tableWidget_Procesos.item(i, 2).text() != "0")
+                            or (self.tableWidget_Procesos.item(i, 4).text() != "0")):
                         error_cpu = i+1
                         break
                     elif int(self.tableWidget_Procesos.item(i, 0).text()) < ta_anterior:
@@ -260,8 +266,6 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                     ta_anterior = int(self.tableWidget_Procesos.item(i, 0).text())
                 if error_cpu != -1:
                     ctrl.uiError.error("Proceso P"+str(error_cpu)+": Todos los procesos deben iniciar y terminar con un ciclo de CPU.")
-                elif error_ta_vacio != -1:
-                    ctrl.uiError.error("Proceso P"+str(error_ta_vacio)+": Se debe especificar el tiempo de arribo.")
                 elif error_ta_menor != -1:
                     ctrl.uiError.error("Proceso P"+str(error_ta_menor)+": El tiempo de arribo es menor al del proceso anterior.")
                 elif error_proceso_sin_memoria != -1:
@@ -296,7 +300,7 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
                         apropiativos(part, alg_part, 'SRTF')
                     elif ctrl.uiCDT.radioButton_ROUNDROBIN.isChecked():
                         apropiativos(part, alg_part, 'RR', self.spinBox_Quantum.value())
-                    ctrl.ventana_resultado()
+                    ctrl.cargar_resultado()
             else:
                 ctrl.uiError.error("Debe existir al menos 1 proceso para ejecutar la simulación.")
 
@@ -313,7 +317,6 @@ class VentanaCDT(Ui_Form_CargaDeTrabajo):
 
 class VentanaImportar(Ui_Dialog_Importar):
     def __init__(self):
-        Ui_Dialog_Importar.__init__(self)
         self.Dialog_Importar = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Importar)
         self.eventos()
@@ -359,7 +362,6 @@ class VentanaImportar(Ui_Dialog_Importar):
 
 class VentanaGuardar(Ui_Dialog_Guardar):
     def __init__(self):
-        Ui_Dialog_Guardar.__init__(self)
         self.Dialog_Guardar = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Guardar)
         self.eventos()
@@ -399,7 +401,6 @@ class VentanaGuardar(Ui_Dialog_Guardar):
 
 class VentanaGenerar(Ui_Dialog_Generar):
     def __init__(self):
-        Ui_Dialog_Generar.__init__(self)
         self.Dialog_Generar = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Generar)
         self.eventos()
@@ -460,7 +461,6 @@ class VentanaGenerar(Ui_Dialog_Generar):
 
 class VentanaError(Ui_Dialog_Error):
     def __init__(self):
-        Ui_Dialog_Error.__init__(self)
         self.Dialog_Error = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Error)
         self.eventos()
@@ -476,7 +476,6 @@ class VentanaError(Ui_Dialog_Error):
 
 class VentanaParticion(Ui_Dialog_Particion):
     def __init__(self):
-        Ui_Dialog_Particion.__init__(self)
         self.Dialog_Particion = QtWidgets.QDialog()
         self.setupUi(self.Dialog_Particion)
         self.pushButton_Aceptar.setDefault(True)
@@ -502,13 +501,11 @@ class VentanaParticion(Ui_Dialog_Particion):
 
 class VentanaResultado(Ui_Form_Resultado):
     def __init__(self):
-        Ui_Form_Resultado.__init__(self)
         self.Form_Resultado = QtWidgets.QWidget()
         self.setupUi(self.Form_Resultado)
         self.tableWidget_Procesos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.splitter.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
         self.splitter_2.setSizes([0.75 * self.Form_Resultado.size().height(), 0.25 * self.Form_Resultado.size().height()])
-        self.Form_Resultado.setStyleSheet("background-image: url(Recursos/Fondo.jpg);")
         self.escena = QtWidgets.QGraphicsScene()
         self.pincel = QtGui.QPen(QtCore.Qt.yellow)
         self.pincel.setWidth(5)
@@ -520,10 +517,15 @@ class VentanaResultado(Ui_Form_Resultado):
         self.eventos()
 
     def eventos(self):
-        self.pushButton_Cerrar.clicked.connect(self.Form_Resultado.close)
+        self.pushButton_Cerrar.clicked.connect(self.cerrar)
         self.pushButton_Minimizar.clicked.connect(self.Form_Resultado.showMinimized)
         self.pushButton_Ventana.clicked.connect(self.modo_ventana)
         self.tableWidget_Procesos.itemSelectionChanged.connect(self.graficar_particiones)
+        self.pushButton_estadisticas.clicked.connect(self.estadisticas)
+
+    @staticmethod
+    def estadisticas():
+        ctrl.ventana_estadisticas()
 
     def graficar_particiones(self):
         self.escena.clear()
@@ -568,7 +570,7 @@ class VentanaResultado(Ui_Form_Resultado):
 
             if cpu != matriz_resultados[i][7]:
                 if cpu != '':
-                    procesos.append(dict(Task="Proceso "+cpu, Start=self.formatear_tiempos(start_cpu), Finish=self.formatear_tiempos(str(finish_cpu)), Resource='CPU'))
+                    procesos.append(dict(Task="Proceso "+cpu, Start=start_cpu, Finish=str(finish_cpu), Resource='CPU'))
                 cpu = matriz_resultados[i][7]
                 start_cpu = matriz_resultados[i][0]
                 finish_cpu = int(start_cpu) + 1
@@ -577,7 +579,7 @@ class VentanaResultado(Ui_Form_Resultado):
 
             if entrada != matriz_resultados[i][8]:
                 if entrada != '':
-                    procesos.append(dict(Task="Proceso "+entrada, Start=self.formatear_tiempos(start_entrada), Finish=self.formatear_tiempos(str(finish_entrada)), Resource='Entrada'))
+                    procesos.append(dict(Task="Proceso "+entrada, Start=start_entrada, Finish=finish_entrada, Resource='Entrada'))
                 entrada = matriz_resultados[i][8]
                 start_entrada = matriz_resultados[i][0]
                 finish_entrada = int(start_entrada) + 1
@@ -586,7 +588,7 @@ class VentanaResultado(Ui_Form_Resultado):
 
             if salida != matriz_resultados[i][9]:
                 if salida != '':
-                    procesos.append(dict(Task="Proceso "+salida, Start=self.formatear_tiempos(start_salida), Finish=self.formatear_tiempos(str(finish_salida)), Resource='Salida'))
+                    procesos.append(dict(Task="Proceso "+salida, Start=start_salida, Finish=finish_salida, Resource='Salida'))
                 salida = matriz_resultados[i][9]
                 start_salida = matriz_resultados[i][0]
                 finish_salida = int(start_salida) + 1
@@ -594,11 +596,11 @@ class VentanaResultado(Ui_Form_Resultado):
                 finish_salida += 1
 
         if cpu != '':
-            procesos.append(dict(Task="Proceso " + cpu, Start=self.formatear_tiempos(start_cpu), Finish=self.formatear_tiempos(str(finish_cpu)), Resource='CPU'))
+            procesos.append(dict(Task="Proceso " + cpu, Start=start_cpu, Finish=str(finish_cpu), Resource='CPU'))
         if entrada != '':
-            procesos.append(dict(Task="Proceso " + entrada, Start=self.formatear_tiempos(start_entrada), Finish=self.formatear_tiempos(str(finish_entrada)), Resource='Entrada'))
+            procesos.append(dict(Task="Proceso " + entrada, Start=start_entrada, Finish=str(finish_entrada), Resource='Entrada'))
         if salida != '':
-            procesos.append(dict(Task="Proceso " + salida, Start=self.formatear_tiempos(start_salida), Finish=self.formatear_tiempos(str(finish_salida)), Resource='Salida'))
+            procesos.append(dict(Task="Proceso " + salida, Start=start_salida, Finish=str(finish_salida), Resource='Salida'))
 
         colores = {'CPU': 'rgb(220, 0, 0)',
                    'Entrada': (1, 0.9, 0.16),
@@ -607,6 +609,7 @@ class VentanaResultado(Ui_Form_Resultado):
         diagrama = ff.create_gantt(procesos, colors=colores, index_col='Resource', show_colorbar=True, group_tasks=True,
                                    title="Diagrama de Gantt", width=screen_size()[0] * 0.95,
                                    height=screen_size()[1] * 0.90, data=None)
+        diagrama['layout']['xaxis'].update({'type': None})
         plotly.offline.plot(diagrama, auto_open=False)
         self.navegador.setUrl(QtCore.QUrl.fromLocalFile('/temp-plot.html'))
 
@@ -615,8 +618,7 @@ class VentanaResultado(Ui_Form_Resultado):
 
     def carga_completa(self):
         self.escena.clear()
-        ctrl.uiCDT.Form_CargaDeTrabajo.showMinimized()
-        self.Form_Resultado.showFullScreen()
+        ctrl.ventana_resultado()
 
     def modo_ventana(self):
         if self.Form_Resultado.isFullScreen():
@@ -627,6 +629,24 @@ class VentanaResultado(Ui_Form_Resultado):
             self.pushButton_Minimizar.setHidden(False)
             self.pushButton_Cerrar.setHidden(False)
             self.Form_Resultado.showFullScreen()
+
+    def cerrar(self):
+        self.Form_Resultado.close()
+        if ctrl.uiCDT.Form_CargaDeTrabajo.isMinimized():
+            ctrl.uiCDT.Form_CargaDeTrabajo.showFullScreen()
+
+class VentanaEstadisticas(Ui_Dialog_Estadisticas):
+    def __init__(self):
+        self.Dialog_Estadisticas = QtWidgets.QDialog(ctrl.uiResultado.Form_Resultado)
+        self.setupUi(self.Dialog_Estadisticas)
+        self.pushButton_Aceptar.setDefault(True)
+
+    def mostrar_estadisticas(self):
+        self.label_tespera.setText("<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de espera promedio: " + str(estadisticas[0]) + "</span></p></body></html>")
+        self.label_trespuesta.setText("<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de respuesta promedio: " + str(estadisticas[1]) + "</span></p></body></html>")
+        self.label_tretorno.setText("<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de retorno promedio: " + str(estadisticas[2]) + "</span></p></body></html>")
+        self.label_pcpu.setText("<html><head/><body><p><span style=\" color:#ffffff;\">Uso de cpu: " + str(estadisticas[3]) + "%" + "</span></p></body></html>")
+
 
 class Control:
     def __init__(self):
@@ -678,8 +698,16 @@ class Control:
     def ventana_particion(self):
         self.uiParticion.Dialog_Particion.show()
 
-    def ventana_resultado(self):
+    def cargar_resultado(self):
         self.uiResultado.cargar()
+
+    def ventana_resultado(self):
+        self.uiCDT.Form_CargaDeTrabajo.showMinimized()
+        self.uiResultado.Form_Resultado.showFullScreen()
+        self.uiEstadisticas.mostrar_estadisticas()
+
+    def ventana_estadisticas(self):
+        self.uiEstadisticas.Dialog_Estadisticas.show()
 
     def consultar(self, qry):
         cursor = self.bd.cursor()
@@ -699,6 +727,7 @@ class Control:
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     ctrl = Control()
+    ctrl.uiEstadisticas = VentanaEstadisticas()
     ctrl.ventana_cdt()
     ctrl.conectar_bd()
     sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Dialog_Error.ui'
+# Form implementation generated from reading ui file 'Dialog_Estadisticas.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.2
 #
@@ -8,17 +8,19 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog_Error(object):
-    def setupUi(self, Dialog_Error):
-        Dialog_Error.setObjectName("Dialog_Error")
-        Dialog_Error.resize(343, 182)
+class Ui_Dialog_Estadisticas(object):
+    def setupUi(self, Dialog_Estadisticas):
+        Dialog_Estadisticas.setObjectName("Dialog_Estadisticas")
+        Dialog_Estadisticas.resize(350, 280)
+        Dialog_Estadisticas.setMinimumSize(QtCore.QSize(350, 280))
+        Dialog_Estadisticas.setMaximumSize(QtCore.QSize(350, 280))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Recursos/Logo.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        Dialog_Error.setWindowIcon(icon)
-        Dialog_Error.setStyleSheet("background-image:url(Recursos/Fondo.jpg)")
-        Dialog_Error.setModal(True)
-        self.pushButton_Aceptar = QtWidgets.QPushButton(Dialog_Error)
-        self.pushButton_Aceptar.setGeometry(QtCore.QRect(130, 130, 81, 31))
+        Dialog_Estadisticas.setWindowIcon(icon)
+        Dialog_Estadisticas.setStyleSheet("background-image:url(Recursos/Fondo.jpg)")
+        Dialog_Estadisticas.setModal(True)
+        self.pushButton_Aceptar = QtWidgets.QPushButton(Dialog_Estadisticas)
+        self.pushButton_Aceptar.setGeometry(QtCore.QRect(130, 230, 81, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -89,38 +91,67 @@ class Ui_Dialog_Error(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_Aceptar.setAutoDefault(False)
         self.pushButton_Aceptar.setObjectName("pushButton_Aceptar")
-        self.textBrowser_Error = QtWidgets.QTextBrowser(Dialog_Error)
-        self.textBrowser_Error.setGeometry(QtCore.QRect(30, 10, 281, 111))
+        self.label_tespera = QtWidgets.QLabel(Dialog_Estadisticas)
+        self.label_tespera.setGeometry(QtCore.QRect(30, 30, 271, 21))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.textBrowser_Error.setFont(font)
-        self.textBrowser_Error.setStyleSheet("background-image:url();\n"
-"color: rgb(255, 255, 255);\n"
-"background-color: rgb(0, 0, 0);")
-        self.textBrowser_Error.setObjectName("textBrowser_Error")
+        self.label_tespera.setFont(font)
+        self.label_tespera.setStyleSheet("background-image:url();")
+        self.label_tespera.setObjectName("label_tespera")
+        self.label_trespuesta = QtWidgets.QLabel(Dialog_Estadisticas)
+        self.label_trespuesta.setGeometry(QtCore.QRect(30, 80, 271, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_trespuesta.setFont(font)
+        self.label_trespuesta.setStyleSheet("background-image:url();")
+        self.label_trespuesta.setObjectName("label_trespuesta")
+        self.label_tretorno = QtWidgets.QLabel(Dialog_Estadisticas)
+        self.label_tretorno.setGeometry(QtCore.QRect(30, 130, 271, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_tretorno.setFont(font)
+        self.label_tretorno.setStyleSheet("background-image:url();")
+        self.label_tretorno.setObjectName("label_tretorno")
+        self.label_pcpu = QtWidgets.QLabel(Dialog_Estadisticas)
+        self.label_pcpu.setGeometry(QtCore.QRect(30, 180, 171, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_pcpu.setFont(font)
+        self.label_pcpu.setStyleSheet("background-image:url();")
+        self.label_pcpu.setObjectName("label_pcpu")
 
-        self.retranslateUi(Dialog_Error)
-        QtCore.QMetaObject.connectSlotsByName(Dialog_Error)
+        self.retranslateUi(Dialog_Estadisticas)
+        self.pushButton_Aceptar.clicked.connect(Dialog_Estadisticas.close)
+        QtCore.QMetaObject.connectSlotsByName(Dialog_Estadisticas)
 
-    def retranslateUi(self, Dialog_Error):
+    def retranslateUi(self, Dialog_Estadisticas):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Error.setWindowTitle(_translate("Dialog_Error", "Error"))
-        self.pushButton_Aceptar.setText(_translate("Dialog_Error", "Aceptar"))
-        self.textBrowser_Error.setHtml(_translate("Dialog_Error", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:14pt; font-weight:600; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        Dialog_Estadisticas.setWindowTitle(_translate("Dialog_Estadisticas", "Estadísticas"))
+        self.pushButton_Aceptar.setText(_translate("Dialog_Estadisticas", "Aceptar"))
+        self.label_tespera.setToolTip(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" font-weight:600;\">Tiempo que un proceso espera en las colas de listo, entrada y salida</span></p></body></html>"))
+        self.label_tespera.setText(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de espera promedio:</span></p></body></html>"))
+        self.label_trespuesta.setToolTip(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" font-weight:600;\">Tiempo que transcurre entre una entrada y el instante en que se produce la primera respuesta</span></p></body></html>"))
+        self.label_trespuesta.setText(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de respuesta promedio:</span></p></body></html>"))
+        self.label_tretorno.setToolTip(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" font-weight:600;\">Tiempo entre el instante en que un proceso arriba y el instante en que finaliza su ejecución</span></p></body></html>"))
+        self.label_tretorno.setText(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" color:#ffffff;\">Tiempo de retorno promedio:</span></p></body></html>"))
+        self.label_pcpu.setToolTip(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" font-weight:600;\">Porcentaje de tiempo que la CPU está asignada a un proceso</span></p></body></html>"))
+        self.label_pcpu.setText(_translate("Dialog_Estadisticas", "<html><head/><body><p><span style=\" color:#ffffff;\">Uso de cpu:</span></p></body></html>"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog_Error = QtWidgets.QDialog()
-    ui = Ui_Dialog_Error()
-    ui.setupUi(Dialog_Error)
-    Dialog_Error.show()
+    Dialog_Estadisticas = QtWidgets.QDialog()
+    ui = Ui_Dialog_Estadisticas()
+    ui.setupUi(Dialog_Estadisticas)
+    Dialog_Estadisticas.show()
     sys.exit(app.exec_())
 

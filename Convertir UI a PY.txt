@@ -17,3 +17,6 @@ python -m PyQt5.uic.pyuic Dialog_Particion.ui -o Dialog_Particion.py -x
 
 
 python -m PyQt5.uic.pyuic Form_Resultado.ui -o Form_Resultado.py -x
+
+
+python -m PyQt5.uic.pyuic Dialog_Estadisticas.ui -o Dialog_Estadisticas.py -x
