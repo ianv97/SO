@@ -422,20 +422,23 @@ class VentanaGenerar(Ui_Dialog_Generar):
         else:
             if lim_inf != 0:
                 for i in range(nprocesos):
+                    memoria = 0
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
-                    ta_lim_inf = ta + (lim_inf * 5)
-                    ta_lim_sup = ta + (lim_sup * 5)
+                    ta_lim_inf = ta + (lim_inf * 2)
+                    ta_lim_sup = ta + (lim_sup * 2)
                     ta = randint(ta_lim_inf, ta_lim_sup)
                     for j in range(1, 6):
                         aleatorio = randint(lim_inf, lim_sup)
+                        memoria += aleatorio
                         ctrl.uiCDT.tableWidget_Procesos.item(i, j).setText(str(aleatorio))
+                        ctrl.uiCDT.tableWidget_Procesos.item(i, 6).setText(str(memoria * 3))
             else:
                 for i in range(nprocesos):
                     memoria = 0
                     # Tiempo de Arribo
                     ctrl.uiCDT.tableWidget_Procesos.item(i, 0).setText(str(ta))
-                    ta_lim_inf = ta + (lim_inf * 5)
-                    ta_lim_sup = ta + (lim_sup * 5)
+                    ta_lim_inf = ta + (lim_inf * 2)
+                    ta_lim_sup = ta + (lim_sup * 2)
                     ta = randint(ta_lim_inf, ta_lim_sup)
                     # CPU 1 debe ser mayor a 0
                     aleatorio = randint(1, lim_sup)
@@ -520,7 +523,7 @@ class VentanaResultado(Ui_Form_Resultado):
         self.pushButton_Cerrar.clicked.connect(self.Form_Resultado.close)
         self.pushButton_Minimizar.clicked.connect(self.Form_Resultado.showMinimized)
         self.pushButton_Ventana.clicked.connect(self.modo_ventana)
-        self.tableWidget_Procesos.doubleClicked.connect(self.graficar_particiones)
+        self.tableWidget_Procesos.itemSelectionChanged.connect(self.graficar_particiones)
 
     def graficar_particiones(self):
         self.escena.clear()
@@ -536,7 +539,7 @@ class VentanaResultado(Ui_Form_Resultado):
                 texto.setPos(95, tamano_particiones + tamano - 15)
             else:
                 texto = self.escena.addText(str(tamano) + ' KB', self.escena_fuente)
-                texto.setPos(110, tamano_particiones + tamano - 15)
+                texto.setPos(115, tamano_particiones + tamano - 15)
             texto.setDefaultTextColor(QtGui.QColor(255, 255, 255, 255))
             tamano_particiones += tamano * 2
 

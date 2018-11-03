@@ -175,7 +175,8 @@ class Ui_Dialog_Generar(object):
         font.setBold(True)
         font.setWeight(75)
         self.spinBox_LimInf.setFont(font)
-        self.spinBox_LimInf.setStyleSheet("color: rgb(255, 255, 255);")
+        self.spinBox_LimInf.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+"color: rgb(255, 255, 255);")
         self.spinBox_LimInf.setAlignment(QtCore.Qt.AlignCenter)
         self.spinBox_LimInf.setMaximum(99)
         self.spinBox_LimInf.setSingleStep(1)
@@ -187,7 +188,8 @@ class Ui_Dialog_Generar(object):
         font.setBold(True)
         font.setWeight(75)
         self.spinBox_LimSup.setFont(font)
-        self.spinBox_LimSup.setStyleSheet("color: rgb(255, 255, 255);")
+        self.spinBox_LimSup.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+"color: rgb(255, 255, 255);")
         self.spinBox_LimSup.setAlignment(QtCore.Qt.AlignCenter)
         self.spinBox_LimSup.setMaximum(99)
         self.spinBox_LimSup.setSingleStep(1)
