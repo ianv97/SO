@@ -166,21 +166,19 @@ def no_apropiativos(esquema_particiones, alg_particiones, alg_procesos):
             if matriz_procesos[cpu][casilla_cpu] == 0:
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append([cpu, matriz_procesos[cpu][2]])
-                    cpu = 0
                 elif matriz_procesos[cpu][3] > 0:
-                    casilla_cpu = 3
+                    cola_listos.append([cpu, 3, matriz_procesos[cpu][3]])
                 elif matriz_procesos[cpu][4] > 0:
                     cola_salida.append([cpu, matriz_procesos[cpu][4]])
-                    cpu = 0
                 elif matriz_procesos[cpu][5] > 0:
-                    casilla_cpu = 5
+                    cola_listos.append([cpu, 5, matriz_procesos[cpu][5]])
                 else: # Si tod0 está en 0 lo agrego a la lista de procesos completados y libero la memoria
                     lista_completados.append(cpu)
                     liberar_particion(cpu)
                     memoria_llena = False
                     estadisticas[0] += tiempo + 1
                     estadisticas[2] += tiempo + 1
-                    cpu = 0
+                cpu = 0
         else:
             cpu_aux = ''
 
@@ -318,6 +316,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
                 if cola_listos[indice][2] < matriz_procesos[cpu][casilla_cpu]:  # Si hay un proceso en la cola de listos con tiempo restante menor al que se estaba ejecutando, le asigno la cpu
                     if cpu != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
                         cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
+                        c_listo += str(cpu) +', '
                     cpu = cola_listos[indice][0]
                     cpu_aux = str(cpu)
                     casilla_cpu = cola_listos[indice][1]
@@ -329,6 +328,7 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
                 if quantum_cpu <= 0:  # Si se terminó el quantum
                     if cpu != 0: # Si la cpu no es el proceso 0, lo agrego nuevamente a la cola de listos (proceso que no terminó)
                         cola_listos.append([cpu, casilla_cpu, matriz_procesos[cpu][casilla_cpu]])
+                        c_listo += str(cpu) + ', '
                     cpu = cola_listos[0][0]
                     quantum_cpu = quantum
                     cpu_aux = str(cpu)
@@ -344,24 +344,20 @@ def apropiativos(esquema_particiones, alg_particiones, alg_procesos, quantum=0):
             if matriz_procesos[cpu][casilla_cpu] == 0:  # Si el proceso no tiene mas tiempo de cpu, lo agrego a otra cola y pongo en 0 la cpu
                 if matriz_procesos[cpu][2] > 0:
                     cola_entrada.append([cpu, matriz_procesos[cpu][2]])
-                    cpu = 0
-                    quantum_cpu = 0
                 elif matriz_procesos[cpu][3] > 0:
-                    casilla_cpu = 3
+                    cola_listos.append([cpu, 3, matriz_procesos[cpu][3]])
                 elif matriz_procesos[cpu][4] > 0:
                     cola_salida.append([cpu, matriz_procesos[cpu][4]])
-                    cpu = 0
-                    quantum_cpu = 0
                 elif matriz_procesos[cpu][5] > 0:
-                    casilla_cpu = 5
+                    cola_listos.append([cpu, 5, matriz_procesos[cpu][5]])
                 else:  # Si tod0 está en 0 lo agrego a la lista de procesos completados y libero la memoria
                     lista_completados.append(cpu)
                     liberar_particion(cpu)
                     memoria_llena = False
                     estadisticas[0] += tiempo + 1
                     estadisticas[2] += tiempo + 1
-                    cpu = 0
-                    quantum_cpu = 0
+                cpu = 0
+                quantum_cpu = 0
         else:
             cpu_aux = ''
 
